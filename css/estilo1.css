@@ -1,0 +1,454 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Eliminar el margen por defecto del body */
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    color: #333;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #0066cc;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+    color:blue;
+}
+th {
+    background: #007bff;
+    color: rgb(0, 8, 117);
+}
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+input[type="checkbox"] {
+    margin: 0;
+}
+input[type="submit"] {
+    background: #007bff;
+    color: rgb(179, 21, 21);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+input[type="submit"]:hover {
+    background: #0056b3;
+}
+.welcome {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="checkbox"] {
+    margin: 0;
+}
+input[type="submit"] {
+    background: #007bff;
+    color: rgb(167, 6, 6);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+input[type="submit"]:hover {
+    background: #0056b3;
+}
+.welcome {
+    text-align: center;
+    margin-bottom: 20px;
+}
+input[type="checkbox"] {
+    margin: 0;
+}
+input[type="submit"] {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+
+input[type="text"], input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#bienve {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background-color: #08449c; /* Color de fondo para el recuadro */
+    font-size: 22px; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    margin: 20px; /* Quitar márgenes del párrafo */
+    margin-left: auto;
+}
+#contenedor-bienvenida {
+    
+    display: flex;
+    align-items: center; /* Alinear verticalmente al centro */
+    justify-content: space-between; /* Distribuir espacio entre el texto y el botón */
+    background-color: #08449c; /* Color de fondo para el recuadro */
+    width: 100%; /* Ajustar el ancho al 100% de la página */
+    height: 75px;
+
+}
+#imagen-bienvenida{
+    width: auto; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: 100%; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Mantiene la proporción de la imagen y cubre el contenedor */
+    margin-bottom: 0;
+    margin-left: 0;
+    display: block;
+    max-height: 100vh;
+    max-width: 50vh;
+    
+}
+
+.btn-salir {
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin bordes */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Suaviza el cambio de color al pasar el mouse */
+    margin: 10px;
+}
+
+.btn-salir:hover {
+    background-color: #4b4d4e; /* Color más oscuro al pasar el mouse */
+}
+.form-volver {
+    display: flex; /* Alinea los botones horizontalmente */
+    justify-content: flex-start; /* Alinea los botones hacia la izquierda */
+    gap: 10px; /* Espaciado entre los botones */
+}
+
+.btn-volver, .btn-otro-boton {
+    padding: 10px 20px;
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none;
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.btn-volver:hover, .btn-otro-boton:hover {
+    background-color: #0056b3; /* Color al pasar el cursor */
+}
+.btn-volver{
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin bordes */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Suaviza el cambio de color al pasar el mouse */
+    
+}
+
+.btn-volver:hover {
+    background-color: #4b4d4e; /* Color más oscuro al pasar el mouse */
+}
+.form-volver {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+.form-volver {
+    display: flex;
+    justify-content: center; /* Alinea el contenido a la derecha */
+    margin: 20px 0; /* Espaciado superior e inferior */
+}
+.intro  {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;    /* Centra verticalmente si es necesario */
+    height: 20vh;          /* Opcional: para centrar verticalmente en toda la pantalla */
+}
+.btn-volver1{
+    background-color: #020c16; /* Color de fondo azul */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin bordes */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Suaviza el cambio de color al pasar el mouse */
+    
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif ;
+    color: #fff;
+    
+}
+
+.nav{
+    
+        width: 250px; /* Ajusta el ancho del menú de navegación */
+        background-color: #333; /* Ejemplo de fondo para el menú */
+        color: white; /* Color de texto blanco */
+        height: 100vh; /* Asegura que ocupe la altura completa de la pantalla */
+
+}
+.nav__link{
+    color:#fdfdfd;
+    display: block;
+    padding:15px 0;
+    text-decoration: none;
+    
+}
+.nav__link--inside{
+    border-radius: 6px;
+    padding-left: 20px;
+    text-align:left;
+
+
+}
+.nav__link--inside:hover{
+    background-color: #464747;
+
+
+}
+
+.list{
+    width:100%;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #08449c;
+}
+.list__item{
+    list-style:none;
+    width:100%;
+    text-align: center;
+    overflow: hidden;
+}
+.list__item--click{
+    cursor:pointer;
+}
+.list__button{
+    display:flex;
+    align-items:center;
+    gap: 1em;
+    width:70%;
+    margin: 0 auto ;
+}
+.arrow .list__arrow{
+    transform: rotate(90deg);
+}
+.list__arrow{
+    margin-left: auto;
+    transition: transform .3s;
+}
+.list__show{
+    width:80%;
+    margin-left: auto;
+    border-left: 2px solid #303440;
+    list-style: none;
+    height: 0;
+    transition:height .4; 
+    
+}
+.contenido-include {
+    flex-grow: 1; /* Ocupa todo el espacio restante */
+    background-color: #f4f4f4; /* Color de fondo claro para el contenido */
+    margin-top: 0; /* Elimina cualquier margen superior */
+    padding-top: 0; /* Asegura que no haya espacio adicional */
+}
+
+
+.contenedor-principal {
+    display: flex;
+    flex-direction: row; /* Asegura que los elementos estén en fila */
+    width: 100%; /* Asegura que ocupe el 100% del ancho disponible */
+    height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+}
+.formulario-contenedor {
+    flex-grow: 1; /* El formulario ocupa todo el espacio restante */
+    background-color: #f4f4f4; /* Color de fondo del área del formulario */
+    overflow-y: auto; /* Permitir desplazamiento si el contenido es largo */
+}
+table {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho del área del formulario */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    margin-top: 0; /* Elimina cualquier margen superior */
+    padding-top: 0; /* Asegura que no haya espacio adicional */
+}
+
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Borde de la tabla */
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+td {
+    background-color: #fff;
+}
+.ai {
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: rgb(0, 0, 245);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease;
+    line-height: 2; /* Valor predeterminado para controlar la altura de la línea */
+}
+.ai:hover{
+    background-color: rgba(3, 7, 250, 0.1);
+}
+.header1 {
+    position: relative;
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; 
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 38px; /* Ajusta la altura según lo que prefieras */
+}
+
+.header1 nav ul{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+
+.header nav a i {
+    font-size: 14px;
+    margin-left: 6px;
+
+}
+
+.submenu{
+    position:absolute;
+    top:100%;
+    background-color: rgb(250, 250, 252);
+    box-shadow: 4px 4px 20px 0px rgba(253, 253, 253, 0.1);
+    border-radius: 10px;
+    max-height: 0;
+    transition: max-height 2s ease;
+    overflow: hidden;
+}
+.submenu.show{
+    max-height: 300px;
+}
+
+.submenu ul{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+}
+.submenu ul li{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.submenu ul li a{
+    width: 100%;
+}
+
+.subsubmenu{
+    position:absolute;
+    top:100%;
+    background-color: rgb(250, 250, 252);
+    box-shadow: 4px 4px 20px 0px rgba(253, 253, 253, 0.1);
+    border-radius: 10px;
+    max-height: 0;
+    transition: max-height 2s ease;
+    overflow: hidden;
+}
+.subsubmenu.show{
+    max-height: 300px;
+}
+
+.subsubmenu ul{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+}
+.subsubmenu ul li{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+.subsubmenu ul li a{
+    width: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+}
