@@ -39,6 +39,9 @@
         <form action="registro_usuario.php"> <!-- Evita el envío del formulario -->
             <button id=""class="btn-volver">Registro de Usuario</button>
         </form>
+        <form action="vista_vacaciones_admin.php"> <!-- Evita el envío del formulario -->
+            <button id=""class="btn-volver">Gestionar vacaciones</button>
+        </form>
     </div>
     <div class="contenedor-principal">
     <nav class="nav">

@@ -6,6 +6,7 @@ require_once("datos_conexion.php");
 
 function obtenerConexion() {
     global $servidor, $user, $clave, $baseDedatos;
+
     $enlace = mysqli_connect($servidor, $user, $clave, $baseDedatos);
     if (!$enlace) {
         die("Error de conexión: " . mysqli_connect_error());
