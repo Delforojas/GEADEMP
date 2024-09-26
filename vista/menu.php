@@ -57,12 +57,13 @@
                     </li>
                 </ul>
             </li>
-
+            
             <li class="list__item">
                 <div class="list__button">
                     <img src="asset/stats.svg" class="list__img">
                     <a href="vista_bolsa_admin.php" class="nav__link">Area de administradores</a>
                 </div>
+
             </li>
             <li class="list__item list__item--click">
                 <div class="list__button list__button--click">
