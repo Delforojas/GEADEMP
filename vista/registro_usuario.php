@@ -7,26 +7,10 @@
     <!-- Incluir Font Awesome para los iconos -->
     <link rel="stylesheet" href="../css/estilo1.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <?php
-        session_start();
-        
-        // Verifica si el usuario ha iniciado sesión y si es un administrador
-        if (!isset($_SESSION['username']) || $_SESSION['rol'] != 1) {
-            // Si no es administrador o no ha iniciado sesión, redirigir a la página de inicio de sesión
-            header("Location: login.php");
-            exit();
-        }
-            $usuario = $_SESSION['username'];
-        
-            echo "<div id='contenedor-bienvenida'>
-                        <img src='imagenes/logo.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
-                        <p id='bienve'>Bienvenido, $usuario  </p>
-                        <form action='../controlador/salir.php' method='post'>
-                            <button type='submit' class='btn-salir'>Salir</button>
-                        </form>
-                    </div>"
-        ?>
     <title>Login</title>
+    <?php
+         include('../controlador/validar_admin.php');
+    ?>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,7 +78,7 @@
             <form action="" method="POST" class="formulario">
                 <h2 class=titulo>Registrar</h2>
                 <?php
-                include("../modelo/datos_conexion.php");
+            
                 include("../controlador/controladorregistro.php");
 
                 ?>

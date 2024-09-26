@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo1.css">
     <title>Iniciar Sesión - Vacaciones</title>
+    <?php
+         include('../controlador/validar_usuario.php');
+    ?>
     <style>
         body {
             font-family: Arial, sans-serif;

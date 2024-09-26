@@ -272,3 +272,25 @@ echo '</body>
       </ul>
     </nav>
 </header>
+
+function ObtenerBolsasl7OrdenadoPorEspesor($direccion = 'ASC') {
+        // Conectar a la base de datos
+        $enlace = obtenerConexion();
+
+        // Validar que la dirección sea 'ASC' o 'DESC' para evitar inyecciones SQL
+        $direccion = ($direccion === 'ASC' || $direccion === 'DESC') ? $direccion : 'ASC';
+
+        // Consulta SQL para obtener los datos ordenados por espesor
+        $consulta = "SELECT nombre, espesor, ancho FROM sl7 ORDER BY espesor $direccion";
+        
+        // Ejecutar la consulta
+        $resultado = mysqli_query($enlace, $consulta);
+
+        // Verificar si la consulta fue exitosa
+        if (!$resultado) {
+            die("Error al obtener los datos: " . mysqli_error($enlace));
+        }
+        
+        // Devolver el resultado de la consulta
+        return $resultado;
+    }

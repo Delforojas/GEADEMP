@@ -6,21 +6,9 @@
     <link rel="stylesheet" href="../css/estilo1.css">
     <title>COMUNICADOS</title>
     <?php
-        session_start(); // Inicia la sesión
-        // Verifica si el usuario ha iniciado sesión
-        if (!isset($_SESSION['username'])) {
-        header("Location: login.php"); // Redirige si no hay sesión
-        exit(); // Detiene la ejecución después de redirigir
-        }
-        $usuario = $_SESSION['username']; // Obtiene el nombre del usuario de la sesión
-        echo "<div id='contenedor-bienvenida'>
-                    <img src='imagenes/logo.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
-                    <p id='bienve'>Bienvenido, $usuario   </p>
-                    <form action='../controlador/salir.php' method='post'>
-                        <button type='submit' class='btn-salir'>Salir</button>
-                    </form>
-                </div>"
-        ?>
+         include('../controlador/validar_usuario.php');
+    ?>
+        
 </head>
 <body>
 <body>

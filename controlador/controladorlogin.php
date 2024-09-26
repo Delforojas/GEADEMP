@@ -1,45 +1,29 @@
 <?php
 // Incluir el archivo que contiene la función de conexión
-include("../modelo/datos_conexion.php");
-include("../modelo/modelo.php");
-session_start();
+require_once("../modelo/datos_conexion.php");
+require_once("../modelo/modelo.php");
 
-// Llamar a la función que devuelve el enlace a la base de datos
-$enlace = obtenerConexion();
+session_start(); // Iniciar la sesión
 
+// Verificar si se ha enviado el formulario de login
 if (!empty($_POST["btningresar"])) {
+    // Obtener los datos del formulario
     $usuario = $_POST["usuario"];
     $password = $_POST["clave"];
 
+    // Verificar si los campos están vacíos
     if (empty($usuario) || empty($password)) {
         echo '<div class="alert alert-danger">LOS CAMPOS ESTÁN VACÍOS</div>';
     } else {
-        // Consulta para verificar el usuario y contraseña
-        $consulta = "SELECT id_cargo, nombre FROM usuarios WHERE usuario = '$usuario' AND clave = '$password'";
-        $resultado = mysqli_query($enlace, $consulta);
+        // Crear una instancia de la clase Usuario
+        $usuarioObj = new Usuario();
         
-        if ($resultado && mysqli_num_rows($resultado) > 0) {
-            $filas = mysqli_fetch_array($resultado);
-            $_SESSION['username'] = $filas['nombre'];
-            $_SESSION['rol'] = $filas['id_cargo'];
-
-            if ($filas['id_cargo'] == 1) { 
-                // Redirección para el administrador
-                header("Location: vista_bolsa_admin.php");
-                exit();
-            } elseif ($filas['id_cargo'] == 2) {
-                // Redirección para el usuario normal
-                header("Location: index.php");
-                exit();
-            }
-        } else {
-            echo '<div class="alert alert-danger">Usuario o contraseña incorrectos</div>';
-        }
-
-        mysqli_free_result($resultado); // Corregir la función mysqli_free_result()
+        // Llamar a la función para verificar credenciales
+        $usuarioObj->verificarCredenciales($usuario, $password);
     }
-    mysqli_close($enlace); // Cerrar la conexión a la base de datos
-}
+        // Llamar a la función para verificar credenciales
+        verificarCredenciales($usuario, $password );
+    }
+
+
 ?>
-
-

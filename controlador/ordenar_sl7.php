@@ -2,41 +2,25 @@
 require_once("../modelo/modelo.php");
 require_once("../modelo/datos_conexion.php");
 
+$enlace = obtenerConexion();
 // Verifica si se ha enviado el valor del select 'orden'
 if (isset($_POST['orden']) && $_POST['orden'] != "") {
     $orden = $_POST['orden'];
 
-    // Conexión a la base de datos
-    $conexion = obtenerConexion();
+   // Crear una instancia de la clase Sl7
+   $sl7 = new Sl7();
 
-    // Inicializamos la variable de consulta
-    $query = "SELECT * FROM sl7";
+   // Llamar al método obtenerDatosOrdenadosSL7() a través de la instancia
+   $resultado = $sl7->obtenerDatosOrdenadosSL7($orden);
 
-    // Determina la consulta según el valor de 'orden'
-    if ($orden == "ASC") {
-        // Ordenar por espesor ascendente
-        $query .= " ORDER BY espesor ASC";
-    } elseif ($orden == "DESC") {
-        // Ordenar por espesor descendente
-        $query .= " ORDER BY espesor DESC";
-    } elseif ($orden == "AASC") {
-        // Ordenar por ancho ascendente
-        $query .= " ORDER BY ancho ASC";
-    } elseif ($orden == "ADESC") {
-        // Ordenar por ancho descendente
-        $query .= " ORDER BY ancho DESC";
-    }
-
-    // Ejecuta la consulta
-    $result = $conexion->query($query);
-
-    // Comprueba si hay resultados y los muestra en una tabla
-    if ($result->num_rows > 0) {
+    // Comprueba si hay resultados
+    if ($resultado->num_rows > 0) {
+        // Prepara los datos para mostrarlos en la vista principal
         echo "<table border='1'>";
         echo "<tr><th>ID</th><th>Nombre</th><th>Ancho</th><th>Espesor</th></tr>";
 
         // Recorre los resultados y los muestra en filas de la tabla
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $resultado->fetch_assoc()) {
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['nombre'] . "</td>";
@@ -47,10 +31,8 @@ if (isset($_POST['orden']) && $_POST['orden'] != "") {
         echo "</table>";
     } else {
         echo "No hay datos para mostrar.";
-    }
+    }$enlace->close();
 
-    // Cierra la conexión
-    $conexion->close();
 } else {
     echo "No se ha recibido ningún valor de ordenamiento.";
 }

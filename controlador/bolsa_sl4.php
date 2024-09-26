@@ -5,7 +5,9 @@ require_once("../modelo/modelo.php");
 require_once("../modelo/datos_conexion.php");
 
 $enlace = obtenerConexion();
-$resultado = ObtenerBolsasl4($enlace);
+
+$sl4 = new Sl4();
+$resultado = $sl4->ObtenerBolsasl4($enlace);
 
 echo '<div class="formulario-contenedor">';
 echo '<form action="procesar.php" method="post">';

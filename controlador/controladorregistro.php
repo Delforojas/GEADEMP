@@ -1,8 +1,8 @@
 <?php
-include("../modelo/datos_conexion.php");
-include("../modelo/modelo.php");
+require_once("../modelo/datos_conexion.php");
+require_once("../modelo/modelo.php");
 
-$enlace = obtenerConexion();
+$enlace=obtenerConexion();
 if(!empty($_POST['registro'])){
     if(empty($_POST['nombre'])  or empty($_POST['usuario']) or empty($_POST['clave'])){
         echo'uno de los campos esta vacio';
@@ -17,7 +17,7 @@ if(!empty($_POST['registro'])){
         $resultado = mysqli_query($enlace, $q);
         if($resultado==1){
             echo'USUARIO REGISTRADO CORRECTAMENTE';
-            header("location: ../vista/index.php");
+            header("location: ../vista/bolsa/vista_admin.php");
         }else{
             echo'usuario no registrado';
         }

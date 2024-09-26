@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/estilo1.css">
     <title>Solicitar Vacaciones</title>
+    <?php
+         include('../controlador/validar_usuario.php');
+    ?>
 </head>
 <body>
     <h1>Solicitar Vacaciones</h1>
