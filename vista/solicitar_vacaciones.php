@@ -10,20 +10,80 @@
     ?>
 </head>
 <body>
-    <h1>Solicitar Vacaciones</h1>
+        <form action="index.php"> <!-- Evita el envío del formulario -->
+            <button class="btn-volver">Volver</button>
+        </form>
+    </div>
+    <div class="contenedor-principal">
+    <nav class="nav">
+        <ul class="list">
+            <li class="list__item">
+                <div class="list__button">
+                    <img src="asset/dashboard.svg" class="list__img">
+                    <a href="index.php" class="nav__link">Inicio</a>
+                </div> 
+            </li>
+            <li class="list__item list__item--click">
+                <div class="list__button list__button--click">
+                    <img src="asset/doc.svg" class="list__img">
+                    <a href="#" class="nav__link">Programa</a>
+                    <img src="asset/arrow.svg" class="list__arrow">
+                </div> 
+                <ul class="list__show">
+                    <li class="list__inside">
+                        <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                    </li>
+                </ul>
+            </li>
 
-    <form action="../controlador/controlador_solicitar_vacaciones.php" method="POST">
-        <label for="fecha_inicio">Fecha de inicio:</label>
-        <input type="date" name="fecha_inicio" required>
-        
-        <label for="fecha_fin">Fecha de fin:</label>
-        <input type="date" name="fecha_fin" required>
-        
-        <label for="dias_solicitados">Total dias :</label>
-       
-        
-        
-        <button type="submit" name="solicitar_vacaciones">Solicitar Vacaciones</button>
-    </form>
+            <li class="list__item">
+                <div class="list__button">
+                    <img src="asset/stats.svg" class="list__img">
+                    <a href="vista_bolsa_admin.php" class="nav__link">Area de administradores</a>
+                </div>
+            </li>
+            <li class="list__item list__item--click">
+                <div class="list__button list__button--click">
+                    <img src="asset/doc.svg" class="list__img">
+                    <a href="#" class="nav__link">Area del empleado 
+                    </a>
+                    <img src="asset/arrow.svg" class="list__arrow">
+                </div> 
+                <ul class="list__show">
+                    <li class="list__inside">
+                        <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="menu.php" class="nav__link nav__link--inside">Menu comedor</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    
+    </nav>
+    <div class ="contenido">
+        <h1>Solicitar Vacaciones</h1>
+
+            <form action="../controlador/controlador_solicitar_vacaciones.php" method="POST">
+                <label for="fecha_inicio">Fecha de inicio:</label>
+                <input type="date" name="fecha_inicio" required>
+                
+                <label for="fecha_fin">Fecha de fin:</label>
+                <input type="date" name="fecha_fin" required>
+                
+                <label for="dias_solicitados">Total dias :</label>      
+                <button type="submit" class ="btn-volver"name="solicitar_vacaciones">Solicitar Vacaciones</button>
+            </form>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>

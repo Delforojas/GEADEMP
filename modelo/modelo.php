@@ -300,5 +300,228 @@ class Usuario {
             public $descripcion;
         
      }
+class Vacaciones {
+        // Atributos públicos de la clase
+    public $id;
+    public $usuario_id;
+    public $fecha_inicio;
+    public $fecha_fin;
+    public $estado;
+    public $comentario;
+    public $dias_solicitados;
+
+    public function verificarVacaciones($enlace, $usuario, $clave) {
+        $consulta = "SELECT id FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
+        $resultado = mysqli_query($enlace, $consulta);
+
+    // Si el usuario es encontrado
+        if (mysqli_num_rows($resultado) == 1) {
+        $usuario_data = mysqli_fetch_assoc($resultado);
+        // Asignar el ID del usuario a la sesión
+        $_SESSION['usuario_id'] = $usuario_data['id'];
+        // Redirigir a la página de vacaciones
+        header("Location: ../vista/vista_vacaciones.php");
+        exit();
+    } else {
+        echo "Usuario o contraseña incorrectos.";
+    }
+
+}
+public function obtenerVacaciones($enlace, $usuario_id) {
+            
+        $consulta = "SELECT fecha_inicio, fecha_fin, estado FROM vacaciones WHERE usuario_id = '$usuario_id'";
+        $resultado = mysqli_query($enlace, $consulta);
+        $tablaHTML = '';
+
+        echo ''; // Limpiar cualquier salida previa
+
+        if (mysqli_num_rows($resultado) > 0) {
+            echo '<table >';
+            echo '<thead><tr><th>Fecha de inicio</th><th>Fecha de fin</th><th>Estado</th><th>Días calculados</th></tr></thead>'; 
+            echo '<tbody>';
+            
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                // Calcular la cantidad de días entre las fechas
+                $fecha_inicio = $fila['fecha_inicio'];
+                $fecha_fin = $fila['fecha_fin'];
+
+                // Usamos DateTime para calcular la diferencia de días
+                $inicio = new DateTime($fecha_inicio);
+                $fin = new DateTime($fecha_fin);
+                $diferencia = $inicio->diff($fin);
+                $dias_solicitados = $diferencia->days + 1;  // Sumar 1 para incluir el día de inicio
+                
+                // Mostrar las vacaciones en una tabla
+                echo '<tr>';
+                echo '<td>' . $fecha_inicio . '</td>';
+                echo '<td>' . $fecha_fin . '</td>';
+                echo '<td>' . $fila['estado'] . '</td>';
+                echo '<td>' . $dias_solicitados . '</td>';  // Mostrar los días calculados
+                echo '</tr>';
+            }
+
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<p>No has solicitado vacaciones.</p>';
+        }
+        // Devolver la tabla generada
+        return $tablaHTML;
+    }
+    public function obtenerDiasVacaciones($enlace, $usuario_id) {
+        // Consulta para obtener el total de días de vacaciones disponibles
+        $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
+        $resultado = mysqli_query($enlace, $consulta);
+
+        // Obtener el total de días de vacaciones
+        $dias_totales = 0;
+        if ($fila_dias = mysqli_fetch_assoc($resultado)) {
+            $dias_totales = $fila_dias['dias_vacaciones'];
+        }
+
+        // Devolver el total de días de vacaciones
+        return $dias_totales;
+    }
+    function calcularDiasSolicitados($fecha_inicio, $fecha_fin) {
+        // Calcular la cantidad de días entre las fechas
+        $inicio = new DateTime($fecha_inicio);
+        $fin = new DateTime($fecha_fin);
+        $diferencia = $inicio->diff($fin);
+        $dias_solicitados = $diferencia->days + 1;
+        
+        return $dias_solicitados;// Sumar 1 para incluir el día de inicio
+    }
+    function insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados) {
+        $consulta_insertar = "INSERT INTO vacaciones (usuario_id, fecha_inicio, fecha_fin, estado, dias_solicitados) 
+                          VALUES ('$usuario_id', '$fecha_inicio', '$fecha_fin', 'pendiente', '$dias_solicitados')";
+
+        // Ejecutar la consulta
+        if (mysqli_query($enlace, $consulta_insertar)) {
+        // Redirigir a la vista de vacaciones si la inserción fue exitosa
+        header("location: ../vista/vista_vacaciones.php");
+          exit();
+        } else {
+        // Mostrar un mensaje de error si la inserción falla
+            echo "Error al solicitar las vacaciones: " . mysqli_error($enlace);
+        }
+
+        // Cerrar la conexión a la base de datos
+        mysqli_close($enlace);
+    }
+    function obtenerSolicitudesPendientes($enlace) {
+        // Consulta para obtener todas las solicitudes pendientes
+        $consulta = "SELECT * FROM vacaciones WHERE estado = 'pendiente';";
+        $resultado = mysqli_query($enlace, $consulta);
     
+        // Inicializar un arreglo para almacenar las solicitudes pendientes
+        $solicitudes_pendientes = [];
+    
+        // Verificar si hay solicitudes pendientes
+        if (mysqli_num_rows($resultado) > 0) {
+            // Recorrer los resultados y almacenarlos en el arreglo
+            while ($solicitud = mysqli_fetch_assoc($resultado)) {
+                $solicitudes_pendientes[] = $solicitud;
+            }
+        }
+    
+        // Devolver el arreglo de solicitudes pendientes
+        return $solicitudes_pendientes;
+    }
+    public function mostrarSolicitudesPendientes($enlace) {
+        $solicitudes_pendientes = $this->obtenerSolicitudesPendientes($enlace);
+
+        if (count($solicitudes_pendientes) > 0) {
+            echo '<table>
+                <thead>
+                    <tr>
+                        <th>Usuario ID</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Días solicitados</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>';
+
+            foreach ($solicitudes_pendientes as $solicitud) {
+                echo '<tr>
+                        <td>' . $solicitud['usuario_id'] . '</td>
+                        <td>' . $solicitud['fecha_inicio'] . '</td>
+                        <td>' . $solicitud['fecha_fin'] . '</td>
+                        <td>' . $solicitud['dias_solicitados'] . '</td>
+                        <td>' . $solicitud['estado'] . '</td>
+                        <td>
+                            <form action="../controlador/controlador_admin_vacaciones.php" method="POST">
+                                <input type="hidden" name="vacacion_id" value="' . $solicitud['id'] . '">
+                                <button type="submit" name="accion" value="aprobar">Aprobar</button>
+                                <button type="submit" name="accion" value="rechazar">Rechazar</button>
+                            </form>
+                        </td>
+                    </tr>';
+            }
+
+            echo '</tbody>
+                </table>';
+        } else {
+            echo '<p>No hay solicitudes pendientes.</p>';
+        }
+    }
+    function obtenerDatosVacacion($enlace, $vacacion_id) {
+        // Preparar la consulta para obtener los datos de la solicitud de vacaciones
+        $consulta_vacacion = "SELECT usuario_id, dias_solicitados FROM vacaciones WHERE id = '$vacacion_id'";
+    
+        // Ejecutar la consulta
+        $resultado_vacacion = mysqli_query($enlace, $consulta_vacacion);
+    
+        // Verificar si se obtuvieron resultados
+        if (mysqli_num_rows($resultado_vacacion) > 0) {
+            // Obtener los datos de la solicitud
+            $vacacion = mysqli_fetch_assoc($resultado_vacacion);
+            return $vacacion; // Devolver los datos de la solicitud
+        } else {
+            return null; // Devolver null si no hay resultados
+        }
+    }
+    function obtenerDiasDisponiblesUsuario($enlace, $usuario_id) {
+        // Preparar la consulta para obtener los días de vacaciones disponibles del usuario
+        $consulta_dias_usuario = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
+    
+        // Ejecutar la consulta
+        $resultado_dias_usuario = mysqli_query($enlace, $consulta_dias_usuario);
+    
+        // Verificar si se obtuvo el resultado
+        if (mysqli_num_rows($resultado_dias_usuario) > 0) {
+            // Obtener los días de vacaciones disponibles
+            $usuario = mysqli_fetch_assoc($resultado_dias_usuario);
+            return $usuario['dias_vacaciones']; // Devolver los días disponibles
+        } else {
+            return null; // Devolver null si no se encuentran resultados
+        }
+    }
+    function actualizarDiasDisponiblesUsuario($enlace, $usuario_id, $dias_restantes) {
+        // Preparar la consulta para actualizar los días de vacaciones restantes del usuario
+        $consulta_actualizar_usuario = "UPDATE usuarios SET dias_vacaciones = '$dias_restantes' WHERE id = '$usuario_id'";
+    
+        // Ejecutar la consulta
+        if (mysqli_query($enlace, $consulta_actualizar_usuario)) {
+            return true; // Éxito en la actualización
+        } else {
+            return "Error al actualizar los días de vacaciones: " . mysqli_error($enlace); // Error en la actualización
+        }
+    }
+
+    public function actualizarEstadoSolicitud($enlace, $vacacion_id, $estado) {
+        // Consulta para actualizar el estado de la solicitud
+        $consulta_actualizar_vacacion = "UPDATE vacaciones SET estado = '$estado' WHERE id = '$vacacion_id'";
+
+        // Ejecutar la consulta
+        if (mysqli_query($enlace, $consulta_actualizar_vacacion)) {
+            return true; // La actualización fue exitosa
+        } else {
+            return "Error al actualizar la solicitud: " . mysqli_error($enlace); // Hubo un error en la actualización
+        }
+    }
+}
+
   

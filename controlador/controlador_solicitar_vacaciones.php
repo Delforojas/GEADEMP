@@ -16,24 +16,11 @@ if (isset($_POST['solicitar_vacaciones'])) {
 
     $enlace = obtenerConexion();
 
-    // Calcular la cantidad de días entre las fechas
-    $inicio = new DateTime($fecha_inicio);
-    $fin = new DateTime($fecha_fin);
-    $diferencia = $inicio->diff($fin);
-    $dias_solicitados = $diferencia->days + 1;  // Sumar 1 para incluir el día de inicio
+    $vacaciones = new Vacaciones();
 
-    // Insertar la solicitud de vacaciones en la base de datos con el usuario específico
-    $consulta_insertar = "INSERT INTO vacaciones (usuario_id, fecha_inicio, fecha_fin, estado, dias_solicitados) 
-                          VALUES ('$usuario_id', '$fecha_inicio', '$fecha_fin', 'pendiente', '$dias_solicitados')";
+    $dias_solicitados = $vacaciones->calcularDiasSolicitados($fecha_inicio, $fecha_fin);
 
-    if (mysqli_query($enlace, $consulta_insertar)) {
-        // Redirigir a la vista de vacaciones
-        header("location: ../vista/vista_vacaciones.php");
-    } else {
-        echo "Error al solicitar las vacaciones: " . mysqli_error($enlace);
-    }
+    $vacaciones->insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados);
 
-    // Cerrar la conexión a la base de datos
-    mysqli_close($enlace);
 }
 ?>

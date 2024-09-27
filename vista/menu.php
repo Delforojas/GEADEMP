@@ -60,14 +60,18 @@
                     <img src="asset/arrow.svg" class="list__arrow">
                 </div> 
                 <ul class="list__show">
+                <ul class="list__show">
                     <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">login</a>
+                         <a href="comunicados.php" class="nav__link nav__link--inside">Comunicados</a>
                     </li>
                     <li class="list__inside">
-                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
                     <li class="list__inside">
-                        <a href="solicitar_vacaciones.php" class="nav__link nav__link--inside">SVacaciones</a>
+                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
                     </li>
                 </ul>
             </li>

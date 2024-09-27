@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/estilo1.css">
-    <title>IRPF</title>
+    <title>Historial de vacaciones</title>
     <?php
          include('../controlador/validar_usuario.php');
     ?>
+  
 </head>
 <body>
-<body>
-                <div>
-                        <h1 class="btn-volver">Certificados de Retenciones</h1>
-                        <form action="index.php" method="post">      
-                            <button type="submit" class="btn-volver">Volver Inicio</button>
-                        </form>
-                        
-                    
-                </div>
-<div class="contenedor-principal">
-<body>
+    <div>
+    <form action="vista_vacaciones.php"> <!-- Evita el envío del formulario -->
+            <button id=""class="btn-volver">Volver</button>
+        </form>
+    
+    <h1>Historial de vacaciones</h1>
+
+    </div>
+    <div class="contenedor-principal">
     <nav class="nav">
         <ul class="list">
             <li class="list__item">
@@ -60,13 +59,13 @@
                 </div> 
                 <ul class="list__show">
                     <li class="list__inside">
-                        <a href="comunicados.php" class="nav__link nav__link--inside">Comunicados</a>
-                    </li>
-                    <li class="list__inside">
                         <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
                     <li class="list__inside">
                         <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                    </li>
+                    <li class="list__inside">
+                        <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
                     </li>
                     <li class="list__inside">
                         <a href="menu.php" class="nav__link nav__link--inside">Menu comedor</a>
@@ -76,12 +75,15 @@
         </ul>
     
     </nav>
-                                 
-    <script src="app.js"></script>
-    
-    <div class="contenido-include">
-        <?php include('../controlador/controlador_retenciones.php'); ?>
+    <div class="contenido">
+    <?php
+        include("../controlador/controlador_vacaciones.php") 
+    ?>
     </div>
+    <script src="app.js"></script>
 
-    </body>
+</div>
+    <script src="app.js"></script>
+    </div>
+</body>
 </html>
