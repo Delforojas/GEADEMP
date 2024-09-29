@@ -67,6 +67,59 @@ class Bolsa {
         mysqli_stmt_close($checkbox);
         return $resultado; // Retorna el resultado
     }
+    public function generarTablaSinCheckbox($resultado, $action = "procesar.php"){ 
+        echo '<div class="formulario-contenedor">';
+        echo '<form action="' . htmlspecialchars($action) . '" method="post">';
+        echo "<table border='1'><tr>";
+    
+        // Imprimir encabezados de la tabla
+        while ($field = mysqli_fetch_field($resultado)) {
+            echo "<th>" . htmlspecialchars($field->name) . "</th>";
+        }
+        echo "</tr>";
+    
+        // Imprimir datos de la tabla
+        while ($row = mysqli_fetch_assoc($resultado)) {
+            echo "<tr>";
+            foreach ($row as $column) {
+                echo "<td>" . htmlspecialchars($column) . "</td>";
+            }
+            echo "</tr>";
+        }
+    
+        echo "</table>";
+        echo "</form>";
+        echo '</div>';
+    }
+    function generarTablaConCheckboxes($resultado, $action = "../controlador/procesar.php") {
+        echo '<form action="' . htmlspecialchars($action) . '" method="post">';
+        echo "<table border='1'><tr>";
+    
+        // Imprimir encabezados de la tabla
+        while ($field = mysqli_fetch_field($resultado)) {
+            echo "<th>" . htmlspecialchars($field->name) . "</th>";
+        }
+        // Añadir un encabezado para la columna de selección
+        echo "<th>Seleccionar</th>";
+        echo "</tr>";
+    
+        // Imprimir datos de la tabla con checkboxes
+        while ($row = mysqli_fetch_assoc($resultado)) {
+            echo "<tr>";
+            foreach ($row as $column) {
+                echo "<td>" . htmlspecialchars($column) . "</td>";
+            }
+            // Añadir checkbox para cada fila
+            echo "<td><input type='checkbox' name='seleccionados[]' value='" . htmlspecialchars($row['id']) . "'></td>";
+            echo "</tr>";
+        }
+        
+        echo "</table>";
+        // Botón de envío para procesar el formulario
+        echo "<input type='submit' value='Enviar'>";
+        echo "</form>";
+    
+    }
 
     public  function eliminardatos($enlace, $id){
         // Eliminar el registro de la tabla bolsa
@@ -101,7 +154,7 @@ class Bolsa {
                 mysqli_stmt_close($insertsl4);
             }    
 
-            public  function ObtenerBolsasl4(){
+            public function ObtenerBolsasl4(){
                 $enlace = obtenerConexion();
                 $consulta = "SELECT * FROM sl4"; // Cambia esto por el nombre de tu tabla
                 $resultado = mysqli_query($enlace, $consulta);
@@ -141,8 +194,29 @@ class Bolsa {
                 // Retorna el resultado de la consulta
                 return $resultado;
             }
+            function mostrarDatosSl4($resultado) {
+                if ($resultado->num_rows > 0) {
+                    // Prepara los datos para mostrarlos en la vista principal
+                    echo "<table border='1'>";
+                    echo "<tr><th>ID</th><th>Nombre</th><th>Ancho</th><th>Espesor</th></tr>";
             
-        }
+                    // Recorre los resultados y los muestra en filas de la tabla
+                    while ($row = $resultado->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['ancho']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['espesor']) . "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                } else {
+                    echo "No hay datos para mostrar.";
+                }
+              
+            }
+            
+    }
       
         
     class Sl7 extends Bolsa {
@@ -162,6 +236,7 @@ class Bolsa {
             mysqli_stmt_close($insertsl7);
 
         }
+        
         function ObtenerBolsasl7(){
             $enlace = obtenerConexion();
             $consulta = "SELECT * FROM sl7"; // Cambia esto por el nombre de tu tabla
@@ -202,6 +277,27 @@ class Bolsa {
             
             // Retorna el resultado de la consulta
             return $resultado;
+        }
+        function mostrarDatosSl7($resultado) {
+            if ($resultado->num_rows > 0) {
+                // Prepara los datos para mostrarlos en la vista principal
+                echo "<table border='1'>";
+                echo "<tr><th>ID</th><th>Nombre</th><th>Ancho</th><th>Espesor</th></tr>";
+        
+                // Recorre los resultados y los muestra en filas de la tabla
+                while ($row = $resultado->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['ancho']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['espesor']) . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "No hay datos para mostrar.";
+            }
+          
         }
         
     }
@@ -326,47 +422,47 @@ class Vacaciones {
         echo "Usuario o contraseña incorrectos.";
     }
 
-}
-public function obtenerVacaciones($enlace, $usuario_id) {
-            
-        $consulta = "SELECT fecha_inicio, fecha_fin, estado FROM vacaciones WHERE usuario_id = '$usuario_id'";
-        $resultado = mysqli_query($enlace, $consulta);
-        $tablaHTML = '';
-
-        echo ''; // Limpiar cualquier salida previa
-
-        if (mysqli_num_rows($resultado) > 0) {
-            echo '<table >';
-            echo '<thead><tr><th>Fecha de inicio</th><th>Fecha de fin</th><th>Estado</th><th>Días calculados</th></tr></thead>'; 
-            echo '<tbody>';
-            
-            while ($fila = mysqli_fetch_assoc($resultado)) {
-                // Calcular la cantidad de días entre las fechas
-                $fecha_inicio = $fila['fecha_inicio'];
-                $fecha_fin = $fila['fecha_fin'];
-
-                // Usamos DateTime para calcular la diferencia de días
-                $inicio = new DateTime($fecha_inicio);
-                $fin = new DateTime($fecha_fin);
-                $diferencia = $inicio->diff($fin);
-                $dias_solicitados = $diferencia->days + 1;  // Sumar 1 para incluir el día de inicio
+    }
+    public function obtenerVacaciones($enlace, $usuario_id) {
                 
-                // Mostrar las vacaciones en una tabla
-                echo '<tr>';
-                echo '<td>' . $fecha_inicio . '</td>';
-                echo '<td>' . $fecha_fin . '</td>';
-                echo '<td>' . $fila['estado'] . '</td>';
-                echo '<td>' . $dias_solicitados . '</td>';  // Mostrar los días calculados
-                echo '</tr>';
-            }
+            $consulta = "SELECT fecha_inicio, fecha_fin, estado FROM vacaciones WHERE usuario_id = '$usuario_id'";
+            $resultado = mysqli_query($enlace, $consulta);
+            $tablaHTML = '';
 
-            echo '</tbody>';
-            echo '</table>';
-        } else {
-            echo '<p>No has solicitado vacaciones.</p>';
+            echo ''; // Limpiar cualquier salida previa
+
+            if (mysqli_num_rows($resultado) > 0) {
+                echo '<table >';
+                echo '<thead><tr><th>Fecha de inicio</th><th>Fecha de fin</th><th>Estado</th><th>Días calculados</th></tr></thead>'; 
+                echo '<tbody>';
+                
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    // Calcular la cantidad de días entre las fechas
+                    $fecha_inicio = $fila['fecha_inicio'];
+                    $fecha_fin = $fila['fecha_fin'];
+
+                    // Usamos DateTime para calcular la diferencia de días
+                    $inicio = new DateTime($fecha_inicio);
+                    $fin = new DateTime($fecha_fin);
+                    $diferencia = $inicio->diff($fin);
+                    $dias_solicitados = $diferencia->days + 1;  // Sumar 1 para incluir el día de inicio
+                    
+                    // Mostrar las vacaciones en una tabla
+                    echo '<tr>';
+                    echo '<td>' . $fecha_inicio . '</td>';
+                    echo '<td>' . $fecha_fin . '</td>';
+                    echo '<td>' . $fila['estado'] . '</td>';
+                    echo '<td>' . $dias_solicitados . '</td>';  // Mostrar los días calculados
+                    echo '</tr>';
+                }
+
+                echo '</tbody>';
+                echo '</table>';
+            } else {
+                echo '<p>No has solicitado vacaciones.</p>';
         }
-        // Devolver la tabla generada
-        return $tablaHTML;
+         // Devolver la tabla generada
+            return $tablaHTML;
     }
     public function obtenerDiasVacaciones($enlace, $usuario_id) {
         // Consulta para obtener el total de días de vacaciones disponibles
@@ -521,6 +617,73 @@ public function obtenerVacaciones($enlace, $usuario_id) {
         } else {
             return "Error al actualizar la solicitud: " . mysqli_error($enlace); // Hubo un error en la actualización
         }
+    }
+    function obtenerDatosVacacion1($enlace, $vacacion_id) {
+        
+        $vacacion_id = mysqli_real_escape_string($enlace, $vacacion_id);
+    
+        
+        $consulta_vacacion = "SELECT usuario_id, dias_solicitados FROM vacaciones WHERE id = '$vacacion_id'";
+        
+       
+        $resultado_vacacion = mysqli_query($enlace, $consulta_vacacion);
+    
+      
+    
+        $vacacion = mysqli_fetch_assoc($resultado_vacacion);
+    
+        return $vacacion;
+    }
+    function obtenerDiasVacacionesUsuario($enlace, $usuario_id) {
+    // Sanitizar el ID del usuario para evitar inyecciones SQL
+    $usuario_id = mysqli_real_escape_string($enlace, $usuario_id);
+
+    // Crear la consulta SQL para obtener los días de vacaciones del usuario
+    $consulta_dias_usuario = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
+
+    // Ejecutar la consulta
+    $resultado_dias_usuario = mysqli_query($enlace, $consulta_dias_usuario);
+
+    // Verificar si la consulta fue exitosa
+    if (!$resultado_dias_usuario) {
+        die("Error en la consulta: " . mysqli_error($enlace));
+    }
+
+    // Verificar si se obtuvieron resultados
+    if (mysqli_num_rows($resultado_dias_usuario) > 0) {
+        // Obtener los datos del usuario (días de vacaciones)
+        $usuario = mysqli_fetch_assoc($resultado_dias_usuario);
+        return $usuario['dias_vacaciones'];
+    } else {
+        // Retornar un valor predeterminado si no hay resultados
+        return null;
+    }
+}
+
+    function actualizarDiasVacaciones($enlace, $usuario_id, $dias_restantes) {
+       
+        $usuario_id = mysqli_real_escape_string($enlace, $usuario_id);
+        $dias_restantes = mysqli_real_escape_string($enlace, $dias_restantes);
+    
+        
+        $consulta_actualizar_usuario = "UPDATE usuarios SET dias_vacaciones = '$dias_restantes' WHERE id = '$usuario_id'";
+       
+        $resultado = mysqli_query($enlace, $consulta_actualizar_usuario);
+    
+        return true;
+    }
+    function actualizarEstadoVacacion($enlace, $vacacion_id, $estado) {
+        
+        $vacacion_id = mysqli_real_escape_string($enlace, $vacacion_id);
+        $estado = mysqli_real_escape_string($enlace, $estado);
+    
+        
+        $consulta_actualizar_vacacion = "UPDATE vacaciones SET estado = '$estado' WHERE id = '$vacacion_id'";
+        
+        
+        $resultado = mysqli_query($enlace, $consulta_actualizar_vacacion);
+    
+        return true;
     }
 }
 
