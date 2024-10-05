@@ -66,7 +66,7 @@
                         <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
                     <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                     </li>
                     <li class="list__inside">
                         <a href="menu.php" class="nav__link nav__link--inside">Menu comedor</a>

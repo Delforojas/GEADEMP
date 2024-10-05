@@ -11,9 +11,10 @@
 
 	</head>
     <body>
-       <div class="container">
-        
+        <h2 class=btn-volver>Introducir bobina</h2>
 
+
+       <div class="container">
         <form action="../controlador/insercoin.php" method="post">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" placeholder="nombre" required>
@@ -25,7 +26,6 @@
             <input type="number" id="espesor" name="espesor" placeholder="espesor" required>
 
             <button type="submit" id="enviarYCerrar" class="btn-volver" name="registro">Enviar y Cerrar</button>
-            
         </form>
     </div>
 

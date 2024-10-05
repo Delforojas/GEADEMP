@@ -12,12 +12,10 @@
 </head>
 <body>
     <div>
+    <h1 class="btn-volver">Historial de vacaciones</h1>
     <form action="vista_vacaciones.php"> <!-- Evita el envío del formulario -->
             <button id=""class="btn-volver">Volver</button>
         </form>
-    
-    <h1>Historial de vacaciones</h1>
-
     </div>
     <div class="contenedor-principal">
     <nav class="nav">
@@ -62,7 +60,7 @@
                         <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
                     <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                     </li>
                     <li class="list__inside">
                         <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>

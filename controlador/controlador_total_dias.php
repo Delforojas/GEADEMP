@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Verificar si el usuario ha iniciado sesión
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['username'])) {
     echo "Debes iniciar sesión para ver tus vacaciones.";
     exit();
 }
@@ -17,7 +17,7 @@ require_once("../modelo/modelo.php");
 $enlace = obtenerConexion();
 
 // Obtener el ID del usuario desde la sesión
-$usuario_id = $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['username'];
 
 $vacaciones = new Vacaciones();
 

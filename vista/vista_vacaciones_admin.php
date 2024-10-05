@@ -30,10 +30,11 @@
     </style>
 </head>
 <body>
+   
+    <h1 class="btn-volver">Solicitud de Vacaciones Pendientes</h1>
     <form action="vista_bolsa_admin.php"> <!-- Evita el envío del formulario -->
             <button id=""class="btn-volver">Volver</button>
     </form>
-    <h1>Solicitudes de Vacaciones Pendientes</h1>
 
     <?php
          include('../controlador/controlador_solicitudes_pendientes.php');

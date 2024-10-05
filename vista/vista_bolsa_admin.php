@@ -13,20 +13,25 @@
   
 
 <body>
+    <h1 class="btn-volver">AREA DE ADMINISTRADORES</h1>
+    
     <div class="form-volver">
         <form action="index.php" method="get">
             <button type="submit" class="btn-volver">Volver a Principal</button>
         </form>
-        <form action="formulario.php"> <!-- Evita el envío del formulario -->
-            <button id=""class="btn-volver">Introducir bobinas</button>
+        <form action="formulario.php">
+            <button class="btn-volver">Introducir bobinas</button>
         </form>
-        <form action="registro_usuario.php"> <!-- Evita el envío del formulario -->
-            <button id=""class="btn-volver">Registro de Usuario</button>
+        <form action="registro_usuario.php">
+            <button class="btn-volver">Registro de Usuario</button>
         </form>
-        <form action="vista_vacaciones_admin.php"> <!-- Evita el envío del formulario -->
-            <button id=""class="btn-volver">Gestionar vacaciones</button>
+        <form action="vista_vacaciones_admin.php">
+            <button class="btn-volver">Gestionar vacaciones</button>
         </form>
     </div>
+
+    
+
     <div class="contenedor-principal">
     <nav class="nav">
         <ul class="list">
@@ -72,7 +77,7 @@
                     <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                 </li>
                 <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                 </li>
                 <li class="list__inside">
                     <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>

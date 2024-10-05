@@ -17,7 +17,6 @@ if (isset($_POST['checkbox']) && is_array($_POST['checkbox'])) {
 
         if ($resultado) {
             $registro = mysqli_fetch_assoc($resultado);
-            
             $nombre = mysqli_real_escape_string($enlace, $registro['nombre']);
             $ancho = mysqli_real_escape_string($enlace, $registro['ancho']);
             $espesor = mysqli_real_escape_string($enlace, $registro['espesor']);

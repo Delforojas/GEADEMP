@@ -10,6 +10,23 @@ function obtenerConexion() {
     return $enlace;
 }
 
+class Database {
+    // Atributos públicos
+    public $servidor = "localhost";
+    public $user = "root";
+    public $clave = "";
+    public $baseDatos = "acx";
+    public $enlace;
+
+    // Constructor de la clase
+    public function __construct($servidor = "localhost", $user = "root", $clave = "", $baseDatos = "acx") {
+        $this->servidor = $servidor;
+        $this->user = $user;
+        $this->clave = $clave;
+        $this->baseDatos = $baseDatos;
+    }
+
+}
 
 class Bolsa {
     public $id;
@@ -686,5 +703,6 @@ class Vacaciones {
         return true;
     }
 }
+
 
   

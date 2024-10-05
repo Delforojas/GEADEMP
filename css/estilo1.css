@@ -3,10 +3,7 @@ body {
     margin: 0; /* Eliminar el margen por defecto del body */
     padding: 0;
 }
-h1 {
-    text-align: center;
-    color: #333;
-}
+
 ul {
     list-style-type: none;
     padding: 0;
@@ -28,13 +25,20 @@ a:hover {
     text-decoration: underline;
 }
 .container {
-    background: #fff;
+    background: #ac1a1a;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: auto;
+
 }
+.container label {
+    color: #007bff; /* Cambia el color del texto del label */
+    font-weight: bold; /* Opción para hacer el texto más destacado */
+    font-size: 16px; /* Ajusta el tamaño de fuente si es necesario */
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -165,66 +169,22 @@ input[type="text"], input[type="number"] {
 .btn-salir:hover {
     background-color: #4b4d4e; /* Color más oscuro al pasar el mouse */
 }
-.form-volver {
-    display: flex; /* Alinea los botones horizontalmente */
-    justify-content: flex-start; /* Alinea los botones hacia la izquierda */
-    gap: 10px; /* Espaciado entre los botones */
-}
 
-.btn-volver, .btn-otro-boton {
-    padding: 10px 20px;
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color del texto */
-    border: none;
-    border-radius: 4px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-}
 
-.btn-volver:hover, .btn-otro-boton:hover {
-    background-color: #0056b3; /* Color al pasar el cursor */
-}
-.btn-volver{
-    background-color: #007bff; /* Color de fondo azul */
-    color: white; /* Color del texto blanco */
-    border: none; /* Sin bordes */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de la fuente */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    transition: background-color 0.3s ease; /* Suaviza el cambio de color al pasar el mouse */
-    
-}
 
-.btn-volver:hover {
-    background-color: #4b4d4e; /* Color más oscuro al pasar el mouse */
-}
-.form-volver {
+.contenedor-botones {
     display: flex;
-    justify-content: flex-end; /* Alinea el contenido a la derecha */
-    margin: 20px 0; /* Espaciado superior e inferior */
+    align-items: center; /* Alinea todos los botones verticalmente al centro */
+    gap: 20px; /* Espacio entre los formularios */
 }
-.form-volver {
-    display: flex;
-    justify-content: center; /* Alinea el contenido a la derecha */
-    margin: 20px 0; /* Espaciado superior e inferior */
-}
+
 .intro  {
     display: flex;
     justify-content: center; /* Centra horizontalmente */
     align-items: center;    /* Centra verticalmente si es necesario */
     height: 20vh;          /* Opcional: para centrar verticalmente en toda la pantalla */
 }
-.btn-volver1{
-    background-color: #020c16; /* Color de fondo azul */
-    color: white; /* Color del texto blanco */
-    border: none; /* Sin bordes */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de la fuente */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    transition: background-color 0.3s ease; /* Suaviza el cambio de color al pasar el mouse */
-    
-}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 
@@ -237,6 +197,7 @@ input[type="text"], input[type="number"] {
 body {
     font-family: 'Poppins', sans-serif ;
     color: #fff;
+    background-color: #3e8d19;
     
 }
 
@@ -452,7 +413,7 @@ table {
 th, td {
     border: 1px solid black;
 }
-.form-container22 {
+.form-container {
     width: 100%;
     max-width: 600px;
     margin: 50px auto; /* Centramos el formulario horizontalmente */
@@ -460,4 +421,90 @@ th, td {
     background-color: #f9f9f9; /* Fondo suave */
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.contenedor-flex {
+    display: flex; /* Flexbox para alinear horizontalmente */
+    align-items: center; /* Alinea los divs verticalmente al centro */
+    background-color:rgb(170, 0, 0);
+    padding: 20px; /* Asegura que haya espacio interno suficiente para ver el fondo */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    min-height: 100px; /* Establece una altura mínima para ver el color de fondo */
+}
+
+.btn-volver ,.btn-otro-boton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Espaciado interno consistente para todos los botones */
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+    height: auto; /* Asegura que la altura sea automática para todos los botones */
+}
+
+.delfo, .form-volver {
+    margin: 0;
+    padding: 0;
+}
+
+.form-volver {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones dentro del div */
+}
+
+.btn-volver-principal {
+    position: static;
+
+}
+/* Estilos para el contenedor del encabezado y botón */
+.header-container {
+    display: flex;
+    justify-content: center;  /* Centra el contenido horizontalmente */
+    align-items: center;      /* Alinea verticalmente al centro */
+    height: 100px;            /* Altura del contenedor */
+    background-color: #f0f0f0; /* Color de fondo, opcional */
+    position: relative;       /* Para que el botón pueda superponerse a este contenedor */
+}
+
+/* Estilo para el botón */
+.volver-inicio {
+    position: absolute;       /* Posiciona el botón absolutamente */
+    top: 10px;                /* Ajusta la posición vertical del botón */
+    left: 10px;               /* Ajusta la posición horizontal del botón */
+}
+
+/* Estilo para el botón visualmente */
+.btn-volver {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.form-volver {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones dentro del div */
+}
+.btn-volver ,.btn-otro-boton {
+    background-color: #3e8d19;
+    color: white;
+    border: none;
+    padding: 10px 20px; /* Espaciado interno consistente para todos los botones */
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+    height: auto; /* Asegura que la altura sea automática para todos los botones */
+}
+label{
+    color:rgb(0, 0, 179);
 }

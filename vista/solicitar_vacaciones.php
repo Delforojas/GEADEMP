@@ -10,6 +10,7 @@
     ?>
 </head>
 <body>
+        <h1 class="btn-volver">SOLICITAR VACACIONES</h1>
         <form action="index.php"> <!-- Evita el envío del formulario -->
             <button class="btn-volver">Volver</button>
         </form>
@@ -57,7 +58,7 @@
                         <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
                     <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                     </li>
                     <li class="list__inside">
                         <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
@@ -71,8 +72,6 @@
     
     </nav>
     <div class ="contenido">
-        <h1>Solicitar Vacaciones</h1>
-
             <form action="../controlador/controlador_solicitar_vacaciones.php" method="POST">
                 <label for="fecha_inicio">Fecha de inicio:</label>
                 <input type="date" name="fecha_inicio" required>

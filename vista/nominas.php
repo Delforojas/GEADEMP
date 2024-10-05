@@ -11,14 +11,13 @@
         
 <body>
 <body>
-                <div>
-                        <h1 class="btn-volver">NOMINAS</h1>
-                        <form action="index.php" method="post">      
-                            <button type="submit" class="btn-volver">Volver Inicio</button>
-                        </form>
-                        
-                    
-                </div>
+<div class="header-container">
+    <h1 class="btn-volver">NOMINAS</h1>
+</div>
+
+<form action="index.php" method="post" class="volver-inicio">
+    <button type="submit" class="btn-volver">Volver Inicio</button>
+</form>
 <div class="contenedor-principal">
 <body>
     <nav class="nav">
@@ -63,7 +62,7 @@
                         <a href="comunicados.php" class="nav__link nav__link--inside">Comunicados</a>
                     </li>
                     <li class="list__inside">
-                        <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                        <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                     </li>
                     <li class="list__inside">
                         <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>

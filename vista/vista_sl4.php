@@ -11,25 +11,26 @@
         
 </head>
 <body>
-    <div class="form-volver">
-        <h1 class="btn-volver">Sl4</h1>
-        <form action="index.php" method="post">
-            <button type="submit" class="btn-volver">Volver Inicio</button>
-        </form>
-        <form id="ordenForm" action="../vista/vista_resultado_sl4.php" method="POST">
-        <button type="submit" class="btn-volver">Ordenar</button>
-            <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
-                <optgroup label="Espesor">
-                    <option value="ASC">ASC (Espesor)</option>
-                    <option value="DESC">DESC (Espesor)</option>
-                </optgroup>
-                <optgroup label="Ancho">
-                    <option value="AASC">ASC (Ancho)</option>
-                    <option value="ADESC">DESC (Ancho)</option>
-                </optgroup>
-            </select>
-        </form>
-    </div>
+    <h1 class="btn-volver">SL4</h1>
+            <div class="form-volver">
+                <form action="index.php" method="get">
+                    <button type="submit" class="btn-volver">Volver a Principal</button>
+                </form>
+                <form id="ordenForm" action="../vista/vista_resultado_sl4.php" method="POST"> 
+                    <button type="submit" class="btn-volver">Ordenar</button>
+                        <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
+                            <optgroup label="Espesor">
+                                <option value="ASC">ASC (Espesor)</option>
+                                <option value="DESC">DESC (Espesor)</option>
+                            </optgroup>
+                            <optgroup label="Ancho">
+                                <option value="AASC">ASC (Ancho)</option>
+                                <option value="ADESC">DESC (Ancho)</option>
+                            </optgroup>
+                        </select>
+                </form>
+            </div>
+        </div>
     <div class="contenedor-principal">
         <nav class="nav">
             <ul class="list">
@@ -72,7 +73,7 @@
                                 <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                             </li>
                             <li class="list__inside">
-                                <a href="login_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                                <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                             </li>
                             <li class="list__inside">
                                 <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
