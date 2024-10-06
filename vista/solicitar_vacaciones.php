@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilo1.css">
+    <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Solicitar Vacaciones</title>
     <?php
          include('../controlador/validar_usuario.php');
     ?>
 </head>
 <body>
-        <h1 class="btn-volver">SOLICITAR VACACIONES</h1>
-        <form action="index.php"> <!-- Evita el envío del formulario -->
-            <button class="btn-volver">Volver</button>
-        </form>
+    <h1 class="titulo-vacaciones"id="h1p">SOLICITAR VACACIONES</h1>
+    <header>
+        <div id="daohang">
+            <button><a href="index.php">Volver a principal</a></button>
+        </div>
+    </header>
     </div>
     <div class="contenedor-principal">
     <nav class="nav">
@@ -71,7 +74,7 @@
         </ul>
     
     </nav>
-    <div class ="contenido">
+    <div class =>
             <form action="../controlador/controlador_solicitar_vacaciones.php" method="POST">
                 <label for="fecha_inicio">Fecha de inicio:</label>
                 <input type="date" name="fecha_inicio" required>
@@ -80,9 +83,9 @@
                 <input type="date" name="fecha_fin" required>
                 
                 <label for="dias_solicitados">Total dias :</label>      
-                <button type="submit" class ="btn-volver"name="solicitar_vacaciones">Solicitar Vacaciones</button>
+                <button type="submit" class =""name="solicitar_vacaciones">Solicitar Vacaciones</button>
             </form>
     </div>
-    <script src="app.js"></script>
+    <script src="../vista/javascript.js"></script>
 </body>
 </html>

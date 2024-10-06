@@ -19,31 +19,32 @@ $ruta_carpeta_usuario = "../Nominas/" . $nombre_limpio;
 if (file_exists($ruta_carpeta_usuario)) {
     
     $archivos = array_diff(scandir($ruta_carpeta_usuario), array('.', '..'));
-
     echo "<h2 class='btn-volver'>Nóminas de $nombre_usuario</h2>";
-    echo "<table border='1' cellpadding='10' cellspacing='0'>";
+    echo "<div class='table-title'>";  // Agregamos el contenedor con la clase 'table-title'
+    echo "<h3  class='titulo-vaca'>Lista de Nóminas</h3>";
+    echo "<table class='table-fill'>";  // Usamos la clase 'table-fill' en la tabla
     echo "<thead>
             <tr>
-                <th>Nominas</th>
-                <th>Ver / Descargar</th>
+                <th class='text-left'>Nóminas</th>
+                <th class='text-left'>Ver / Descargar</th>
             </tr>
-          </thead>";
+        </thead>";
     echo "<tbody>";
 
-    
     foreach ($archivos as $archivo) {
         $ruta_archivo = $ruta_carpeta_usuario . '/' . $archivo;
         echo "<tr>";
-        echo "<td>$archivo</td>";  
-        echo "<td><a href='$ruta_archivo' target='_blank'>Ver / Descargar</a></td>";  
+        echo "<td class='text-left'>$archivo</td>";  // Aplicamos la clase 'text-left' a las celdas
+        echo "<td class='text-left'><a href='$ruta_archivo' target='_blank'>Ver / Descargar</a></td>";
         echo "</tr>";
     }
 
     echo "</tbody>";
     echo "</table>";
+    echo "</div>"; 
 
-} else {
-    echo "No se encontró la carpeta de nóminas para el usuario $nombre_usuario.";
-}
+    } else {
+        echo "No se encontró la carpeta de nóminas para el usuario $nombre_usuario.";
+    }
 
-?>
+    ?>

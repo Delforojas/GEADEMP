@@ -10,7 +10,7 @@ require_once("../modelo/modelo.php");
 // Obtener la conexión a la base de datos
 $enlace = obtenerConexion();
 
-$usuario_id = $_SESSION['usermame'];
+$usuario_id = $_SESSION['id'];
 
 $vacaciones = new Vacaciones();
 

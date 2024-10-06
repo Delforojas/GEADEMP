@@ -2,10 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilo.css">
-    <link rel="stylesheet" href="../css/estilo1.css">
+    <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Menu desplegable</title>
     
 
@@ -17,6 +16,11 @@
 
 </head>
 <body>
+<header>
+                            <div id="daohang">
+                               
+                            </div>
+</header>        
     <nav class="nav">
         <ul class="list">
             <li class="list__item">
@@ -75,6 +79,6 @@
         </ul>
     
     </nav>
-    <script src="app.js"></script>
+    <script src="../vista/javascript.js"></script>
 </body>
 </html>

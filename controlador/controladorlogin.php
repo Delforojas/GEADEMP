@@ -32,11 +32,11 @@ if (!empty($_POST["btningresar"])) {
 
                 if ($filas['id_cargo'] == 1) {
                     // Redirección para el administrador
-                    header("Location: vista_bolsa_admin.php");
+                    header("Location: ../vista/vista_bolsa_admin.php");
                     exit();
                 } elseif ($filas['id_cargo'] == 2) {
                     // Redirección para el usuario normal
-                    header("Location: index.php");
+                    header("Location: ../vista/index.php");
                     exit();
                 }
             } else {

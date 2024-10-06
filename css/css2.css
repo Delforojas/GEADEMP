@@ -1,0 +1,287 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+div {
+  display: block; /* Asegura que se comporta como un bloque normal */
+  margin: 0; /* Elimina márgenes que podrían centrarlo */
+  padding: 0; /* Elimina el relleno */
+}
+h1 {
+  margin: 0;
+  padding: 0;
+  text-align: left; /* Alinea el texto a la izquierda */
+  position: relative; /* Para ajustar su posición si es necesario */
+}
+.contenedor-flex {
+  display: flex; /* Flexbox para alinear los divs horizontalmente */
+  width: 100%;
+  align-items: flex-start; /* Alinea los elementos al principio (izquierda) verticalmente */
+  justify-content: flex-start;
+}
+.contenedor-principal {
+  display: flex; /* Usamos flexbox para alinear los elementos en fila */
+  width: 100%;
+}
+.contenido-include {
+  flex-grow: 1; /* Hace que este div ocupe el espacio restante */
+  padding: 2px; /* Añade espacio alrededor del contenido */
+}
+#contenedor-bienvenida {
+    
+    display: flex;
+    align-items: center; /* Alinear verticalmente al centro */
+    justify-content: space-between; /* Distribuir espacio entre el texto y el botón */
+    background-color: #0B192C; /* Color de fondo para el recuadro */
+    width: 100%; /* Ajustar el ancho al 100% de la página */
+    height: 75px;
+
+}
+#imagen-bienvenida{
+    width: auto; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: 100%; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Mantiene la proporción de la imagen y cubre el contenedor */
+    margin-bottom: 0;
+    margin-left: 0;
+    display: block;
+    max-height: 100vh;
+    max-width: 50vh;
+    
+}
+#bienve {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background-color: #0B192C; /* Color de fondo para el recuadro */
+    font-size: 22px; /* Tamaño de la fuente */
+    color: #ffffff; /* Color del texto */
+    margin: 20px; /* Quitar márgenes del párrafo */
+    margin-left: auto;
+}
+.titulo-vacaciones {
+    background-color: #FF6500; /* Color de fondo */
+    color:Black; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    margin: 0; /* Sin márgenes */
+    width: 100%; /* Abarca el ancho completo */
+    font-size: 2em; /* Tamaño de fuente */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+    height: 10vh;
+    align-items: center; 
+    display: flex;
+    justify-content: center;
+}
+.titulo-vaca {
+  background-color: #257180; /* Color de fondo */
+  color: #FF6500 !important; /* Asegura que el color del texto se aplique */
+  text-align: center; /* Centrar el texto */
+  margin: 0; /* Sin márgenes */
+  width: 100%; /* Abarca el ancho completo */
+  font-size: 2em; /* Tamaño de fuente */
+  box-sizing: border-box; /* Incluir padding en el ancho total */
+  height: 10vh; /* Altura del contenedor */
+  display: flex; /* Flexbox para centrar vertical y horizontal */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+}
+
+body {
+    background-color: #9ea7af;
+    font-family: 'Arial', sans-serif; /* Establece Arial como la fuente principal */
+}
+
+@media (max-width: 600px) {
+    .titulo-vacaciones {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+    }
+}
+a{
+	text-decoration: none;
+	text-align: center;
+	color: white;
+}
+header{
+	width: 100%;
+	background-color: #1E3E62;
+	position: relative;
+}
+#daohang{
+	display: flex;
+    justify-content: center; /* Para centrar los botones */
+    align-items: center; /* Para alinear los botones verticalmente */
+    height: 10vh;
+}
+#daohang button{
+	height: 10vh ; 
+    white-space: normal;
+    margin: 0 10px; /* Espaciado entre los botones */
+    border: 0;
+    width: 150px; /* Aumenta el ancho del botón */
+    background-color: #1E3E62;
+    color: white; /* Color del texto para mejorar la visibilidad */
+    font-size: 16px; /* Aumenta el tamaño del texto */
+    cursor: pointer;
+    
+}
+#daohang button:hover{
+	background-color: orange;
+}
+.btn-salir {
+  height: 10vh; /* Altura del botón */
+  white-space: normal; /* Permitir que el texto se ajuste si es largo */
+  margin: 0 10px; /* Espaciado alrededor del botón */
+  border: none; /* Elimina el borde */
+  width: 150px; /* Ancho del botón */
+  background-color: #1E3E62; /* Color de fondo del botón */
+  color: white; /* Color del texto */
+  font-size: 16px; /* Tamaño del texto */
+  cursor: pointer; /* Cambia el cursor cuando pasa el ratón */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+.btn-salir:hover {
+  background-color: orange; /* Cambia el color al pasar el ratón */
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+body {
+  background-color:#9ea7af;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+
+div.table-title {
+  display: block;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 10vh;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+  table-layout: fixed; 
+}
+ 
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  width: 100%;
+  padding:10px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+ 
+tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+

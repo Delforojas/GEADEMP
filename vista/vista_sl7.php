@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilo1.css">
+    <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Bolsa SL7</title>
     <?php
          include('../controlador/validar_usuario.php');
@@ -11,26 +12,26 @@
         
 </head>
 <body>
-    <h1 class="btn-volver">SL7</h1>
-        <div class="form-volver">
-            <form action="index.php" method="get">
-                <button type="submit" class="btn-volver">Volver a Principal</button>
-            </form>
-            <form id="ordenForm" action="../vista/vista_resultado_sl7.php" method="POST">          
-                <button type="submit" class="btn-volver">Ordenar</button>
+    <h1 class="titulo-vacaciones"id="h1p">SL7</h1>
+    <header>
+        <div id="daohang">
+            <button><a href="index.php">Volver a Principal</a></button>
+            <form id="ordenForm" action="../vista/vista_resultado_sl7.php" method="POST">   
+            <button type="submit" class=>Ordenar</button>
                     <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
-                    <optgroup label="Espesor">
-                        <option value="ASC">ASC (Espesor)</option>
-                        <option value="DESC">DESC (Espesor)</option>
-                    </optgroup>
                     <optgroup label="Ancho">
                         <option value="AASC">ASC (Ancho)</option>
                         <option value="ADESC">DESC (Ancho)</option>
                     </optgroup>
-                </select>
+                    <optgroup label="Espesor">
+                        <option value="ASC">ASC (Espesor)</option>
+                        <option value="DESC">DESC (Espesor)</option>
+                    </optgroup>
+                    </select>
             </form>
         </div>
-    </div>
+    </header>
+<div class="contenedor-flex">  
     <div class="contenedor-principal">
         <nav class="nav">
             <ul class="list">
@@ -49,7 +50,7 @@
                     <ul class="list__show">
                         <li class="list__inside">
                             <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
-                         </li>
+                        </li>
                     </ul>
                         
 
@@ -84,17 +85,13 @@
                         </ul>
                     </li>
                 </li>
-
-
-            </ul>
-                    
+            </ul>           
         </nav>
+    </div>
         <div class="contenido-include">
             <?php include('../controlador/bolsa_sl7.php'); ?>
-        </div>
-    </div>
-                    
-    <script src="app.js"></script>
-    
+    </div>  
+</div>         
+    <script src="../vista/javascript.js"></script>
 </body>
 </html>

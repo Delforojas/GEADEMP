@@ -85,13 +85,13 @@ class Bolsa {
         return $resultado; // Retorna el resultado
     }
     public function generarTablaSinCheckbox($resultado, $action = "procesar.php"){ 
-        echo '<div class="formulario-contenedor">';
+        echo '<div class="table-title">';
         echo '<form action="' . htmlspecialchars($action) . '" method="post">';
-        echo "<table border='1'><tr>";
+        echo "<table class ='table-fill'><tr>";
     
         // Imprimir encabezados de la tabla
         while ($field = mysqli_fetch_field($resultado)) {
-            echo "<th>" . htmlspecialchars($field->name) . "</th>";
+            echo "<th class='text-left'>" . htmlspecialchars($field->name) . "</th>";
         }
         echo "</tr>";
     
@@ -99,7 +99,7 @@ class Bolsa {
         while ($row = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             foreach ($row as $column) {
-                echo "<td>" . htmlspecialchars($column) . "</td>";
+                echo "<td class='text-left'>" . htmlspecialchars($column) . "</td>";
             }
             echo "</tr>";
         }
@@ -109,31 +109,32 @@ class Bolsa {
         echo '</div>';
     }
     function generarTablaConCheckboxes($resultado, $action = "../controlador/procesar.php") {
+        echo '<div class="table-title">';
         echo '<form action="' . htmlspecialchars($action) . '" method="post">';
-        echo "<table border='1'><tr>";
+        echo "<table class ='table-fill'><tr>";
     
         // Imprimir encabezados de la tabla
         while ($field = mysqli_fetch_field($resultado)) {
-            echo "<th>" . htmlspecialchars($field->name) . "</th>";
+            echo "<th class='text-left'>" . htmlspecialchars($field->name) . "</th>";
         }
         // Añadir un encabezado para la columna de selección
-        echo "<th>Seleccionar</th>";
+        echo "<th class='text-left'>Seleccionar</th>";
         echo "</tr>";
     
         // Imprimir datos de la tabla con checkboxes
         while ($row = mysqli_fetch_assoc($resultado)) {
             echo "<tr>";
             foreach ($row as $column) {
-                echo "<td>" . htmlspecialchars($column) . "</td>";
+                echo "<td class='text-left'>" . htmlspecialchars($column) . "</td>";
             }
             // Añadir checkbox para cada fila
-            echo "<td><input type='checkbox' name='seleccionados[]' value='" . htmlspecialchars($row['id']) . "'></td>";
+            echo "<td class='text-left'><input type='checkbox' name='seleccionados[]' value='" . htmlspecialchars($row['id']) . "'></td>";
             echo "</tr>";
         }
         
         echo "</table>";
         // Botón de envío para procesar el formulario
-        echo "<input type='submit' value='Enviar'>";
+        echo "<input type='submit' value='Enviar' class ='btn-salir'>";
         echo "</form>";
     
     }
@@ -214,9 +215,15 @@ class Bolsa {
             function mostrarDatosSl4($resultado) {
                 if ($resultado->num_rows > 0) {
                     // Prepara los datos para mostrarlos en la vista principal
-                    echo "<table border='1'>";
-                    echo "<tr><th>ID</th><th>Nombre</th><th>Ancho</th><th>Espesor</th></tr>";
-            
+                    echo "<div class='table-title'>";
+                    echo "<table class='table-fill'>";
+                    echo "<tr>
+                            <th class='text-left'>ID</th>
+                            <th class='text-left'>Nombre</th>
+                            <th class='text-left'>Ancho</th>
+                            <th class='text-left'>Espesor</th>
+                          </tr>";
+                
                     // Recorre los resultados y los muestra en filas de la tabla
                     while ($row = $resultado->fetch_assoc()) {
                         echo "<tr>";
@@ -227,10 +234,10 @@ class Bolsa {
                         echo "</tr>";
                     }
                     echo "</table>";
+                    echo "</div>";  // Cierre de div para la tabla
                 } else {
                     echo "No hay datos para mostrar.";
                 }
-              
             }
             
     }
@@ -298,9 +305,15 @@ class Bolsa {
         function mostrarDatosSl7($resultado) {
             if ($resultado->num_rows > 0) {
                 // Prepara los datos para mostrarlos en la vista principal
-                echo "<table border='1'>";
-                echo "<tr><th>ID</th><th>Nombre</th><th>Ancho</th><th>Espesor</th></tr>";
-        
+                echo "<div class='table-title'>";
+                echo "<table class='table-fill'>";
+                echo "<tr>
+                        <th class='text-left'>ID</th>
+                        <th class='text-left'>Nombre</th>
+                        <th class='text-left'>Ancho</th>
+                        <th class='text-left'>Espesor</th>
+                      </tr>";
+            
                 // Recorre los resultados y los muestra en filas de la tabla
                 while ($row = $resultado->fetch_assoc()) {
                     echo "<tr>";
@@ -311,10 +324,10 @@ class Bolsa {
                     echo "</tr>";
                 }
                 echo "</table>";
+                echo "</div>";  // Cierre de div para la tabla
             } else {
                 echo "No hay datos para mostrar.";
             }
-          
         }
         
     }
@@ -449,15 +462,16 @@ class Vacaciones {
             echo ''; // Limpiar cualquier salida previa
 
             if (mysqli_num_rows($resultado) > 0) {
-                echo '<table >';
-                echo '<thead><tr><th>Fecha de inicio</th><th>Fecha de fin</th><th>Estado</th><th>Días calculados</th></tr></thead>'; 
+                echo '<div class="table-title">';
+                echo '<table class="table-fill">';
+                echo '<thead><tr><th class="text-left">Fecha de inicio</th><th class="text-left">Fecha de fin</th><th class="text-left">Estado</th><th class="text-left">Días calculados</th></tr></thead>'; 
                 echo '<tbody>';
                 
                 while ($fila = mysqli_fetch_assoc($resultado)) {
                     // Calcular la cantidad de días entre las fechas
                     $fecha_inicio = $fila['fecha_inicio'];
                     $fecha_fin = $fila['fecha_fin'];
-
+            
                     // Usamos DateTime para calcular la diferencia de días
                     $inicio = new DateTime($fecha_inicio);
                     $fin = new DateTime($fecha_fin);
@@ -466,21 +480,23 @@ class Vacaciones {
                     
                     // Mostrar las vacaciones en una tabla
                     echo '<tr>';
-                    echo '<td>' . $fecha_inicio . '</td>';
-                    echo '<td>' . $fecha_fin . '</td>';
-                    echo '<td>' . $fila['estado'] . '</td>';
-                    echo '<td>' . $dias_solicitados . '</td>';  // Mostrar los días calculados
+                    echo '<td class="text-left">' . htmlspecialchars($fecha_inicio) . '</td>';
+                    echo '<td class="text-left">' . htmlspecialchars($fecha_fin) . '</td>';
+                    echo '<td class="text-left">' . htmlspecialchars($fila['estado']) . '</td>';
+                    echo '<td class="text-left">' . htmlspecialchars($dias_solicitados) . '</td>';  // Mostrar los días calculados
                     echo '</tr>';
                 }
-
+            
                 echo '</tbody>';
                 echo '</table>';
+                echo '</div>';
             } else {
                 echo '<p>No has solicitado vacaciones.</p>';
+            }
         }
-         // Devolver la tabla generada
-            return $tablaHTML;
-    }
+            
+    
+    
     public function obtenerDiasVacaciones($enlace, $usuario_id) {
         // Consulta para obtener el total de días de vacaciones disponibles
         $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";

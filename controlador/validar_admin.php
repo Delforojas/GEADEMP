@@ -14,10 +14,10 @@ session_start();
             $usuario = $_SESSION['username'];
         
             echo "<div id='contenedor-bienvenida'>
-                        <img src='imagenes/logo.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
+                        <img src='imagenes/logod.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
                         <p id='bienve'>Bienvenido (admin), $usuario  </p>
                         <form action='../controlador/salir.php' method='post'>
-                            <button type='submit' class='btn-salir'>Salir</button>
+                            <button type='submit' class=''>Salir</button>
                         </form>
                     </div>"
 ?>

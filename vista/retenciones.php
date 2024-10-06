@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilo1.css">
+    <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>IRPF</title>
     <?php
          include('../controlador/validar_usuario.php');
@@ -12,10 +13,12 @@
 <body>
 <body>
                 <div>
-                        <h1 class="btn-volver">Certificados de Retenciones</h1>
-                        <form action="index.php" method="post">      
-                            <button type="submit" class="btn-volver">Volver Inicio</button>
-                        </form>
+                        <h1 class="titulo-vacaciones"id="h1p">Certificados de Retenciones</h1>
+                        <header>
+                            <div id="daohang">
+                                <button><a href="index.php">Volver a principal</a></button>
+                            </div>
+                        </header>
                         
                     
                 </div>
@@ -79,9 +82,9 @@
                                  
     <script src="app.js"></script>
     
-    <div class="contenido-include">
+    <div class=>
         <?php include('../controlador/controlador_retenciones.php'); ?>
     </div>
-
+    <script src="../vista/javascript.js"></script>
     </body>
 </html>
