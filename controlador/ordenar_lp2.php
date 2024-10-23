@@ -6,13 +6,12 @@ $enlace = obtenerConexion();
 // Verifica si se ha enviado el valor del select 'orden'
 if (isset($_POST['orden']) && $_POST['orden'] != "") {
     $orden = $_POST['orden'];
-
    // Crear una instancia de la clase Sl7
-   $sl7 = new Sl7();
+   $lp2 = new lp2();
 
    // Llamar al método obtenerDatosOrdenadosSL7() a través de la instancia
-   $resultado = $sl7->obtenerDatosOrdenadosSL7($orden);
-   $sl7->mostrarDatosSl7($resultado);
+   $resultado = $lp2->obtenerDatosOrdenadoslp2($orden);
+   $lp2->mostrarDatoslp2($resultado);
 }
 
 ?>

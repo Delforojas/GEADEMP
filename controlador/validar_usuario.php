@@ -12,8 +12,6 @@ session_start(); // Inicia la sesión
         $usuario = $_SESSION['username']; 
         $usuario_id = $_SESSION['id'];
 
-        // Obtiene el nombre del usuario de la sesión
-        // Si ha iniciado sesión, muestra el mensaje de bienvenida
         echo "<div id='contenedor-bienvenida'>
                     <img src='imagenes/logod.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
                     <p id='bienve'>Bienvenido, $usuario   </p>

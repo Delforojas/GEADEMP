@@ -285,3 +285,89 @@ td.text-right {
   text-align: right;
 }
 
+section {
+  width: 600px; /* Ajusta el ancho según sea necesario */
+  height: 430px; /* Ajusta la altura según sea necesario */
+  overflow: hidden; /* Evita que las imágenes se desborden */
+  margin-left:40vh ;
+  margin-top:  -100vh;
+}
+
+section img {
+  width:0px;
+  flex-grow: 1; /* Las imágenes ocuparán el mismo espacio */
+  object-fit: cover; /* Mantiene la relación de aspecto */
+  opacity: 0.8; /* Opacidad inicial */
+  transition:  0.5s ease; /* Transición suave */
+}
+
+section img:hover {
+  cursor: crosshair; /* Cambia el cursor al pasar el mouse */
+  width: 300px; /* Cambia el ancho al hacer hover */
+  opacity: 1; /* Aumenta la opacidad al hacer hover */
+  filter: contrast(120%); /* Aumenta el contraste */
+}
+/* Estilos responsive */
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  .desktop {
+      display: none;
+  }
+  .tablet {
+      display: none;
+  }
+  .movil {
+      display: block;
+  }
+
+  /* La navegación será más compacta en móvil */
+  .nav {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .list__button {
+      padding: 15px;
+  }
+
+  .galeria-imagenes img {
+      width: 80px;
+  }
+}
+
+/* Estilos para pantallas medianas (tabletas) */
+@media (min-width: 768px) and (max-width: 990px) {
+  .desktop {
+      display: none;
+  }
+  .tablet {
+      display: block;
+  }
+  .movil {
+      display: none;
+  }
+
+  /* Ajustar el tamaño de las imágenes en tabletas */
+  .galeria-imagenes img {
+      width: 120px;
+  }
+}
+
+/* Estilos para pantallas grandes (escritorio) */
+@media (min-width: 991px) {
+  .desktop {
+      display: block;
+  }
+  .tablet {
+      display: none;
+  }
+  .movil {
+      display: none;
+  }
+
+  /* Ajustes adicionales para pantallas más grandes */
+  .galeria-imagenes img {
+      width: 150px;
+  }
+}

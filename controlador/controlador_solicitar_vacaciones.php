@@ -31,5 +31,7 @@ if (isset($_POST['solicitar_vacaciones'])) {
     $dias_solicitados = $vacaciones->calcularDiasSolicitados($fecha_inicio, $fecha_fin);
 
     $vacaciones->insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados);
+
+    $vacaciones->actualizarDiasVacaciones($enlace, $usuario_id, $dias_solicitados);
 }
 ?>

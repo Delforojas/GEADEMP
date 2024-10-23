@@ -37,12 +37,11 @@
                     </div> 
                     <ul class="list__show">
                         <li class="list__inside">
-                            <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
+                            <a href="vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                         </li>
-                    </ul>
-                    <ul class="list__show">
+                    
                         <li class="list__inside">
-                            <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                            <a href="vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
                     </ul>
                         

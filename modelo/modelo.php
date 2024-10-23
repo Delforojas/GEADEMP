@@ -28,16 +28,16 @@ class Database {
 
 }
 
-class Bolsa {
+class linea_produccion {
     public $id;
     public $nombre;
-    public $ancho;
-    public $espesor;
+    public $criterio1;
+    public $criterio2;
 
 
-    public  function ObtenerBolsa(){
+    public  function ObtenerLineaProduccion(){
         $enlace = obtenerConexion();
-        $consulta = "SELECT * FROM bolsa"; // Cambia esto por el nombre de tu tabla
+        $consulta = "SELECT * FROM linea_produccion"; // Cambia esto por el nombre de tu tabla
         $resultado = mysqli_query($enlace, $consulta);
 
         if (!$resultado) {
@@ -45,16 +45,16 @@ class Bolsa {
         }
         return $resultado;
     }
-    public  function insertarEnBolsa($nombre, $ancho, $espesor) {
+    public  function insertarEnlineaProduccion($nombre, $criterio1, $criterio2) {
         $enlace = obtenerConexion();
-        $consulta = "INSERT INTO bolsa (nombre, ancho, espesor) VALUES (?,?,?)";
+        $consulta = "INSERT INTO linea_produccion (nombre, criterio1, criterio2) VALUES (?,?,?)";
         $resultado = mysqli_prepare($enlace, $consulta);
         
         if (!$resultado) {
                 die("Error al preparar la consulta: " . mysqli_error($enlace));
             }
         // Vincular los parámetros (s = string, i = entero)
-        mysqli_stmt_bind_param($resultado, "sii", $nombre, $ancho, $espesor);
+        mysqli_stmt_bind_param($resultado, "sii", $nombre, $criterio1, $criterio2);
 
         // Ejecutar la consulta
         $ejecucion = mysqli_stmt_execute($resultado);
@@ -71,7 +71,7 @@ class Bolsa {
     }
 
     public  function obtenerCheckbox($enlace, $id) {
-        $consulta = "SELECT nombre, ancho, espesor FROM bolsa WHERE id = ?";
+        $consulta = "SELECT nombre, criterio1, criterio2 FROM linea_produccion WHERE id = ?";
         $checkbox = mysqli_prepare($enlace, $consulta);
         if (!$checkbox) {
             die("Error al preparar la consulta: " . mysqli_error($enlace));
@@ -85,7 +85,9 @@ class Bolsa {
         return $resultado; // Retorna el resultado
     }
     public function generarTablaSinCheckbox($resultado, $action = "procesar.php"){ 
+        
         echo '<div class="table-title">';
+         echo "<h3  class='titulo-vaca'>Produccion</h3>";
         echo '<form action="' . htmlspecialchars($action) . '" method="post">';
         echo "<table class ='table-fill'><tr>";
     
@@ -110,6 +112,7 @@ class Bolsa {
     }
     function generarTablaConCheckboxes($resultado, $action = "../controlador/procesar.php") {
         echo '<div class="table-title">';
+         echo "<h3  class='titulo-vaca'>Produccion</h3>";
         echo '<form action="' . htmlspecialchars($action) . '" method="post">';
         echo "<table class ='table-fill'><tr>";
     
@@ -141,7 +144,7 @@ class Bolsa {
 
     public  function eliminardatos($enlace, $id){
         // Eliminar el registro de la tabla bolsa
-        $eliminar = "DELETE FROM bolsa WHERE id = ?";
+        $eliminar = "DELETE FROM linea_produccion WHERE id = ?";
         $Delete = mysqli_prepare($enlace, $eliminar);
         mysqli_stmt_bind_param($Delete, "i", $id);
         mysqli_stmt_execute($Delete);
@@ -150,31 +153,31 @@ class Bolsa {
 
     public function obtenerDatosFormulario() {
         $nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : null;
-        $ancho = isset($_POST['ancho']) ? (int)$_POST['ancho'] : null; 
-        $espesor = isset($_POST['espesor']) ? (int)$_POST['espesor'] : null;
+        $criterio1 = isset($_POST['criterio1']) ? (int)$_POST['criterio1'] : null; 
+        $criterio2 = isset($_POST['criterio2']) ? (int)$_POST['criterio2'] : null;
 
-        return [$nombre, $ancho, $espesor]; // Devuelve un array con los datos
+        return [$nombre, $criterio1, $criterio2]; // Devuelve un array con los datos
     }
 }
 
-    class Sl4 extends Bolsa {
-            public  function insertarsl4($enlace, $nombre, $ancho, $espesor) {
-                $insertar = "INSERT INTO sl4 (nombre, ancho, espesor) VALUES (?, ?, ?)";
-                $insertsl4 = mysqli_prepare($enlace, $insertar);
-                if (!$insertsl4) {
+    class lp1 extends linea_produccion {
+            public  function insertarslp1 ($enlace, $nombre, $criterio1, $criterio2) {
+                $insertar = "INSERT INTO lp1 (nombre, criterio1, criterio2) VALUES (?, ?, ?)";
+                $insertlp1 = mysqli_prepare($enlace, $insertar);
+                if (!$insertlp1) {
                     die("Error al preparar la consulta: " . mysqli_error($enlace));
                 }
-                mysqli_stmt_bind_param($insertsl4, "sii", $nombre, $ancho, $espesor);
-                $ejecucion = mysqli_stmt_execute($insertsl4);
+                mysqli_stmt_bind_param($insertlp1, "sii", $criterio1, $criterio2, $criterio3);
+                $ejecucion = mysqli_stmt_execute($insertlp1);
                 if (!$ejecucion) {
-                    die("Error al ejecutar la consulta: " . mysqli_stmt_error($insertsl4));
+                    die("Error al ejecutar la consulta: " . mysqli_stmt_error($insertlp1));
                 }
-                mysqli_stmt_close($insertsl4);
+                mysqli_stmt_close($insertlp1);
             }    
 
-            public function ObtenerBolsasl4(){
+            public function Obtenerlp1(){
                 $enlace = obtenerConexion();
-                $consulta = "SELECT * FROM sl4"; // Cambia esto por el nombre de tu tabla
+                $consulta = "SELECT * FROM lp1"; // Cambia esto por el nombre de tu tabla
                 $resultado = mysqli_query($enlace, $consulta);
                 
                 if (!$resultado) {
@@ -183,22 +186,22 @@ class Bolsa {
                 return $resultado;
             }
 
-            public function obtenerDatosOrdenadossl4($orden) {
+            public function obtenerDatosOrdenadoslp1($orden) {
                     // Conexión a la base de datos
                 $enlace = obtenerConexion();  // Asume que tienes definida la función obtenerConexion()
                     
                     // Inicializamos la variable de consulta
-                $q = "SELECT * FROM sl4";
+                $q = "SELECT * FROM lp1";
                     
                     // Determina la consulta según el valor de 'orden'
                 if ($orden == "ASC") {
-                    $q .= " ORDER BY espesor ASC";
+                    $q .= " ORDER BY criterio1 ASC";
                 } elseif ($orden == "DESC") {
-                    $q .= " ORDER BY espesor DESC";
+                    $q .= " ORDER BY criterio1 DESC";
                 } elseif ($orden == "AASC") {
-                    $q .= " ORDER BY ancho ASC";
+                    $q .= " ORDER BY criterio2 ASC";
                 } elseif ($orden == "ADESC") {
-                    $q .= " ORDER BY ancho DESC";
+                    $q .= " ORDER BY criterio2 DESC";
                 }
                     
                 // Ejecuta la consulta
@@ -212,16 +215,17 @@ class Bolsa {
                 // Retorna el resultado de la consulta
                 return $resultado;
             }
-            function mostrarDatosSl4($resultado) {
+            function mostrarDatoslp1($resultado) {
                 if ($resultado->num_rows > 0) {
                     // Prepara los datos para mostrarlos en la vista principal
                     echo "<div class='table-title'>";
+                     echo "<h3  class='titulo-vaca'>Linea de Produccion 1</h3>";
                     echo "<table class='table-fill'>";
                     echo "<tr>
                             <th class='text-left'>ID</th>
                             <th class='text-left'>Nombre</th>
-                            <th class='text-left'>Ancho</th>
-                            <th class='text-left'>Espesor</th>
+                            <th class='text-left'>Criterio 1</th>
+                            <th class='text-left'>Criterio 2</th>
                           </tr>";
                 
                     // Recorre los resultados y los muestra en filas de la tabla
@@ -229,8 +233,8 @@ class Bolsa {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['id']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['ancho']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['espesor']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['criterio1']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['criterio2']) . "</td>";
                         echo "</tr>";
                     }
                     echo "</table>";
@@ -243,27 +247,27 @@ class Bolsa {
     }
       
         
-    class Sl7 extends Bolsa {
-        public function insertarsl7($enlace, $nombre, $ancho, $espesor) {
-            $insertar = "INSERT INTO sl7 (nombre, ancho, espesor) VALUES (?, ?, ?)";
-            $insertsl7 = mysqli_prepare($enlace, $insertar);
-            if (!$insertsl7) {
+    class lp2 extends linea_produccion {
+        public function insertarlp2($enlace, $nombre, $criterio1, $criterio2) {
+            $insertar = "INSERT INTO lp2 (nombre, criterio1, criterio2) VALUES (?, ?, ?)";
+            $insertlp2 = mysqli_prepare($enlace, $insertar);
+            if (!$insertlp2) {
                 die("Error al preparar la consulta: " . mysqli_error($enlace));
             }
 
-            mysqli_stmt_bind_param($insertsl7, "sii", $nombre, $ancho, $espesor);
-            $ejecucion = mysqli_stmt_execute($insertsl7);
+            mysqli_stmt_bind_param($insertlp2, "sii", $nombre, $criterio1, $criterio2);
+            $ejecucion = mysqli_stmt_execute($insertlp2);
             if (!$ejecucion) {
-                die("Error al ejecutar la consulta: " . mysqli_stmt_error($insertsl7));
+                die("Error al ejecutar la consulta: " . mysqli_stmt_error($insertlp2));
             }
 
-            mysqli_stmt_close($insertsl7);
+            mysqli_stmt_close($insertlp2);
 
         }
         
-        function ObtenerBolsasl7(){
+        function Obtenerlp2(){
             $enlace = obtenerConexion();
-            $consulta = "SELECT * FROM sl7"; // Cambia esto por el nombre de tu tabla
+            $consulta = "SELECT * FROM lp2"; // Cambia esto por el nombre de tu tabla
             $resultado = mysqli_query($enlace, $consulta);
         
             if (!$resultado) {
@@ -273,22 +277,22 @@ class Bolsa {
         }
         
 
-        public function obtenerDatosOrdenadossl7($orden) {
+        public function obtenerDatosOrdenadoslp2($orden) {
             // Conexión a la base de datos
             $enlace = obtenerConexion();  // Asume que tienes definida la función obtenerConexion()
             
             // Inicializamos la variable de consulta
-            $q = "SELECT * FROM sl7";
+            $q = "SELECT * FROM lp2";
             
             // Determina la consulta según el valor de 'orden'
             if ($orden == "ASC") {
-                $q .= " ORDER BY espesor ASC";
+                $q .= " ORDER BY criterio1 ASC";
             } elseif ($orden == "DESC") {
-                $q .= " ORDER BY espesor DESC";
+                $q .= " ORDER BY criterio1 DESC";
             } elseif ($orden == "AASC") {
-                $q .= " ORDER BY ancho ASC";
+                $q .= " ORDER BY criterio2 ASC";
             } elseif ($orden == "ADESC") {
-                $q .= " ORDER BY ancho DESC";
+                $q .= " ORDER BY criterio2 DESC";
             }
             
             // Ejecuta la consulta
@@ -302,16 +306,17 @@ class Bolsa {
             // Retorna el resultado de la consulta
             return $resultado;
         }
-        function mostrarDatosSl7($resultado) {
+        function mostrarDatoslp2($resultado) {
             if ($resultado->num_rows > 0) {
                 // Prepara los datos para mostrarlos en la vista principal
                 echo "<div class='table-title'>";
+                 echo "<h3  class='titulo-vaca'>Lista Produccion 2</h3>";
                 echo "<table class='table-fill'>";
                 echo "<tr>
                         <th class='text-left'>ID</th>
                         <th class='text-left'>Nombre</th>
-                        <th class='text-left'>Ancho</th>
-                        <th class='text-left'>Espesor</th>
+                        <th class='text-left'>Criterio 1</th>
+                        <th class='text-left'>Criterio 2</th>
                       </tr>";
             
                 // Recorre los resultados y los muestra en filas de la tabla
@@ -319,8 +324,8 @@ class Bolsa {
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($row['id']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['nombre']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['ancho']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['espesor']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['criterio1']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['criterio2']) . "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
@@ -420,7 +425,10 @@ class Usuario {
             // Cerrar el statement
             $q->close();
         }
-}
+        
+
+        
+    } 
         class Cargo {
             public $id;
             public $descripcion;
@@ -433,38 +441,136 @@ class Vacaciones {
     public $fecha_inicio;
     public $fecha_fin;
     public $estado;
-    public $comentario;
+    public $dias_vacaciones;
     public $dias_solicitados;
 
-    public function verificarVacaciones($enlace, $usuario, $clave) {
-        $consulta = "SELECT id FROM usuarios WHERE usuario = '$usuario' AND clave = '$clave'";
+
+    public function obtenerVacacionesPorUsuario($enlace, $usuario_id) {
+        $consulta = "SELECT 
+                        u.nombre, 
+                        u.dias_vacaciones AS total_dias_vacaciones,
+                        v.estado,
+                        v.dias_solicitados
+                    FROM 
+                        usuarios u 
+                    LEFT JOIN 
+                        vacaciones v ON u.id = v.usuario_id 
+                    WHERE 
+                        u.id = ?";
+    
+        $q = $enlace->prepare($consulta);
+        $q->bind_param('i', $usuario_id);
+        $q->execute();
+    
+        $resultado = $q->get_result();
+    
+        
+        $vacaciones_data = [];
+    
+        
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $vacaciones_data[] = $fila; 
+            }
+        } else {
+            echo "No se encontraron vacaciones para el usuario con ID: " . htmlspecialchars($usuario_id) . ".";
+        }
+    
+        $q->close();
+    
+        return $vacaciones_data;
+    }
+    function obtenerDiasVacacionesUsuario($enlace, $usuario_id) {
+
+        $usuario_id = mysqli_real_escape_string($enlace, $usuario_id);
+    
+        $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
+    
         $resultado = mysqli_query($enlace, $consulta);
-
-    // Si el usuario es encontrado
-        if (mysqli_num_rows($resultado) == 1) {
-        $usuario_data = mysqli_fetch_assoc($resultado);
-        // Asignar el ID del usuario a la sesión
-        $_SESSION['usuario_id'] = $usuario_data['id'];
-        // Redirigir a la página de vacaciones
-        header("Location: ../vista/vista_vacaciones.php");
-        exit();
-    } else {
-        echo "Usuario o contraseña incorrectos.";
+    
+        if (!$resultado) {
+            die("Error en la consulta: " . mysqli_error($enlace));
+        }
+    
+        if (mysqli_num_rows($resultado) > 0) {
+            $usuario = mysqli_fetch_assoc($resultado);
+            return $usuario['dias_vacaciones'];
+        } else {
+            return null;
+        }
     }
-
+    public function mostrarDiasRestantes($dias_restantes) {
+        echo "<br>Días restantes: " . htmlspecialchars($dias_restantes) . "<br>";
+        if ($dias_restantes <= 0) {
+            echo "<p style='color: red; font-weight: bold;'>No puedes realizar más solicitudes de vacaciones, ya que no te quedan días disponibles.</p>";
+        }
     }
+    public function manejarSolicitudVacaciones($enlace, $accion, $vacacion_id, $usuario_id, $dias_solicitados) {
+        
+        $dias_disponibles = $this->obtenerDiasVacacionesDisponibles($enlace, $usuario_id);
+    
+        if ($accion === 'aprobar') {
+            
+            if ($dias_disponibles >= $dias_solicitados) {
+                
+                $this->actualizarDiasVacaciones($enlace, $usuario_id, $dias_solicitados); 
+    
+                $consulta = "UPDATE vacaciones SET estado = 'aprobada' WHERE id = ?";
+                $q = $enlace->prepare($consulta);
+                $q->bind_param('i', $vacacion_id);
+                $q->execute();
+                $q->close();
+    
+                return "Solicitud aprobada y días actualizados.";
+            } else {
+                return "No puedes aprobar la solicitud porque no hay suficientes días de vacaciones disponibles.";
+            }
+        } elseif ($accion === 'rechazar') {
+            // Lógica para rechazar la solicitud
+            $consulta = "UPDATE vacaciones SET estado = 'rechazada' WHERE id = ?";
+            $q = $enlace->prepare($consulta);
+            $q->bind_param('i', $vacacion_id);
+            $q->execute();
+            $q->close();
+    
+            return "Solicitud rechazada. No se han modificado los días de vacaciones."; 
+    
+        return "Acción no válida.";
+    }
+}   
+    public function obtenerDiasVacacionesDisponibles($enlace, $usuario_id) {
+        $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = ?";
+        $q = $enlace->prepare($consulta);
+        $q->bind_param('i', $usuario_id);
+        $q->execute();
+        $resultado = $q->get_result();
+        
+        if ($resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            return $fila['dias_vacaciones']; // Retorna los días de vacaciones disponibles
+        } else {
+            return 0; // Si no se encuentra el usuario, retorna 0
+        }
+        
+        $q->close();
+    }
+    
+    
+    
+    
     public function obtenerVacaciones($enlace, $usuario_id) {
                 
             $consulta = "SELECT fecha_inicio, fecha_fin, estado FROM vacaciones WHERE usuario_id = '$usuario_id'";
             $resultado = mysqli_query($enlace, $consulta);
             $tablaHTML = '';
 
-            echo ''; // Limpiar cualquier salida previa
+            echo ''; 
 
             if (mysqli_num_rows($resultado) > 0) {
                 echo '<div class="table-title">';
+                echo "<h3  class='titulo-vaca'>Historial de Solicitudes</h3>";
                 echo '<table class="table-fill">';
-                echo '<thead><tr><th class="text-left">Fecha de inicio</th><th class="text-left">Fecha de fin</th><th class="text-left">Estado</th><th class="text-left">Días calculados</th></tr></thead>'; 
+                echo '<thead><tr><th class="text-left">Fecha de inicio</th><th class="text-left">Fecha de fin</th><th class="text-left">Estado</th><th class="text-left">Dias Solicitados</th></tr></thead>'; 
                 echo '<tbody>';
                 
                 while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -494,164 +600,166 @@ class Vacaciones {
                 echo '<p>No has solicitado vacaciones.</p>';
             }
         }
+        function mostrarVacaciones($vacaciones_data) {
+            if (!empty($vacaciones_data) && is_array($vacaciones_data)) {
+                $vacaciones = $vacaciones_data[0]; 
+                echo "<br>";
+                echo htmlspecialchars($vacaciones['nombre']) . "<br><br>";
+                echo "Días de vacaciones totales: 30  <br>";
+                echo "<br>";
+            } else {
+                echo "No hay vacaciones disponibles para el usuario.";
+            }
+        }
+        function calcularDiasSolicitados($fecha_inicio, $fecha_fin) {
+            // Calcular la cantidad de días entre las fechas
+            $inicio = new DateTime($fecha_inicio);
+            $fin = new DateTime($fecha_fin);
+            $diferencia = $inicio->diff($fin);
+            $dias_solicitados = $diferencia->days + 1;
             
-    
-    
-    public function obtenerDiasVacaciones($enlace, $usuario_id) {
-        // Consulta para obtener el total de días de vacaciones disponibles
-        $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
-        $resultado = mysqli_query($enlace, $consulta);
-
-        // Obtener el total de días de vacaciones
-        $dias_totales = 0;
-        if ($fila_dias = mysqli_fetch_assoc($resultado)) {
-            $dias_totales = $fila_dias['dias_vacaciones'];
+            return $dias_solicitados;
         }
-
-        // Devolver el total de días de vacaciones
-        return $dias_totales;
-    }
-    function calcularDiasSolicitados($fecha_inicio, $fecha_fin) {
-        // Calcular la cantidad de días entre las fechas
-        $inicio = new DateTime($fecha_inicio);
-        $fin = new DateTime($fecha_fin);
-        $diferencia = $inicio->diff($fin);
-        $dias_solicitados = $diferencia->days + 1;
+        function insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados) {
+            $consulta_insertar = "INSERT INTO vacaciones (usuario_id, fecha_inicio, fecha_fin, estado, dias_solicitados) 
+                              VALUES ('$usuario_id', '$fecha_inicio', '$fecha_fin', 'pendiente', '$dias_solicitados')";
+    
+            if (mysqli_query($enlace, $consulta_insertar)) {
+            header("location: ../vista/vista_vacaciones.php");
+              exit();
+            } else {
+                echo "Error al solicitar las vacaciones: " . mysqli_error($enlace);
+            }
+    
+            mysqli_close($enlace);
+        } 
+        public function actualizarDiasVacaciones($enlace, $usuario_id, $dias_solicitados) {
+            // Obtener los días actuales de vacaciones
+            $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = ?";
+            $q = $enlace->prepare($consulta);
+            $q->bind_param('i', $usuario_id);
+            $q->execute();
+            $q = $stmt->get_result();
+            $fila = $resultado->fetch_assoc();
         
-        return $dias_solicitados;// Sumar 1 para incluir el día de inicio
-    }
-    function insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados) {
-        $consulta_insertar = "INSERT INTO vacaciones (usuario_id, fecha_inicio, fecha_fin, estado, dias_solicitados) 
-                          VALUES ('$usuario_id', '$fecha_inicio', '$fecha_fin', 'pendiente', '$dias_solicitados')";
+            if ($fila) {
+                $dias_disponibles = $fila['dias_vacaciones'];
+                $nuevos_dias = $dias_disponibles - $dias_solicitados;
+        
+                // Actualizar los días de vacaciones
+                $consulta_update = "UPDATE usuarios SET dias_vacaciones = ? WHERE id = ?";
+                $q_update = $enlace->prepare($consulta_update);
+                $q_update->bind_param('ii', $nuevos_dias, $usuario_id);
+                $q_update->execute();
+                $q_update->close();
+            }
+        
+            $q->close();
+        }   
 
-        // Ejecutar la consulta
-        if (mysqli_query($enlace, $consulta_insertar)) {
-        // Redirigir a la vista de vacaciones si la inserción fue exitosa
-        header("location: ../vista/vista_vacaciones.php");
-          exit();
-        } else {
-        // Mostrar un mensaje de error si la inserción falla
-            echo "Error al solicitar las vacaciones: " . mysqli_error($enlace);
+        function obtenerSolicitudesPendientes($enlace) {
+            $consulta = "SELECT * FROM vacaciones WHERE estado = 'pendiente';";
+            $resultado = mysqli_query($enlace, $consulta);
+        
+            $solicitudes_pendientes = [];
+            if (mysqli_num_rows($resultado) > 0) {
+                while ($solicitud = mysqli_fetch_assoc($resultado)) {
+                    $solicitudes_pendientes[] = $solicitud;
+                }
+            }
+                return $solicitudes_pendientes;
         }
-
-        // Cerrar la conexión a la base de datos
-        mysqli_close($enlace);
-    }
-    function obtenerSolicitudesPendientes($enlace) {
-        // Consulta para obtener todas las solicitudes pendientes
-        $consulta = "SELECT * FROM vacaciones WHERE estado = 'pendiente';";
-        $resultado = mysqli_query($enlace, $consulta);
-    
-        // Inicializar un arreglo para almacenar las solicitudes pendientes
-        $solicitudes_pendientes = [];
-    
-        // Verificar si hay solicitudes pendientes
-        if (mysqli_num_rows($resultado) > 0) {
-            // Recorrer los resultados y almacenarlos en el arreglo
-            while ($solicitud = mysqli_fetch_assoc($resultado)) {
-                $solicitudes_pendientes[] = $solicitud;
+        
+        
+        public function mostrarSolicitudesPendientes($enlace) {
+            $solicitudes_pendientes = $this->obtenerSolicitudesPendientes($enlace);
+        
+            if (count($solicitudes_pendientes) > 0) {
+                echo '<table>
+                    <thead>
+                        <tr>
+                            <th>Usuario ID</th>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de fin</th>
+                            <th>Días solicitados</th>
+                            <th>Estado</th>
+                            <th>Días restantes</th> <!-- Nueva columna -->
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+        
+                foreach ($solicitudes_pendientes as $solicitud) {
+                    $dias_disponibles = $this->obtenerDiasVacacionesDisponibles($enlace, $solicitud['usuario_id']);
+                    $dias_restantes = $dias_disponibles; // Inicializa con los días disponibles
+                    
+                    $dias_solicitados = $solicitud['dias_solicitados'];
+                    
+                    $dias_restantes -= $dias_solicitados;
+        
+                    echo '<tr>
+                            <td>' . htmlspecialchars($solicitud['usuario_id']) . '</td>
+                            <td>' . htmlspecialchars($solicitud['fecha_inicio']) . '</td>
+                            <td>' . htmlspecialchars($solicitud['fecha_fin']) . '</td>
+                            <td>' . htmlspecialchars($dias_solicitados) . '</td>
+                            <td>' . htmlspecialchars($solicitud['estado']) . '</td>
+                            <td>' . htmlspecialchars($dias_restantes) . '</td> <!-- Mostrar días restantes -->
+                            <td>
+                                <form action="../controlador/controlador_admin_vacaciones.php" method="POST">
+                                    <input type="hidden" name="vacacion_id" value="' . htmlspecialchars($solicitud['id']) . '">
+                                    <button type="submit" name="accion" value="aprobar">Aprobar</button>
+                                    <button type="submit" name="accion" value="rechazar">Rechazar</button>
+                                </form>
+                            </td>
+                        </tr>';
+                }
+        
+                echo '</tbody>
+                    </table>';
+            } else {
+                echo '<p>No hay solicitudes pendientes.</p>';
             }
         }
-    
-        // Devolver el arreglo de solicitudes pendientes
-        return $solicitudes_pendientes;
-    }
-    public function mostrarSolicitudesPendientes($enlace) {
-        $solicitudes_pendientes = $this->obtenerSolicitudesPendientes($enlace);
-
-        if (count($solicitudes_pendientes) > 0) {
-            echo '<table>
-                <thead>
-                    <tr>
-                        <th>Usuario ID</th>
-                        <th>Fecha de inicio</th>
-                        <th>Fecha de fin</th>
-                        <th>Días solicitados</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>';
-
-            foreach ($solicitudes_pendientes as $solicitud) {
-                echo '<tr>
-                        <td>' . $solicitud['usuario_id'] . '</td>
-                        <td>' . $solicitud['fecha_inicio'] . '</td>
-                        <td>' . $solicitud['fecha_fin'] . '</td>
-                        <td>' . $solicitud['dias_solicitados'] . '</td>
-                        <td>' . $solicitud['estado'] . '</td>
-                        <td>
-                            <form action="../controlador/controlador_admin_vacaciones.php" method="POST">
-                                <input type="hidden" name="vacacion_id" value="' . $solicitud['id'] . '">
-                                <button type="submit" name="accion" value="aprobar">Aprobar</button>
-                                <button type="submit" name="accion" value="rechazar">Rechazar</button>
-                            </form>
-                        </td>
-                    </tr>';
+        function actualizarEstadoVacacion($enlace, $vacacion_id, $estado) {
+        
+            $vacacion_id = mysqli_real_escape_string($enlace, $vacacion_id);
+            $estado = mysqli_real_escape_string($enlace, $estado);
+        
+            
+            $consulta_actualizar_vacacion = "UPDATE vacaciones SET estado = '$estado' WHERE id = '$vacacion_id'";
+            
+            
+            $resultado = mysqli_query($enlace, $consulta_actualizar_vacacion);
+        
+            return true;
+        }
+        
+          
+        public function obtenerDiasVacaciones($enlace, $username) {
+            // Consulta para obtener el total de días de vacaciones disponibles
+            $consulta = "SELECT dias_vacaciones FROM usuarios WHERE id = ?";
+            
+            // Preparar la consulta
+            $stmt = $enlace->prepare($consulta);
+            $stmt->bind_param('i', $usuario_id);
+            
+            // Ejecutar la consulta
+            $stmt->execute();
+            
+            // Obtener el resultado
+            $resultado = $stmt->get_result();
+            $dias_totales = 0;
+        
+            if ($fila_dias = $resultado->fetch_assoc()) {
+                $dias_totales = $fila_dias['dias_vacaciones'];
             }
-
-            echo '</tbody>
-                </table>';
-        } else {
-            echo '<p>No hay solicitudes pendientes.</p>';
+        
+            $stmt->close();
+        
+            return $dias_totales;
         }
-    }
-    function obtenerDatosVacacion($enlace, $vacacion_id) {
-        // Preparar la consulta para obtener los datos de la solicitud de vacaciones
-        $consulta_vacacion = "SELECT usuario_id, dias_solicitados FROM vacaciones WHERE id = '$vacacion_id'";
-    
-        // Ejecutar la consulta
-        $resultado_vacacion = mysqli_query($enlace, $consulta_vacacion);
-    
-        // Verificar si se obtuvieron resultados
-        if (mysqli_num_rows($resultado_vacacion) > 0) {
-            // Obtener los datos de la solicitud
-            $vacacion = mysqli_fetch_assoc($resultado_vacacion);
-            return $vacacion; // Devolver los datos de la solicitud
-        } else {
-            return null; // Devolver null si no hay resultados
-        }
-    }
-    function obtenerDiasDisponiblesUsuario($enlace, $usuario_id) {
-        // Preparar la consulta para obtener los días de vacaciones disponibles del usuario
-        $consulta_dias_usuario = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
-    
-        // Ejecutar la consulta
-        $resultado_dias_usuario = mysqli_query($enlace, $consulta_dias_usuario);
-    
-        // Verificar si se obtuvo el resultado
-        if (mysqli_num_rows($resultado_dias_usuario) > 0) {
-            // Obtener los días de vacaciones disponibles
-            $usuario = mysqli_fetch_assoc($resultado_dias_usuario);
-            return $usuario['dias_vacaciones']; // Devolver los días disponibles
-        } else {
-            return null; // Devolver null si no se encuentran resultados
-        }
-    }
-    function actualizarDiasDisponiblesUsuario($enlace, $usuario_id, $dias_restantes) {
-        // Preparar la consulta para actualizar los días de vacaciones restantes del usuario
-        $consulta_actualizar_usuario = "UPDATE usuarios SET dias_vacaciones = '$dias_restantes' WHERE id = '$usuario_id'";
-    
-        // Ejecutar la consulta
-        if (mysqli_query($enlace, $consulta_actualizar_usuario)) {
-            return true; // Éxito en la actualización
-        } else {
-            return "Error al actualizar los días de vacaciones: " . mysqli_error($enlace); // Error en la actualización
-        }
-    }
-
-    public function actualizarEstadoSolicitud($enlace, $vacacion_id, $estado) {
-        // Consulta para actualizar el estado de la solicitud
-        $consulta_actualizar_vacacion = "UPDATE vacaciones SET estado = '$estado' WHERE id = '$vacacion_id'";
-
-        // Ejecutar la consulta
-        if (mysqli_query($enlace, $consulta_actualizar_vacacion)) {
-            return true; // La actualización fue exitosa
-        } else {
-            return "Error al actualizar la solicitud: " . mysqli_error($enlace); // Hubo un error en la actualización
-        }
-    }
-    function obtenerDatosVacacion1($enlace, $vacacion_id) {
+        
+    function obtenerDatosVacaciones($enlace, $vacacion_id) {
         
         $vacacion_id = mysqli_real_escape_string($enlace, $vacacion_id);
     
@@ -667,58 +775,50 @@ class Vacaciones {
     
         return $vacacion;
     }
-    function obtenerDiasVacacionesUsuario($enlace, $usuario_id) {
-    // Sanitizar el ID del usuario para evitar inyecciones SQL
-    $usuario_id = mysqli_real_escape_string($enlace, $usuario_id);
-
-    // Crear la consulta SQL para obtener los días de vacaciones del usuario
-    $consulta_dias_usuario = "SELECT dias_vacaciones FROM usuarios WHERE id = '$usuario_id'";
-
-    // Ejecutar la consulta
-    $resultado_dias_usuario = mysqli_query($enlace, $consulta_dias_usuario);
-
-    // Verificar si la consulta fue exitosa
-    if (!$resultado_dias_usuario) {
-        die("Error en la consulta: " . mysqli_error($enlace));
-    }
-
-    // Verificar si se obtuvieron resultados
-    if (mysqli_num_rows($resultado_dias_usuario) > 0) {
-        // Obtener los datos del usuario (días de vacaciones)
-        $usuario = mysqli_fetch_assoc($resultado_dias_usuario);
-        return $usuario['dias_vacaciones'];
-    } else {
-        // Retornar un valor predeterminado si no hay resultados
-        return null;
-    }
-}
-
-    function actualizarDiasVacaciones($enlace, $usuario_id, $dias_restantes) {
-       
-        $usuario_id = mysqli_real_escape_string($enlace, $usuario_id);
-        $dias_restantes = mysqli_real_escape_string($enlace, $dias_restantes);
     
-        
-        $consulta_actualizar_usuario = "UPDATE usuarios SET dias_vacaciones = '$dias_restantes' WHERE id = '$usuario_id'";
-       
-        $resultado = mysqli_query($enlace, $consulta_actualizar_usuario);
-    
-        return true;
-    }
-    function actualizarEstadoVacacion($enlace, $vacacion_id, $estado) {
-        
-        $vacacion_id = mysqli_real_escape_string($enlace, $vacacion_id);
-        $estado = mysqli_real_escape_string($enlace, $estado);
-    
-        
-        $consulta_actualizar_vacacion = "UPDATE vacaciones SET estado = '$estado' WHERE id = '$vacacion_id'";
-        
-        
-        $resultado = mysqli_query($enlace, $consulta_actualizar_vacacion);
-    
-        return true;
-    }
 }
 
 
-  
+    
+
+
+class Nomina {
+    public $id;           // ID de la nómina
+    public $usuario_id;   // ID del usuario
+    public $mes;          // Mes de la nómina
+    public $anio;         // Año de la nómina
+    public $enlace_pdf;   // Enlace al archivo PDF
+
+    // Método para mostrar nóminas
+    public function mostrarNominas($ruta_carpeta_usuario, $nombre_usuario) {
+        if (file_exists($ruta_carpeta_usuario)) {
+            $archivos = array_diff(scandir($ruta_carpeta_usuario), array('.', '..'));
+            
+            echo "<h2 class='btn-volver'>Nóminas de {$nombre_usuario}</h2>";
+            echo "<div class='table-title'>";
+            echo "<h3 class='titulo-vaca'>Lista de Nóminas</h3>";
+            echo "<table class='table-fill'>";
+            echo "<thead>
+                    <tr>
+                        <th class='text-left'>Nóminas</th>
+                        <th class='text-left'>Ver / Descargar</th>
+                    </tr>
+                  </thead>";
+            echo "<tbody>";
+
+            foreach ($archivos as $archivo) {
+                $ruta_archivo = $ruta_carpeta_usuario . '/' . $archivo;
+                echo "<tr>";
+                echo "<td class='text-left'>$archivo</td>";
+                echo "<td class='text-left'><a href='$ruta_archivo' target='_blank'>Ver / Descargar</a></td>";
+                echo "</tr>";
+            }
+
+            echo "</tbody>";
+            echo "</table>";
+            echo "</div>";
+        } else {
+            echo "No se encontró la carpeta de nóminas para el usuario {$nombre_usuario}.";
+        }
+    }
+}

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/css7.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Menu desplegable</title>
     
@@ -16,11 +17,16 @@
 
 </head>
 <body>
+<h1 class="titulo-vacaciones"id="h1p">GEAMDEP </h1>
 <header>
                             <div id="daohang">
                                
                             </div>
-</header>        
+</header>
+
+
+    </div>
+</div>     
     <nav class="nav">
         <ul class="list">
             <li class="list__item">
@@ -37,10 +43,10 @@
                 </div> 
                 <ul class="list__show">
                     <li class="list__inside">
-                        <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
+                        <a href="vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                     </li>
                     <li class="list__inside">
-                        <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                        <a href="vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                     </li>
                 </ul>
             </li>
@@ -77,8 +83,18 @@
                 </ul>
             </li>
         </ul>
-    
     </nav>
+    <!-- Imagen al lado del nav -->
+    <div style="margin-left:40vh ;margin-top:  -100vh;">
+        <div class="galeria-imagenes">
+            <img src="../vista/imagenes/logod.png" alt="Logo 1">
+            <img src="../vista/imagenes/d20a910c67a81bdd4296c6f29c442234.webp" alt="Logo 2">
+            <img src="../vista/imagenes/deadpool-2016-3257944.webp" alt="Logo 3">
+            <img src="../vista/imagenes/img2.rtve.jpeg" alt="Logo 4">
+        </div>
+    </div>
+</div>
+</div>
     <script src="../vista/javascript.js"></script>
 </body>
 </html>

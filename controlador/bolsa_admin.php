@@ -6,10 +6,10 @@ require_once("../modelo/datos_conexion.php");
 
 $enlace = obtenerConexion();
 // Crear una instancia de la clase Bolsa
-$bolsa = new Bolsa();
+$lp = new linea_produccion();
 
-// Llamar al método ObtenerBolsa() a través de la instancia
-$resultado = $bolsa->ObtenerBolsa();
 
-$bolsa ->generarTablaConCheckboxes($resultado);
+$resultado = $lp->ObtenerLineaProduccion();
+
+$lp ->generarTablaConCheckboxes($resultado);
 

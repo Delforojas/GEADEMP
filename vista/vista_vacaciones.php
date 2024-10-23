@@ -19,6 +19,7 @@
             <button><a href="index.php">Volver</a></button>
         </div>
     </header>
+    
 
     <div class="contenedor-flex">  
     <div class="contenedor-principal">
@@ -33,17 +34,15 @@
                 <li class="list__item list__item--click">
                     <div class="list__button list__button--click">
                         <img src="asset/doc.svg" class="list__img">
-                            <a href="#" class="nav__link">Programa</a>
+                            <a href="#" class="nav__link">Produccion</a>
                             <img src="asset/arrow.svg" class="list__arrow">
                     </div> 
                     <ul class="list__show">
                         <li class="list__inside">
-                            <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
+                            <a href="vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                         </li>
-                    </ul>
-                    <ul class="list__show">
                         <li class="list__inside">
-                            <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                            <a href="vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
                     </ul>
                         
@@ -81,17 +80,18 @@
                 </li>
             </ul>           
         </nav>
+        
     </div>
-    <div >
-        <div style="text-align: left; margin-left: 20px;">
-                <h1>Total de días de vacaciones disponibles: 
+    
+    <div style="position: absolute; top: 100; left: 20%; transform: translateX(-%);">
+                <h1 style="margin: 0px;">
                     <?php 
-                        $dias_totales = include("../controlador/controlador_total_dias.php");
-                        // Mostrar el mensaje con el nombre del usuario y los días restantes de vacaciones
-                        echo "$usuario, te quedan $dias_totales días de vacaciones.";
+                         include("../controlador/controlador_total_dias.php");
+                         include("../controlador/controlador_actualizar_vacaciones.php");
+                         include("../controlador/controlador_dias_restantes.php")
+
                     ?>
                 </h1>
-        </div>
     </div>
         
 </div>         

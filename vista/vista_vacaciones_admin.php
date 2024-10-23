@@ -16,7 +16,7 @@
     <h1 class="titulo-vacaciones"id="h1p">Solicitud de Vacaciones Pendientes</h1>
     <header>
         <div id="daohang">
-            <button><a href="index.php">Volver</a></button>
+            <button><a href="vista_bolsa_admin.php">Volver</a></button>
         </div>
     </header>
 

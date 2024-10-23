@@ -16,7 +16,7 @@
 <h2 class="titulo-vacaciones"id="h1p">Registrar</h2>
 <header>
                             <div id="daohang">
-                                <button><a href="index.php">Volver a principal</a></button>
+                                <button><a href="vista_bolsa_admin.php">Volver a principal</a></button>
                             </div>
 </header>
 <body >

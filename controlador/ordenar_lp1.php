@@ -7,10 +7,10 @@ $enlace = obtenerConexion();
 if (isset($_POST['orden']) && $_POST['orden'] != "") {
     $orden = $_POST['orden'];
 
-    $sl4 = new Sl4();
-    $resultado = $sl4->obtenerDatosOrdenadosSL4($orden);
+    $lp1 = new lp1();
+    $resultado = $lp1->obtenerDatosOrdenadoslp1($orden);
 
-    $sl4->mostrarDatosSl4($resultado);
+    $lp1->mostrarDatoslp1($resultado);
 }
 
 ?>

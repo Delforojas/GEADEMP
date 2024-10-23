@@ -6,10 +6,10 @@ require_once("../modelo/datos_conexion.php");
 
 $enlace = obtenerConexion();
 
-$sl4 = new Sl4();
-$resultado = $sl4->ObtenerBolsasl4($enlace);
+$lp1 = new lp1();
+$resultado = $lp1->Obtenerlp1($enlace);
 
 
-$sl4->generarTablaSinCheckbox($resultado);
+$lp1->generarTablaSinCheckbox($resultado);
 
 ?>

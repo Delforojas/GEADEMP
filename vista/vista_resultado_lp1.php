@@ -6,27 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
-    <title>Bolsa SL4</title>
+    <title>Linea Produccion 2</title>
     <?php
          include('../controlador/validar_usuario.php');
     ?>
         
 </head>
 <body>
-<h1 class="titulo-vacaciones"id="h1p">SL4</h1>
+<h1 class="titulo-vacaciones"id="h1p">Linea de Produccion 1</h1>
     <header>
         <div id="daohang">
             <button><a href="index.php">Volver a Principal</a></button>
-            <form id="ordenForm" action="../vista/vista_resultado_sl4.php" method="POST">   
+            <form id="ordenForm" action="../vista/vista_resultado_lp1.php" method="POST">   
             <button type="submit" class=>Ordenar</button>
                     <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
-                    <optgroup label="Ancho">
-                        <option value="AASC">ASC (Ancho)</option>
-                        <option value="ADESC">DESC (Ancho)</option>
+                    <optgroup label="Criterio 1">
+                        <option value="AASC">ASC (Criterio 1)</option>
+                        <option value="ADESC">DESC (Criterio 1)</option>
                     </optgroup>
-                    <optgroup label="Espesor">
-                        <option value="ASC">ASC (Espesor)</option>
-                        <option value="DESC">DESC (Espesor)</option>
+                    <optgroup label="Criterio 2">
+                        <option value="ASC">ASC (Criterio 2)</option>
+                        <option value="DESC">DESC (Criterio 2)</option>
                     </optgroup>
                     </select>
             </form>
@@ -50,7 +50,7 @@
                     </div> 
                     <ul class="list__show">
                         <li class="list__inside">
-                            <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                            <a href="vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
                     </ul>
                         
@@ -90,7 +90,7 @@
         </nav>
     </div>
         <div class="contenido-include">
-            <?php include('../controlador/ordenar_sl4.php'); ?>
+            <?php include('../controlador/ordenar_lp1.php'); ?>
     </div>  
 </div>         
     <script src="../vista/javascript.js"></script>

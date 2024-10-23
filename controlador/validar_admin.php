@@ -17,7 +17,7 @@ session_start();
                         <img src='imagenes/logod.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>
                         <p id='bienve'>Bienvenido (admin), $usuario  </p>
                         <form action='../controlador/salir.php' method='post'>
-                            <button type='submit' class=''>Salir</button>
+                            <button type='submit' class='btn-salir'>Salir</button>
                         </form>
                     </div>"
 ?>

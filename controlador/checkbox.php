@@ -12,24 +12,24 @@ if (isset($_POST['checkbox']) && is_array($_POST['checkbox'])) {
         $valor = mysqli_real_escape_string($enlace, $valor);
 
         // Obtén los datos del registro seleccionado
-        $query = "SELECT nombre, ancho, espesor FROM bolsa WHERE id = '$valor'";
+        $query = "SELECT nombre, criterio1 , criterio2 FROM linea_produccion WHERE id = '$valor'";
         $resultado = mysqli_query($enlace, $query);
 
         if ($resultado) {
             $registro = mysqli_fetch_assoc($resultado);
             $nombre = mysqli_real_escape_string($enlace, $registro['nombre']);
-            $ancho = mysqli_real_escape_string($enlace, $registro['ancho']);
-            $espesor = mysqli_real_escape_string($enlace, $registro['espesor']);
+            $ancho = mysqli_real_escape_string($enlace, $registro['criterio1']);
+            $espesor = mysqli_real_escape_string($enlace, $registro['criterio2']);
 
             // Determina en qué tabla insertar basándose en el espesor
-            if ($espesor > 1) {
-                $tablaDestino = "sl4";
+            if ($criterio1 > 1) {
+                $tablaDestino = "lp1";
             } else {
-                $tablaDestino = "sl7";
+                $tablaDestino = "lp2";
             }
 
             // Inserta los datos en la tabla correspondiente
-            $insertarDatos = "INSERT INTO $tablaDestino (nombre, ancho, espesor) VALUES ('$nombre', '$ancho', '$espesor')";
+            $insertarDatos = "INSERT INTO $tablaDestino (nombre, criterio1, criterio2) VALUES ('$nombre', '$criterio1', '$criterio2')";
             $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
 
             if (!$ejecutarInsertar) {

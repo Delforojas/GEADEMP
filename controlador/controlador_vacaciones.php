@@ -7,10 +7,6 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once("../modelo/datos_conexion.php");
 require_once("../modelo/modelo.php");
 
-// Obtener la conexión a la base de datos
-$enlace = obtenerConexion();
-
-$usuario_id = $_SESSION['id'];
 
 $vacaciones = new Vacaciones();
 
