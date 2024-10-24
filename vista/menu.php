@@ -31,15 +31,13 @@
                 <li class="list__item list__item--click">
                     <div class="list__button list__button--click">
                         <img src="asset/doc.svg" class="list__img">
-                            <a href="#" class="nav__link">Programa</a>
+                            <a href="#" class="nav__link">Produccion</a>
                             <img src="asset/arrow.svg" class="list__arrow">
                     </div> 
                     <ul class="list__show">
                         <li class="list__inside">
                             <a href="vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                         </li>
-                    </ul>
-                    <ul class="list__show">
                         <li class="list__inside">
                             <a href="vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
@@ -70,9 +68,6 @@
                             </li>
                             <li class="list__inside">
                                 <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
-                            </li>
-                            <li class="list__inside">
-                                <a href="menu.php" class="nav__link nav__link--inside">Menu comedor</a>
                             </li>
                         </ul>
                     </li>

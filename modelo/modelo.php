@@ -639,7 +639,8 @@ class Vacaciones {
             $q = $enlace->prepare($consulta);
             $q->bind_param('i', $usuario_id);
             $q->execute();
-            $q = $stmt->get_result();
+
+            $resultado = $q->get_result();
             $fila = $resultado->fetch_assoc();
         
             if ($fila) {
@@ -707,8 +708,8 @@ class Vacaciones {
                             <td>
                                 <form action="../controlador/controlador_admin_vacaciones.php" method="POST">
                                     <input type="hidden" name="vacacion_id" value="' . htmlspecialchars($solicitud['id']) . '">
-                                    <button type="submit" name="accion" value="aprobar">Aprobar</button>
-                                    <button type="submit" name="accion" value="rechazar">Rechazar</button>
+                                    <button type="submit" class="btn-salir"name="accion" value="aprobar">Aprobar</button>
+                                    <button type="submit" class="btn-salir"name="accion" value="rechazar">Rechazar</button>
                                 </form>
                             </td>
                         </tr>';

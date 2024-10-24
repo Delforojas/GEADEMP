@@ -30,7 +30,7 @@
             <li class="list__item list__item--click">
                 <div class="list__button list__button--click">
                     <img src="asset/doc.svg" class="list__img">
-                    <a href="#" class="nav__link">Programa</a>
+                    <a href="#" class="nav__link">Producion</a>
                     <img src="asset/arrow.svg" class="list__arrow">
                 </div> 
                 <ul class="list__show">
@@ -57,6 +57,9 @@
                     <img src="asset/arrow.svg" class="list__arrow">
                 </div> 
                 <ul class="list__show">
+                <li class="list__inside">
+                        <a href="comunicados.php" class="nav__link nav__link--inside">Comunicados</a>
+                    </li>
                     <li class="list__inside">
                         <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                     </li>
@@ -83,7 +86,7 @@
                 <input type="date" name="fecha_fin" required>
                 
                 <label for="dias_solicitados">Total dias :</label>      
-                <button type="submit" class =""name="solicitar_vacaciones">Solicitar Vacaciones</button>
+                <button type="submit" class ="btn-salir"name="solicitar_vacaciones">Solicitar Vacaciones</button>
             </form>
     </div>
     <script src="../vista/javascript.js"></script>

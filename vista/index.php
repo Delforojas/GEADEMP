@@ -38,7 +38,7 @@
             <li class="list__item list__item--click">
                 <div class="list__button list__button--click">
                     <img src="asset/doc.svg" class="list__img">
-                    <a href="#" class="nav__link">Programa</a>
+                    <a href="#" class="nav__link">Produccion</a>
                     <img src="asset/arrow.svg" class="list__arrow">
                 </div> 
                 <ul class="list__show">
