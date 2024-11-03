@@ -20,7 +20,7 @@
         <input type="text" placeholder="Introduzca Usuario*"  name="usuario" id="usuario"  required>
       </div>
       <div class="row">
-        <input type="text" placeholder="Introduzca su contraseña*" name="clave" id="Contraseña" required>
+        <input type="text" placeholder="Introduzca su contraseña*" name="clave" id="clave" required>
       </div>
     </div>
     <div class="rule"></div>

@@ -8,14 +8,14 @@ session_start();
 $enlace = obtenerConexion();
 
 if (!empty($_POST["btningresar"])) {
-    $usuario = $_POST["usuario"];
-    $password = $_POST["clave"];
+    $idusuario = $_POST["usuario"];
+    $clave = $_POST["clave"];
 
-    if (empty($usuario) || empty($password)) {
+    if (empty($idusuario) || empty($clave)) {
         echo '<div class="alert alert-danger">LOS CAMPOS ESTÁN VACÍOS</div>';
     } else {
         // Consulta para verificar el usuario y contraseña
-        $consulta = "SELECT id , id_cargo, nombre FROM usuarios WHERE usuario = '$usuario' AND clave = '$password'";
+        $consulta = "SELECT idUsuario , idCargo, nombre FROM usuario WHERE apellidos = '$idusuario' AND clave = '$clave'";
         $resultado = mysqli_query($enlace, $consulta);
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {
@@ -25,16 +25,16 @@ if (!empty($_POST["btningresar"])) {
             var_dump($filas);  // Verifica qué valores están siendo recuperados
 
             // Verifica que el ID esté presente en el resultado
-            if (isset($filas['id'])) {
+            if (isset($filas['idUsuario'])) {
                 $_SESSION['username'] = $filas['nombre'];
-                $_SESSION['rol'] = $filas['id_cargo'];
-                $_SESSION['id'] = $filas['id'];  // Asegúrate de que $filas['id'] está correcto
+                $_SESSION['rol'] = $filas['idCargo'];
+                $_SESSION['idUsuario'] = $filas['idUsuario'];  // Asegúrate de que $filas['id'] está correcto
 
-                if ($filas['id_cargo'] == 1) {
+                if ($filas['idCargo'] == 1) {
                     // Redirección para el administrador
                     header("Location: ../vista/vista_bolsa_admin.php");
                     exit();
-                } elseif ($filas['id_cargo'] == 2) {
+                } elseif ($filas['idCargo'] == 2) {
                     // Redirección para el usuario normal
                     header("Location: ../vista/index.php");
                     exit();

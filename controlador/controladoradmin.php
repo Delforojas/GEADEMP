@@ -9,21 +9,21 @@ $enlace = obtenerConexion();
 // Verificar si se ha enviado el formulario de login
 if (!empty($_POST["btningresar"])) {
     // Obtener los datos del formulario
-    $usuario = $_POST["usuario"];
-    $password = $_POST["password"];
+    $epellidos = $_POST["apellidos"];
+    $clave = $_POST["clave"];
 
     // Verificar si los campos están vacíos
-    if (empty($usuario) || empty($password)) {
+    if (empty($apellidos) || empty($clave)) {
         echo '<div class="alert alert-danger">LOS CAMPOS ESTÁN VACÍOS</div>';
     } else {
         // Llamar a la función verificarUsuario
-        $datosUsuario = verificarUsuario($usuario, $password);
+        $datosUsuario = verificarUsuario($apellidos, $clave);
 
         // Verificar si se encontró el usuario
         if ($datosUsuario) {
             // Guardar los datos en la sesión
             $_SESSION['username'] = $datosUsuario['nombre'];
-            $_SESSION['rol'] = $datosUsuario['rol'];
+            $_SESSION['idCargo'] = $datosUsuario['idCargo'];
 
             // Mostrar mensaje de éxito
             echo '<div class="alert alert-success">Login exitoso</div>';

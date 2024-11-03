@@ -5,12 +5,12 @@ require_once("../modelo/datos_conexion.php");
 $enlace = obtenerConexion();
 session_start(); // Inicia la sesión
         // Verifica si el usuario ha iniciado sesión
-    if (!isset($_SESSION['username']) || !isset($_SESSION['id'])) {
+    if (!isset($_SESSION['username']) || !isset($_SESSION['idUsuario'])) {
         header("Location: login.php"); // Redirige si no hay sesión
         exit();
         }
         $usuario = $_SESSION['username']; 
-        $usuario_id = $_SESSION['id'];
+        $usuario_id = $_SESSION['idUsuario'];
 
         echo "<div id='contenedor-bienvenida'>
                     <img src='imagenes/logod.png' alt='Imagen de bienvenida' id='imagen-bienvenida'>

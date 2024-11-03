@@ -5,17 +5,19 @@ require_once("../modelo/modelo.php");
 $enlace = obtenerConexion();
 
 if (!empty($_POST['registro'])) {
-    if (empty($_POST['nombre']) || empty($_POST['usuario']) || empty($_POST['clave'])) {
+    // Verifica si alguno de los campos está vacío
+    if (empty($_POST['nombre']) || empty($_POST['apellidos']) || empty($_POST['clave'])) {
         echo 'Uno de los campos está vacío';
     } else {
+        // Captura los valores de los campos del formulario
         $nombre = $_POST['nombre'];
-        $usuario = $_POST['usuario'];
+        $apellidos = $_POST['apellidos']; // Asegúrate de que el nombre del campo sea correcto
         $clave = $_POST['clave'];
-        $id_cargo = 2; // O el valor correspondiente para el rol
+        $idCargo = 2; // O el valor correspondiente para el rol
 
         // Consulta para insertar el nuevo usuario
-        $q = "INSERT INTO usuarios (nombre, usuario, clave, id_cargo) 
-              VALUES ('$nombre', '$usuario', '$clave', $id_cargo)";
+        $q = "INSERT INTO usuario (nombre, apellidos, clave, idCargo) 
+              VALUES ('$nombre', '$apellidos', '$clave', $idCargo)";
         $resultado = mysqli_query($enlace, $q);
 
         if ($resultado == 1) {
@@ -53,4 +55,3 @@ if (!empty($_POST['registro'])) {
 
 // Cerrar la conexión a la base de datos
 mysqli_close($enlace);
-?>

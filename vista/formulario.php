@@ -16,7 +16,7 @@
         <h1 class="titulo-vacaciones"id="h1p">Introduzca Proceso</h1>
             <header>
                 <div id="daohang">
-                    <button><a href="index.php">Volver a principal</a></button>
+                    <button><a href="../vista/index.php">Volver a principal</a></button>
                 </div>
             </header>
                           

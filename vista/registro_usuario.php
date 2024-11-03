@@ -29,7 +29,7 @@
         <input type="text" placeholder="Nombre*"  name="nombre" id="Nombres">
       </div>
       <div class="row">
-        <input type="text" placeholder="Usuario*"name="usuario" id="Usuario">
+        <input type="text" placeholder="Apellids*"name="apellidos" id="apellidos">
       </div>
       <div class="row">
         <input type="text" placeholder="Contraseña*" name="clave" id="Contraseña">

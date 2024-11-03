@@ -1,3 +1,6 @@
+
+</html>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +24,7 @@
     </header>
 
     <?php
-         include('../controlador/controlador_solicitudes_pendientes.php');
+    include('../controlador/aprobacion_vacaciones.php'); 
     ?>
     <script src="../vista/javascript.js"></script>
 </body>

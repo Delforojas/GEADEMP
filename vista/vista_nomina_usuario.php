@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
-    <title>Vacaciones del Usuario</title>
-    <?php
-         include('../controlador/validar_usuario.php');
-    ?> 
+    <title>Consulta de Nóminas</title>
 </head>
 <body>
-    <h1 class="titulo-vacaciones"id="h1p">Vacaciones</h1>
-    <header>
-        <div id="daohang">
-            <button><a href="../vista/vista_vacaciones_historial.php">Historial</a></button>
-            <button><a href="../vista/solicitar_vacaciones.php">Solicitar Vacaciones </a></button>
-            <button><a href="../vista/index.php">Volver</a></button>
-        </div>
-    </header>
-    
 
-    <div class="contenedor-flex">  
+<h1 class="titulo-vacaciones" id="h1p">Nóminas Usuario</h1>
+
+<header>         
+    <div id="daohang">
+        <button><a href="../vista/index.php">Volver a principal</a></button>
+        <button><a href="../vista/nominas.php">Consultar otra Nomina</a></button>
+    </div>
+</header>
+
+<div class="contenedor-flex">  
     <div class="contenedor-principal">
         <nav class="nav">
             <ul class="list">
@@ -41,6 +38,7 @@
                         <li class="list__inside">
                             <a href="../vista/vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                         </li>
+                    
                         <li class="list__inside">
                             <a href="../vista/vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
@@ -64,9 +62,6 @@
                                 <a href="../vista/comunicados.php" class="nav__link nav__link--inside">Comunicados</a>
                             </li>
                             <li class="list__inside">
-                                <a href="../vista/nominas.php" class="nav__link nav__link--inside">Nominas</a>
-                            </li>
-                            <li class="list__inside">
                                 <a href="../vista/vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
                             </li>
                             <li class="list__inside">
@@ -80,18 +75,13 @@
                 </li>
             </ul>           
         </nav>
-        
-    </div>
+        <div class="table-title">
+            <?php include('../controlador/controlador_nomina_usuario.php'); ?>
+        </div>  
+    <div>
+</div>
     
-    <div style="position: absolute; top: 100; left: 20%; transform: translateX(-%);">
-                
-                <h1>Total de Días de Vacaciones</h1>
-                <?php include('../controlador/controlador_total_dias.php'); ?>
-    </div>
-        
 </div>         
-    <script src="../vista/javascript.js"></script>
-
-          
+<script src="../vista/javascript.js"></script>
 </body>
 </html>

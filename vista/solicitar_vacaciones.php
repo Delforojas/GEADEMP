@@ -78,16 +78,15 @@
     
     </nav>
     <div class =>
-            <form action="../controlador/controlador_solicitar_vacaciones.php" method="POST">
-                <label for="fecha_inicio">Fecha de inicio:</label>
-                <input type="date" name="fecha_inicio" required>
-                
-                <label for="fecha_fin">Fecha de fin:</label>
-                <input type="date" name="fecha_fin" required>
-                
-                <label for="dias_solicitados">Total dias :</label>      
-                <button type="submit" class ="btn-salir"name="solicitar_vacaciones">Solicitar Vacaciones</button>
-            </form>
+    <form action="../controlador/SolicitarVacaciones.php" method="post">
+        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <input type="date" name="fecha_inicio" required>
+
+        <label for="fecha_fin">Fecha de Fin:</label>
+        <input type="date" name="fecha_fin" required>
+
+        <button type="submit" name="solicitar_vacaciones">Solicitar Vacaciones</button>
+    </form>
     </div>
     <script src="../vista/javascript.js"></script>
 </body>

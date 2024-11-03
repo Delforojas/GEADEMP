@@ -5,8 +5,8 @@ require_once("../modelo/datos_conexion.php");
 $enlace = obtenerConexion();
 
 $lp = new linea_produccion();
-$lp1 = new lp1();  // Crear una instancia de la clase Sl7
-$lp2 = new lp2();  // Crear una instancia de la clase Sl4
+$lp1 = new lp1();  // Crear una instancia de la clase lp1
+$lp2 = new lp2();  // Crear una instancia de la clase lp2
 
 // Verificar si se enviaron datos del formulario
 if (isset($_POST['seleccionados'])) {

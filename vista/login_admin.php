@@ -31,7 +31,7 @@
 
                 <div class="mb-3">
                     <h5>Contraseña</h5>
-                    <input id="password" type="password" class="form-control" name="password">
+                    <input id="clave" type="password" class="form-control" name="clave">
                 </div>
 
                 <div class="text-center">
