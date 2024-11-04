@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/css8.css">
+
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Solicitar Vacaciones</title>
     <?php
@@ -77,15 +79,16 @@
         </ul>
     
     </nav>
-    <div class =>
+    
+    <div class="sol-container">
     <form action="../controlador/SolicitarVacaciones.php" method="post">
-        <label for="fecha_inicio">Fecha de Inicio:</label>
+        <h2 class="sol-h2">Solicitar Vacaciones cambiateeeee</h2>
+        <label for="age">Fecha de Inicio</label>
         <input type="date" name="fecha_inicio" required>
-
-        <label for="fecha_fin">Fecha de Fin:</label>
-        <input type="date" name="fecha_fin" required>
-
-        <button type="submit" name="solicitar_vacaciones">Solicitar Vacaciones</button>
+        <label for="age">Fecha de Final</label>
+        <input type="date" name="fecha_inicio" required>
+        
+        <button type="submit" name="solicitar_vacaciones"class="sol-button">Solicitar Vacaciones </button>
     </form>
     </div>
     <script src="../vista/javascript.js"></script>

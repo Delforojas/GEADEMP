@@ -16,3 +16,15 @@ listElements.forEach(listElement =>{
 
     })
 });
+
+// Función para mostrar la alerta al cargar la página de login
+function mostrarAlerta() {
+    alert("No tienes acceso al área de administradores. Por favor, póngase en contacto con su administrador para más información.");
+}
+
+// Verificar si estamos en la página de login
+if (window.location.pathname.endsWith('loginadmin.php')) {
+    window.onload = function() {
+        mostrarAlerta(); // Llama a la función de alerta solo en la página de login
+    }
+}

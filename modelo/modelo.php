@@ -499,6 +499,65 @@ class Vacaciones {
             'diasRestantes' => $diasRestantes
         ];
     }
+    function obtenerDiasTotales($enlace, $idUsuario) {
+        // Consulta SQL para obtener los días totales
+        $sqlTotales = "SELECT v.diasTotales 
+                       FROM Usuariovacaciones uv 
+                       JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
+                       WHERE uv.idUsuario = ?";
+        
+        $stmtTotales = $enlace->prepare($sqlTotales);
+        $stmtTotales->bind_param("i", $idUsuario);
+        $stmtTotales->execute();
+        $stmtTotales->bind_result($diasTotales);
+        $stmtTotales->fetch();
+        $stmtTotales->close();
+        
+        return $diasTotales; // Retorna los días totales
+    }
+    function obtenerDiasSolicitados1($enlace, $idVacaciones) {
+        // Consulta SQL para obtener los días solicitados
+        $sqlSolicitados = "SELECT diasSolicitados 
+                           FROM vacaciones 
+                           WHERE idVacaciones = ?";
+        
+        $stmtSolicitados = $enlace->prepare($sqlSolicitados);
+        $stmtSolicitados->bind_param("i", $idVacaciones);
+        $stmtSolicitados->execute();
+        $stmtSolicitados->bind_result($diasSolicitados);
+        $stmtSolicitados->fetch();
+        $stmtSolicitados->close();
+        
+        return $diasSolicitados; // Retorna los días solicitados
+    }
+    function actualizarDiasTotales($enlace, $nuevosDiasTotales, $idUsuario) {
+        // Consulta SQL para actualizar los días totales
+        $sqlActualizar = "UPDATE vacaciones 
+                          SET diasTotales = ? 
+                          WHERE idUsuario = ?";
+        $stmtActualizar = $enlace->prepare($sqlActualizar);
+        $stmtActualizar->bind_param("ii", $nuevosDiasTotales, $idUsuario);
+        $stmtActualizar->execute();
+        $stmtActualizar->close();
+    }
+    function obtenerDiasSolicitados2($enlace, $idUsuario) {
+        // Consulta SQL para obtener la suma de días solicitados
+        $sqlSolicitados = "SELECT SUM(v.diasSolicitados) AS diasSolicitados 
+                           FROM Usuariovacaciones uv 
+                           JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
+                           JOIN solicitud s ON v.idSolicitud = s.idSolicitud 
+                           WHERE uv.idUsuario = ? AND s.estado IN ('Pendiente', 'Aprobado')";
+        
+        $stmtSolicitados = $enlace->prepare($sqlSolicitados);
+        $stmtSolicitados->bind_param("i", $idUsuario);
+        $stmtSolicitados->execute();
+        $stmtSolicitados->bind_result($diasSolicitados);
+        $stmtSolicitados->fetch();
+        $stmtSolicitados->close();
+    
+        return $diasSolicitados ?? 0; // Retorna los días solicitados o 0 si no hay solicitudes
+    }
+    
 }
 
 

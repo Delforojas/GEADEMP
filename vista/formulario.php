@@ -38,7 +38,8 @@
     </div>
     <div class="rule"></div>
     <div class="form-footer">
-      <button type="submit" id="enviarYCerrar" value="Registrar" name="registro">Registrar</button>
+      <button type="submit" id="enviarYCerrar" value="Registrar" name="registro">Introducir</button>
+      <button type="button" id="enviarYCerrar" onclick="location.href='vista_bolsa_admin.php';">Volver</button>
     </div>
   </form>
 </div>

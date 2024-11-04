@@ -1,77 +1,17 @@
-.card-form {
-    width: 500px; /* Ancho del contenedor del formulario */
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column; /* Para alinear el contenido en columna */
-    justify-content: center; /* Centrar verticalmente */
-    align-items: center; /* Centrar horizontalmente */
-    position: absolute; /* Usar posición absoluta para centrar en la pantalla */
-    top: 50%; /* Mover el contenedor hacia el medio */
-    left: 50%; /* Mover el contenedor hacia el medio */
-    transform: translate(-50%, -50%); /* Ajustar el contenedor a su tamaño */
+
+button {
+  display: inline-block;
+  line-height: 40px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background: #1E3E62;
+  margin-right: 10px;
+  font-size: 16px; /* Asegúrate de definir el tamaño de fuente */
+  color: white; /* Color del texto del botón */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
 
-.signup {
-    width: 100%; /* Que el formulario use todo el ancho de .card-form */
-    padding: 20px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #fff; /* Fondo blanco */
+button:hover {
+  background: #FF6500; /* Cambia el color de fondo al pasar el ratón */
 }
-.form-title{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 10vh;
-    font-size: 20px;
-    font-weight: bold;
-    background: orange;
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .form-body{
-    padding: 10px;
-  }
- .row{
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      
-      input[type="text"]{
-        appearance: none;
-        width: 100%;
-        margin: 0 15px;
-        height: 35px;
-        padding: 5px 15px;
-        border-radius: 5px;
-        outline: none;
-        border: none;
-        background: #e8ebed;
-        color: #576366;
-        font-size: 14px;
-      }
-    }
-  
-  
-  .rule{
-    height: 2px;
-    background: #e8ebed;
-    margin: 0px 35px;
-  }
-  .form-footer {
-    display: flex;
-    justify-content: center; /* Centra el botón */
-}
-  button{
-    display: inline-block;
-    line-height: 40px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 15px;
-    background:orange;
-    margin-right: 10px;
-    font-size: 14px;
-  }

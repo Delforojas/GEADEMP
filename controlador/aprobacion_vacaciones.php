@@ -59,7 +59,9 @@ if (isset($_SESSION['mensaje'])) {
 ?>
 
 <?php if (!empty($solicitudes)): ?>
-    <table border="1">
+    <div class='table-title'>
+    <h3 class="titulo-vaca">Solicitud de Vacaciones de <?php echo htmlspecialchars($_SESSION['username']); ?></h3>
+    <table class='table-fill'>
         <thead>
             <tr>
                 <th>ID de Vacaciones</th>
@@ -83,8 +85,8 @@ if (isset($_SESSION['mensaje'])) {
                     <td>
                         <form action="../controlador/aprobar_rechazar_vacaciones.php" method="post">
                             <input type="hidden" name="idVacaciones" value="<?= htmlspecialchars($solicitud['idVacaciones']) ?>">
-                            <button type="submit" name="aprobar">Aprobar</button>
-                            <button type="submit" name="rechazar">Rechazar</button>
+                            <button type="submit" name="aprobar"class ='btn-salir'>Aprobar</button>
+                            <button type="submit" name="rechazar"class ='btn-salir'>Rechazar</button>
                         </form>
                     </td>
                 </tr>

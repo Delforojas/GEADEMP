@@ -8,7 +8,7 @@ session_start();
         // Verifica si el usuario ha iniciado sesión y si es un administrador
         if (!isset($_SESSION['username']) || $_SESSION['rol'] != 1) {
             // Si no es administrador o no ha iniciado sesión, redirigir a la página de inicio de sesión
-            header("Location: login.php");
+            header("Location: loginadmin.php");
             exit();
         }
             $usuario = $_SESSION['username'];

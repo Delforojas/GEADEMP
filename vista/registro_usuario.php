@@ -13,7 +13,7 @@
     ?>
 </head>
 
-<h2 class="titulo-vacaciones"id="h1p">Registrar</h2>
+<h2 class="titulo-vacaciones"id="h1p">Registrar Usuario</h2>
 <header>
                             <div id="daohang">
                                 <button><a href="vista_bolsa_admin.php">Volver a principal</a></button>
@@ -38,6 +38,7 @@
     <div class="rule"></div>
     <div class="form-footer">
       <button type="submit" id="cerrarVentana" value="Registrar" name="registro">Registrar</button>
+      <button type="button" id="enviarYCerrar" onclick="location.href='vista_bolsa_admin.php';">Volver</button>
     </div>
   </form>
 </div>

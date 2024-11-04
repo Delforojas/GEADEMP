@@ -1,0 +1,63 @@
+.contenido-include {
+    display: block;
+    background-color: #EEEEEE; /* Fondo del contenido */
+    padding: 20px; /* Espaciado interno */
+    width: 300px; /* Ancho del contenido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenido */
+    margin: 0 auto; /* Centrar el contenido en la página */
+    text-align: center; /* Centrar el texto dentro del contenedor */
+}
+
+.titulo-vaca {
+    background-color: #257180; /* Color de fondo */
+    color: #FF6500 !important; /* Asegura que el color del texto se aplique */
+    text-align: center; /* Centrar el texto */
+    margin: 0; /* Sin márgenes */
+    width: 100%; /* Abarca el ancho completo */
+    font-size: 2em; /* Tamaño de fuente */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+    height: 10vh; /* Altura del contenedor */
+    display: flex; /* Flexbox para centrar vertical y horizontal */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+  }
+
+label {
+    display: block; /* Hacer que cada etiqueta ocupe una línea completa */
+    margin: 10px 0 5px; /* Margen alrededor de la etiqueta */
+    color: #FF6500; /* Color del texto de las etiquetas */
+}
+
+select {
+    width: 30%; /* Ancho del select (puedes ajustar según lo desees) */
+    padding: 10px; /* Espaciado interno */
+    margin: 10px auto; /* Margen vertical entre select y otros elementos, centrado horizontalmente */
+    border: 1px solid #ccc; /* Borde del select */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    font-size: 14px; /* Tamaño de la fuente */
+    text-align: center; /* Centrar el texto en el select */
+}
+
+/* Para centrar los option en navegadores compatibles */
+select option {
+    text-align: center; /* Centrar el texto dentro de los option */
+}
+
+button {
+    display: block; /* Asegura que el botón sea un bloque para centrarlo */
+    width: 20%; /* Ancho del botón (puedes ajustar según lo desees) */
+    padding: 10px; /* Espaciado interno */
+    background-color: #0B192C; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente del botón */
+    cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+    margin: 20px auto; /* Margen superior e inferior y centrar el botón */
+}
+
+button:hover {
+    background-color: #FF6500; /* Color del fondo al pasar el ratón */
+}

@@ -19,11 +19,11 @@
             <form id="ordenForm" action="../vista/vista_resultado_lp1.php" method="POST">   
             <button type="submit" class=>Ordenar</button>
                     <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
-                    <optgroup label="Ancho">
+                    <optgroup label="Criterio1">
                         <option value="AASC">ASC (criterio 1)</option>
                         <option value="ADESC">DESC (Criterio 2)</option>
                     </optgroup>
-                    <optgroup label="Espesor">
+                    <optgroup label="Criterio2">
                         <option value="ASC">ASC (Criterio 2)</option>
                         <option value="DESC">DESC (Criterio 2)</option>
                     </optgroup>
