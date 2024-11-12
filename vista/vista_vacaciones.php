@@ -83,11 +83,13 @@
         
     </div>
     
-    <div style="position: absolute; top: 100; left: 20%; transform: translateX(-%);">
-                
-                <h1>Total de Días de Vacaciones</h1>
+    <div >
+                <h1>Total de Días de  Vacaciones</h1>
                 <?php include('../controlador/controlador_total_dias.php'); ?>
     </div>
+    <div style="position: absolute; top: 100px; left: 20%;">
+   
+</div>
         
 </div>         
     <script src="../vista/javascript.js"></script>

@@ -10,62 +10,56 @@ if (!$idUsuario) {
     exit();
 }
 
+$enlace = obtenerConexion();
+
+if ($enlace->connect_error) {
+    die("Conexión fallida: " . $enlace->connect_error);
+}
+
+// Consulta para obtener la suma de los días solicitados aprobados por el usuario
+$query = "SELECT SUM(v.diasSolicitados) AS totalDiasSolicitados 
+          FROM vacaciones v
+          JOIN usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones
+          WHERE uv.idUsuario = ? AND v.idSolicitud = 2"; // Solo contar los días de vacaciones aprobados
+
+$stmt = $enlace->prepare($query);
+$stmt->bind_param("i", $idUsuario);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$fila = $resultado->fetch_assoc();
+$totalDiasSolicitados = $fila['totalDiasSolicitados'] ?? 0;
+
+// Calcular los días restantes
+$diasTotales = 30; // Total de días disponibles, puedes ajustar según corresponda
+$diasRestantes = $diasTotales - $totalDiasSolicitados;
+
+// Guardar los días restantes en la sesión
+$_SESSION['diasRestantes'] = $diasRestantes;
+
+// Si el usuario intenta solicitar vacaciones
 if (isset($_POST['solicitar_vacaciones'])) {
     $fecha_inicio = $_POST['fecha_inicio'] ?? null;
     $fecha_fin = $_POST['fecha_fin'] ?? null;
 
-    // Validar las fechas de inicio y fin
     if (!$fecha_inicio || !$fecha_fin || strtotime($fecha_inicio) > strtotime($fecha_fin)) {
-        $_SESSION['mensaje_error'] = "Fechas de solicitud no válidas.";
-        header("Location: ../vista/vista_vacaciones.php");
+        echo "<script>alert('Fechas de solicitud no válidas.');</script>";
+        echo "<script>window.location.href = '../vista/solicitar_vacaciones.php';</script>";
         exit();
     }
 
-    $enlace = obtenerConexion();
-
-    // Calcular días solicitados
+    // Recalcular días solicitados
     $diasSolicitados = (strtotime($fecha_fin) - strtotime($fecha_inicio)) / (60 * 60 * 24) + 1;
 
-    // Verificar que los días solicitados no excedan el límite de 30
-    if ($diasSolicitados > 30) {
-        echo '<script>
-                alert("No puedes solicitar más de 30 días de vacaciones.");
-                window.location.href = "../vista/vista_vacaciones.php"; // Redirigir después del mensaje
-              </script>';
+    // Verificar si los días restantes son suficientes
+    if ($_SESSION['diasRestantes'] <= 0) {
+        echo "<script>alert('No tienes días disponibles para solicitar más vacaciones. Días restantes: {$_SESSION['diasRestantes']}.');</script>";
+        echo "<script>window.location.href = '../vista/solicitar_vacaciones.php';</script>";
         exit();
     }
 
-    // Obtener los días totales disponibles del usuario
-    $sqlTotales = "SELECT v.diasTotales 
-                   FROM Usuariovacaciones uv 
-                   JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
-                   WHERE uv.idUsuario = ?";
-    
-    $stmtTotales = $enlace->prepare($sqlTotales);
-    $stmtTotales->bind_param("i", $idUsuario);
-    $stmtTotales->execute();
-    $stmtTotales->bind_result($diasTotales);
-    $stmtTotales->fetch();
-    $stmtTotales->close();
-
-    // Calcular días restantes
-    $diasRestantes = $diasTotales - $diasSolicitados;
-
-    // Verificar que no queden días negativos
-    if ($diasRestantes < 0) {
-        echo '<script>
-                alert("No puedes solicitar más días de los que tienes disponibles.");
-                window.location.href = "../vista/vista_vacaciones.php"; //
-              </script>';
-        exit();
-    }
-
-    // Verificar que los días restantes sean mayores que 0 para permitir la solicitud
-    if ($diasRestantes <= 0) {
-        echo '<script>
-                alert("No puedes solicitar más vacaciones, ya que no te quedan días disponibles. cabron ");
-                window.location.href = "../vista/vista_vacaciones.php"; // Redirigir después del mensaje
-              </script>';
+    if ($diasSolicitados > $_SESSION['diasRestantes']) {
+        echo "<script>alert('No tienes suficientes días disponibles para la solicitud. Días restantes: {$_SESSION['diasRestantes']}.');</script>";
+        echo "<script>window.location.href = '../vista/solicitar_vacaciones.php';</script>";
         exit();
     }
 
@@ -73,22 +67,32 @@ if (isset($_POST['solicitar_vacaciones'])) {
     $queryVacaciones = "INSERT INTO Vacaciones (idSolicitud, fecha_inicio, fecha_fin, diasSolicitados) VALUES (1, ?, ?, ?)";
     $stmtVacaciones = $enlace->prepare($queryVacaciones);
     $stmtVacaciones->bind_param("ssi", $fecha_inicio, $fecha_fin, $diasSolicitados);
-    $stmtVacaciones->execute();
-    $idVacaciones = $stmtVacaciones->insert_id;
-    $stmtVacaciones->close();
+    
+    if ($stmtVacaciones->execute()) {
+        $idVacaciones = $stmtVacaciones->insert_id;
+        $stmtVacaciones->close();
 
-    // Asociar la solicitud de vacaciones con el usuario en `UsuarioVacaciones`
-    $queryUsuariosVacaciones = "INSERT INTO UsuarioVacaciones (idUsuario, idVacaciones) VALUES (?, ?)";
-    $stmtUsuariosVacaciones = $enlace->prepare($queryUsuariosVacaciones);
-    $stmtUsuariosVacaciones->bind_param("ii", $idUsuario, $idVacaciones);
-    $stmtUsuariosVacaciones->execute();
-    $stmtUsuariosVacaciones->close();
+        // Asociar la solicitud de vacaciones con el usuario en `UsuarioVacaciones`
+        $queryUsuariosVacaciones = "INSERT INTO UsuarioVacaciones (idUsuario, idVacaciones) VALUES (?, ?)";
+        $stmtUsuariosVacaciones = $enlace->prepare($queryUsuariosVacaciones);
+        $stmtUsuariosVacaciones->bind_param("ii", $idUsuario, $idVacaciones);
+        
+        if ($stmtUsuariosVacaciones->execute()) {
+            echo "<script>alert('Solicitud de vacaciones enviada con éxito.');</script>";
+            // Actualizar los días restantes después de la solicitud exitosa
+            $_SESSION['diasRestantes'] -= $diasSolicitados;
+        } else {
+            echo "<script>alert('Error al asociar la solicitud con el usuario: " . addslashes($stmtUsuariosVacaciones->error) . "');</script>";
+        }
+        $stmtUsuariosVacaciones->close();
+    } else {
+        echo "<script>alert('Error al insertar la solicitud de vacaciones: " . addslashes($stmtVacaciones->error) . "');</script>";
+    }
 
-    $_SESSION['mensaje_exito'] = "Solicitud de vacaciones enviada con éxito.";
     mysqli_close($enlace);
 
-    // Redirigir después de la solicitud
-    header("Location: ../vista/vista_vacaciones.php");
+    // Redirigir a la vista para mostrar el resultado
+    echo "<script>window.location.href = '../vista/solicitar_vacaciones.php';</script>";
     exit();
 }
 ?>
