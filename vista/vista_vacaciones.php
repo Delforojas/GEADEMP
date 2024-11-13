@@ -15,7 +15,7 @@
     <header>
         <div id="daohang">
             <button><a href="../vista/vista_vacaciones_historial.php">Historial</a></button>
-            <button><a href="../vista/solicitar_vacaciones.php">Solicitar Vacaciones </a></button>
+            <button><a href="../vista/vista_solicitar_vacaciones.php">Solicitar Vacaciones </a></button>
             <button><a href="../vista/index.php">Volver</a></button>
         </div>
     </header>
@@ -85,8 +85,8 @@
     
     <div style="position: absolute; top: 100; left: 20%; transform: translateX(-%);">
                 
-                <h1>Total de Días de Vacaciones</h1>
-                <?php include('../controlador/controlador_total_dias.php'); ?>
+                <h1>Total de Días de Vacaciones eooo  </h1>
+                <?php include('../controlador/controlador_Total_dias.php'); ?>
     </div>
         
 </div>         

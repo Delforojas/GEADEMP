@@ -439,131 +439,6 @@ class Usuario {
             public $descripcion;
         
      }
-class Vacaciones {
-        // Atributos públicos de la clase
-    public $idVacaciones;
-    public $fecha_inicio;
-    public $fecha_fin;
-    public $idSolicitud;
-    public $diasSolicitados;
-    public $diasTotales = 30;
-
-
-    public function obtenerDiasTotalesVacaciones($enlace, $idUsuario) {
-        $query = "SELECT diasTotales FROM usuariovacaciones uv
-                  JOIN Vacaciones v ON uv.idVacaciones = v.idVacaciones
-                  WHERE uv.idUsuario = ?";
-        $stmt = $enlace->prepare($query);
-        $stmt->bind_param("i", $idUsuario);
-        $stmt->execute();
-        $stmt->bind_result($diasTotales);
-        $stmt->fetch();
-        $stmt->close();
-        
-        return $diasTotales ?? 0;
-    }
-
-    // Método para obtener los días ya solicitados por el usuario
-    public function obtenerDiasSolicitados($enlace, $idUsuario) {
-        $query = "SELECT SUM(diasSolicitados) FROM usuariovacaciones uv
-                  JOIN Vacaciones v ON uv.idVacaciones = v.idVacaciones
-                  WHERE uv.idUsuario = ?";
-        $stmt = $enlace->prepare($query);
-        $stmt->bind_param("i", $idUsuario);
-        $stmt->execute();
-        $stmt->bind_result($diasSolicitados);
-        $stmt->fetch();
-        $stmt->close();
-
-        return $diasSolicitados ?? 0;
-    }
-    public function obtenerVacacionesPorUsuario($enlace, $idUsuario) {
-        $query = "SELECT v.diasTotales AS diasTotales, SUM(v.diasSolicitados) AS diasSolicitados
-                  FROM usuariovacaciones uv
-                  JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones
-                  WHERE uv.idUsuario = ?
-                  GROUP BY v.diasTotales";
-
-        $stmt = $enlace->prepare($query);
-        $stmt->bind_param("i", $idUsuario);
-        $stmt->execute();
-        $stmt->bind_result($diasTotales, $diasSolicitados);
-        $stmt->fetch();
-        $stmt->close();
-
-        $diasRestantes = $diasTotales - ($diasSolicitados ?? 0);
-
-        return [
-            'diasTotales' => $diasTotales ?? 0,
-            'diasSolicitados' => $diasSolicitados ?? 0,
-            'diasRestantes' => $diasRestantes
-        ];
-    }
-    function obtenerDiasTotales($enlace, $idUsuario) {
-        // Consulta SQL para obtener los días totales
-        $sqlTotales = "SELECT v.diasTotales 
-                       FROM Usuariovacaciones uv 
-                       JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
-                       WHERE uv.idUsuario = ?";
-        
-        $stmtTotales = $enlace->prepare($sqlTotales);
-        $stmtTotales->bind_param("i", $idUsuario);
-        $stmtTotales->execute();
-        $stmtTotales->bind_result($diasTotales);
-        $stmtTotales->fetch();
-        $stmtTotales->close();
-        
-        return $diasTotales; // Retorna los días totales
-    }
-    function obtenerDiasSolicitados1($enlace, $idVacaciones) {
-        // Consulta SQL para obtener los días solicitados
-        $sqlSolicitados = "SELECT diasSolicitados 
-                           FROM vacaciones 
-                           WHERE idVacaciones = ?";
-        
-        $stmtSolicitados = $enlace->prepare($sqlSolicitados);
-        $stmtSolicitados->bind_param("i", $idVacaciones);
-        $stmtSolicitados->execute();
-        $stmtSolicitados->bind_result($diasSolicitados);
-        $stmtSolicitados->fetch();
-        $stmtSolicitados->close();
-        
-        return $diasSolicitados; // Retorna los días solicitados
-    }
-    function actualizarDiasTotales($enlace, $nuevosDiasTotales, $idUsuario) {
-        // Consulta SQL para actualizar los días totales
-        $sqlActualizar = "UPDATE vacaciones 
-                          SET diasTotales = ? 
-                          WHERE idUsuario = ?";
-        $stmtActualizar = $enlace->prepare($sqlActualizar);
-        $stmtActualizar->bind_param("ii", $nuevosDiasTotales, $idUsuario);
-        $stmtActualizar->execute();
-        $stmtActualizar->close();
-    }
-    function obtenerDiasSolicitados2($enlace, $idUsuario) {
-        // Consulta SQL para obtener la suma de días solicitados
-        $sqlSolicitados = "SELECT SUM(v.diasSolicitados) AS diasSolicitados 
-                           FROM Usuariovacaciones uv 
-                           JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
-                           JOIN solicitud s ON v.idSolicitud = s.idSolicitud 
-                           WHERE uv.idUsuario = ? AND s.estado IN ('Pendiente', 'Aprobado')";
-        
-        $stmtSolicitados = $enlace->prepare($sqlSolicitados);
-        $stmtSolicitados->bind_param("i", $idUsuario);
-        $stmtSolicitados->execute();
-        $stmtSolicitados->bind_result($diasSolicitados);
-        $stmtSolicitados->fetch();
-        $stmtSolicitados->close();
-    
-        return $diasSolicitados ?? 0; // Retorna los días solicitados o 0 si no hay solicitudes
-    }
-    
-}
-
-
-
-    
-
 
 class Nomina {
     public $idNomina;
@@ -607,6 +482,226 @@ class Nomina {
         // Devolver el array de nóminas
         return $nominas;
     }
+
+class Vacaciones{
+    public $idVacaciones;
+    public $fecha_inicio;
+    public $fecha_fin;
+    public $idSolicitud;
+    public $diasSolicitados;
+    public $diasTotales = 30;
+
+
+    function diasTotales($enlace, $idUsuario) {
+        $dTotales = "SELECT v.diasTotales 
+                       FROM Usuariovacaciones uv 
+                       JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
+                       WHERE uv.idUsuario = ?";
+    
+        $diasTotales = $enlace->prepare($dTotales);
+        if ($stmtTotales === false) {
+            die('Error al preparar la consulta: ' . $enlace->error);
+        }
+    
+        $diasTotales->bind_param("i", $idUsuario);
+        $diasTotales->execute();
+        $diasTotales->bind_result($diasTotalesDB);
+        $diasTotales->fetch();
+        $diasTotales->close();
+    
+        return $diasTotalesDB;
+    }
+    
+    
+    
+    function diasSolicitados($enlace, $idVacaciones) {
+        $s = "SELECT diasSolicitados 
+              FROM vacaciones 
+              WHERE idVacaciones = ?";
+    
+        $diassSolicitados = $enlace->prepare($s);
+        if ($sSolicitados === false) {
+            die('Error al preparar la consulta: ' . $enlace->error);
+        }
+    
+        $diasSolicitados->bind_param("i", $idVacaciones);
+        $diasSolicitados->execute();
+        $diasSolicitados->bind_result($diasSolicitados);
+        $diasSolicitados->fetch();
+        $diasSolicitados->close();
+    
+        return $diasSolicitados;
+    }
+    
+    function actualizarDiasTotales($enlace, $nuevosDiasTotales, $idUsuario) {
+        $s = "UPDATE vacaciones 
+              SET diasTotales = ? 
+              WHERE idUsuario = ?";
+    
+        $sActualizar = $enlace->prepare($s);
+        if ($sActualizar === false) {
+            die('Error al preparar la consulta: ' . $enlace->error);
+        }
+    
+        $sActualizar->bind_param("ii", $nuevosDiasTotales, $idUsuario);
+        $sActualizar->execute();
+        $sActualizar->close();
+    }
+    
+    function totalDiasSolicitados($enlace, $idUsuario) {
+        $s = "SELECT SUM(v.diasSolicitados) AS diasSolicitados 
+              FROM Usuariovacaciones uv 
+              JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
+              JOIN solicitud s ON v.idSolicitud = s.idSolicitud 
+              WHERE uv.idUsuario = ? AND s.estado IN ('Pendiente', 'Aprobado')";
+    
+        $sSolicitados = $enlace->prepare($s);
+        if ($sSolicitados === false) {
+            die('Error al preparar la consulta: ' . $enlace->error);
+        }
+    
+        $sSolicitados->bind_param("i", $idUsuario);
+        $sSolicitados->execute();
+        $sSolicitados->bind_result($diasSolicitados);
+        $sSolicitados->fetch();
+        $sSolicitados->close();
+    
+        return $diasSolicitados;
+    }
+    public function insertarVacaciones($idSolicitud, $fecha_inicio, $fecha_fin, $diasSolicitados) {
+        $iVacaciones = "INSERT INTO Vacaciones (idSolicitud, fecha_inicio, fecha_fin, diasSolicitados) VALUES (?, ?, ?, ?)";
+        $sVacaciones = $this->enlace->prepare($iVacaciones);
+        if ($sVacaciones) {
+            $sVacaciones->bind_param("issi", $idSolicitud, $fecha_inicio, $fecha_fin, $diasSolicitados);
+            $sVacaciones->execute();
+            $idVacaciones = $sVacaciones->insert_id;
+            $sVacaciones->close();
+            return $idVacaciones;
+        } else {
+            return null; // Manejo de errores si no se puede preparar la consulta
+        }
+    }
+    public function UsuarioVacaciones($idUsuario, $idVacaciones) {
+        $iUsuariosVacaciones = "INSERT INTO UsuarioVacaciones (idUsuario, idVacaciones) VALUES (?, ?)";
+        $sUsuariosVacaciones = $this->enlace->prepare($iUsuariosVacaciones);
+        if ($sUsuariosVacaciones) {
+            $sUsuariosVacaciones->bind_param("ii", $idUsuario, $idVacaciones);
+            $sUsuariosVacaciones->execute();
+            $sUsuariosVacaciones->close();
+            return true;
+        } else {
+            return false; // Manejo de errores si no se puede preparar la consulta
+        }
+    }
+    function actualizarSolicitud($enlace, $nuevoEstado, $idVacaciones) {
+        // Consulta para actualizar el estado de la solicitud en la tabla `solicitud`
+        $query = "UPDATE solicitud SET estado = ? WHERE idSolicitud = (SELECT idSolicitud FROM vacaciones WHERE idVacaciones = ?)";
+        
+        // Preparar la sentencia
+        if ($q = $enlace->prepare($query)) {
+            // Enlazar los parámetros
+            $q->bind_param("si", $nuevoEstado, $idVacaciones);
+            
+            // Ejecutar la sentencia
+            if ($q->execute()) {
+                echo "El estado de la solicitud ha sido actualizado correctamente.";
+            } else {
+                echo "Error al ejecutar la consulta: " . $q->error;
+            }
+            
+            // Cerrar la sentencia
+            $q->close();
+        } else {
+            echo "Error al preparar la consulta: " . $enlace->error;
+        }
+    }
+    function eliminarVacaciones($enlace, $idVacaciones) {
+        // Consulta para eliminar un registro de la tabla `vacaciones`
+        $deleteQuery = "DELETE FROM vacaciones WHERE idVacaciones = ?";
+        
+        // Preparar la sentencia
+        if ($qDelete = $enlace->prepare($deleteQuery)) {
+            // Enlazar los parámetros
+            $qDelete->bind_param("i", $idVacaciones);
+            
+            // Ejecutar la sentencia
+            if ($qDelete->execute()) {
+                echo "El registro de vacaciones ha sido eliminado correctamente.";
+            } else {
+                echo "Error al ejecutar la consulta: " . $qDelete->error;
+            }
+            
+            // Cerrar la sentencia
+            $qDelete->close();
+        } else {
+            echo "Error al preparar la consulta: " . $enlace->error;
+        }
+    }
+    function solicitudesPendientes($enlace) {
+        // Consulta para cargar las solicitudes pendientes
+        $query = "
+            SELECT v.idVacaciones, u.nombre, u.apellidos, v.fecha_inicio, v.fecha_fin, v.diasSolicitados, s.estado, s.idSolicitud
+            FROM vacaciones v
+            JOIN usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones
+            JOIN usuario u ON uv.idUsuario = u.idUsuario
+            JOIN solicitud s ON v.idSolicitud = s.idSolicitud
+            WHERE s.estado = 'pendiente'";
+        
+        // Ejecutar la consulta
+        $resultado = $enlace->query($query);
+        if ($resultado) {
+            $solicitudes = $resultado->fetch_all(MYSQLI_ASSOC);
+            return $solicitudes;
+        } else {
+            echo "Error al ejecutar la consulta: " . $enlace->error;
+            return [];
+        }
+    }
+    function tablaSolicitudesPendientes($solicitudes) {
+        if (!empty($solicitudes)) {
+            echo "<div class='table-title'>";
+            echo "<h3 class='titulo-vaca'>Solicitud de Vacaciones de " . htmlspecialchars($_SESSION['username']) . "</h3>";
+            echo "<table class='table-fill'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th>ID de Vacaciones</th>";
+            echo "<th>Nombre</th>";
+            echo "<th>Apellidos</th>";
+            echo "<th>Fecha Inicio</th>";
+            echo "<th>Fecha Fin</th>";
+            echo "<th>Días Solicitados</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+            foreach ($solicitudes as $solicitud) {
+                echo "<tr>";
+                echo "<td>" . htmlspecialchars($solicitud['idVacaciones']) . "</td>";
+                echo "<td>" . htmlspecialchars($solicitud['nombre']) . "</td>";
+                echo "<td>" . htmlspecialchars($solicitud['apellidos']) . "</td>";
+                echo "<td>" . htmlspecialchars($solicitud['fecha_inicio']) . "</td>";
+                echo "<td>" . htmlspecialchars($solicitud['fecha_fin']) . "</td>";
+                echo "<td>" . htmlspecialchars($solicitud['diasSolicitados']) . "</td>";
+                echo "<td>";
+                echo "<form action='../controlador/aprobar_rechazar_vacaciones.php' method='post'>";
+                echo "<input type='hidden' name='idVacaciones' value='" . htmlspecialchars($solicitud['idVacaciones']) . "'>";
+                echo "<button type='submit' name='aprobar' class='btn-salir'>Aprobar</button>";
+                echo "<button type='submit' name='rechazar' class='btn-salir'>Rechazar</button>";
+                echo "</form>";
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</tbody>";
+            echo "</table>";
+            echo "</div>";
+        } else {
+            echo "<p>No hay solicitudes de vacaciones pendientes.</p>";
+        }
+    }
+    
+
+
+
+}
     
 
 }

@@ -24,7 +24,7 @@
     </header>
 
     <?php
-    include('../controlador/aprobacion_vacaciones.php'); 
+    include('../controlador/controlador_gestion_vacaciones.php'); 
     ?>
     <script src="../vista/javascript.js"></script>
 </body>

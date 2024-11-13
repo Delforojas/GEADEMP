@@ -12,22 +12,7 @@ if (!$idUsuario) {
 $enlace = obtenerConexion(); // Asegúrate de que la conexión esté disponible
 
 // Inicializa días totales
-$diasTotales = 30; // Establecido en 30, según la información proporcionada
-
-// Obtener días totales de vacaciones de la base de datos (si es necesario)
-$sqlTotales = "SELECT v.diasTotales 
-               FROM Usuariovacaciones uv 
-               JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
-               WHERE uv.idUsuario = ?";
-
-$stmtTotales = $enlace->prepare($sqlTotales);
-$stmtTotales->bind_param("i", $idUsuario);
-$stmtTotales->execute();
-$stmtTotales->bind_result($diasTotalesDB);
-$stmtTotales->fetch();
-$stmtTotales->close();
-
-
+diasTotales($enlace, $idUsuario);
 
 // Verificar si hay días totales disponibles
 if ($diasTotales <= 0) {
@@ -44,16 +29,7 @@ $diasSolicitados = 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aprobar'])) {
     $idVacaciones = $_POST['idVacaciones'] ?? null; // ID de la solicitud a aprobar
 
-    // Obtener días solicitados
-    $sqlSolicitados = "SELECT diasSolicitados 
-                       FROM vacaciones 
-                       WHERE idVacaciones = ?";
-    $stmtSolicitados = $enlace->prepare($sqlSolicitados);
-    $stmtSolicitados->bind_param("i", $idVacaciones);
-    $stmtSolicitados->execute();
-    $stmtSolicitados->bind_result($diasSolicitados);
-    $stmtSolicitados->fetch();
-    $stmtSolicitados->close();
+    diasSolicitados($enlace, $idVacaciones);
 
     // Verificar que los días solicitados no excedan el límite de 30
     if ($diasSolicitados > 30) {
@@ -71,38 +47,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aprobar'])) {
     if ($nuevosDiasTotales < 0) {
         echo '<script>
                 alert("No puedes aprobar esta solicitud porque no te quedan días disponibles.");
-                window.location.href = "../vista/vacaciones.php";
+                window.location.href = "../vista/vista_vacaciones.php";
               </script>';
         exit();
     }
 
     // Actualizar los días totales
-    $sqlActualizar = "UPDATE vacaciones 
-                      SET diasTotales = ? 
-                      WHERE idUsuario = ?";
-    $stmtActualizar = $enlace->prepare($sqlActualizar);
-    $stmtActualizar->bind_param("ii", $nuevosDiasTotales, $idUsuario);
-    $stmtActualizar->execute();
-    $stmtActualizar->close();
+    actualizarDiasTotales($enlace, $nuevosDiasTotales, $idUsuario);
 
     echo '<script>
             alert("Solicitud aprobada. Días totales actualizados.");
-            window.location.href = "../vista/vacaciones.php";
+            window.location.href = "../vista/vista_vacaciones.php";
           </script>';
 }
 
 // Obtener de nuevo los días solicitados para mostrar en la vista
-$sqlSolicitados = "SELECT SUM(v.diasSolicitados) AS diasSolicitados 
-                   FROM Usuariovacaciones uv 
-                   JOIN vacaciones v ON uv.idVacaciones = v.idVacaciones 
-                   JOIN solicitud s ON v.idSolicitud = s.idSolicitud 
-                   WHERE uv.idUsuario = ? AND s.estado IN ('Pendiente', 'Aprobado')";
-$stmtSolicitados = $enlace->prepare($sqlSolicitados);
-$stmtSolicitados->bind_param("i", $idUsuario);
-$stmtSolicitados->execute();
-$stmtSolicitados->bind_result($diasSolicitados);
-$stmtSolicitados->fetch();
-$stmtSolicitados->close();
+totalDiasSolicitados($enlace, $idUsuario);
 
 // Calcular días restantes
 $diasRestantes = $diasTotales - ($diasSolicitados ?? 0); 
@@ -114,7 +74,7 @@ if ($diasRestantes <= 0) {
           </script>';
     echo '<h1>Días Totales de Vacaciones: ' . htmlspecialchars($diasTotales) . '</h1>';
     echo '<h1>Días Solicitados: ' . htmlspecialchars($diasSolicitados ?? 0) . '</h1>'; // Usar 0 si no hay solicitudes
-    echo '<h1>Días Restantes: ' . htmlspecialchars($diasRestantes) . '</h1>';
+    echo '<h1>Días Restantes hola: ' . htmlspecialchars($diasRestantes) . '</h1>';
     exit();
 }
 
@@ -124,5 +84,5 @@ $enlace->close(); // Cerrar la conexión para mysqli
 // Imprimir el contenido directamente en la vista
 echo '<h1>Días Totales de Vacaciones: ' . htmlspecialchars($diasTotales) . '</h1>';
 echo '<h1>Días Solicitados: ' . htmlspecialchars($diasSolicitados ?? 0) . '</h1>'; // Usar 0 si no hay solicitudes
-echo '<h1>Días Restantes: ' . htmlspecialchars($diasRestantes) . '</h1>';
+echo '<h1>Días Restantes hola: ' . htmlspecialchars($diasRestantes) . '</h1>';
 ?>
