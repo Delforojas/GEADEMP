@@ -1,11 +1,8 @@
 .contenido-include {
-    display: block;
-    background-color: #EEEEEE; /* Fondo del contenido */
-    padding: 20px; /* Espaciado interno */
-    width: 300px; /* Ancho del contenido */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenido */
-    margin: 0 auto; /* Centrar el contenido en la página */
+    position: relative; /* Establece una posición absoluta */
+    width: 79%; /* Ancho del contenido */
     text-align: center; /* Centrar el texto dentro del contenedor */
+    padding:7px;
 }
 
 .titulo-vaca {

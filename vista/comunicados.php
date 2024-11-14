@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
-   
-
     <title>COMUNICADOS</title>
     <?php
          include('../controlador/validar_usuario.php');
-    ?>
-        
+    ?>       
 </head>
+
 <body>
-                <div>
-                <h1 class="titulo-vacaciones"id="h1p">COMUNICADOS</h1>
+    <h1 class="titulo-vacaciones"id="h1p">COMUNICADOS</h1>
                 <header>
-                            <div id="daohang">
-                                <button><a href="../vista/index.php">Volver a principal</a></button>
-                            </div>
-                        </header>
-                </div>
+                        <div id="daohang">
+                            <button><a href="../vista/index.php">Volver a principal</a></button>
+                        </div>
+                    </header>
+
     <div class="contenedor-flex">  
     <div class="contenedor-principal">
         <nav class="nav">
@@ -46,8 +43,7 @@
                         <li class="list__inside">
                             <a href="../vista/vista_lp2.php" class="nav__link nav__link--inside">Linea Produccion 2</a>
                         </li>
-                    </ul>
-                        
+                    </ul> 
 
                     <li class="list__item">
                         <div class="list__button">
@@ -79,11 +75,11 @@
                 </li>
             </ul>           
         </nav>
-    </div>
+    </div> 
         <div class="contenido-include">
             <?php include('../controlador/controlador_comunicados.php'); ?>
         </div>  
-</div>         
+        
     <script src="../vista/javascript.js"></script>
 </body>
 </html>       

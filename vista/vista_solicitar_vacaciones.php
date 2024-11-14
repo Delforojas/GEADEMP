@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
-    <link rel="stylesheet" href="../css/css8.css">
-
+    <link rel="stylesheet" href="../assets/css/vistavacaciones.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
     <title>Solicitar Vacaciones</title>
     <?php
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
          include('../controlador/validar_usuario.php');
     ?>
 </head>
@@ -20,6 +22,7 @@
         </div>
     </header>
     </div>
+    <div class="contenedor-flex">  
     <div class="contenedor-principal">
     <nav class="nav">
         <ul class="list">
@@ -32,7 +35,7 @@
             <li class="list__item list__item--click">
                 <div class="list__button list__button--click">
                     <img src="asset/doc.svg" class="list__img">
-                    <a href="#" class="nav__link">Producion</a>
+                    <a href="#" class="nav__link">Produccion</a>
                     <img src="asset/arrow.svg" class="list__arrow">
                 </div> 
                 <ul class="list__show">
@@ -77,16 +80,16 @@
                 </ul>
             </li>
         </ul>
-    
+
     </nav>
-    
-    <div class="sol-container">
+
+    <div class="contenido-include2">
     <form action="../controlador/controlador_solicitar_vacaciones.php" method="post">
-        <h2 class="sol-h2">Solicitar Vacaciones cambiateeeee</h2>
+        <h3  class='titulo-vaca'>Solicitar Vacaciones </h2>
         <label for="age">Fecha de Inicio</label>
         <input type="date" name="fecha_inicio" required>
         <label for="age">Fecha de Final</label>
-        <input type="date" name="fecha_inicio" required>
+        <input type="date" name="fecha_fin" required>
         
         <button type="submit" name="solicitar_vacaciones"class="sol-button">Solicitar Vacaciones </button>
     </form>
@@ -94,3 +97,4 @@
     <script src="../vista/javascript.js"></script>
 </body>
 </html>
+

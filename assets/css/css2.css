@@ -1,6 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
+  box-sizing: border-box;
 }
 div {
   display: block; /* Asegura que se comporta como un bloque normal */
@@ -14,18 +15,25 @@ h1 {
   position: relative; /* Para ajustar su posición si es necesario */
 }
 .contenedor-flex {
-  display: flex; /* Flexbox para alinear los divs horizontalmente */
-  width: 100%;
-  align-items: flex-start; /* Alinea los elementos al principio (izquierda) verticalmente */
-  justify-content: flex-start;
+  position: absolute; /* Establece una posición absoluta */
+    width: 20%; /* Ancho del contenido */
+    text-align: center;
 }
 .contenedor-principal {
-  display: flex; /* Usamos flexbox para alinear los elementos en fila */
-  width: 100%;
+  display: flex; /* Habilita flexbox */
+  align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
+  justify-content: flex-start; /* Asegura que los hijos se alineen al inicio horizontal */
+  width: 100%; /* El contenedor principal ocupa todo el ancho */
+  gap: 20px; /* Espaciado entre los elementos hijos */
 }
+
 .contenido-include {
-  flex-grow: 1; /* Hace que este div ocupe el espacio restante */
-  padding: 2px; /* Añade espacio alrededor del contenido */
+  flex-grow: 1; /* Haz que el contenido ocupe todo el espacio restante */
+  padding: 20px; /* Espaciado interno */
+  background-color: #ffffff; /* Fondo claro */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  min-height: 100vh; /* Asegura que ocupe al menos la altura de la pantalla */
+  text-align: center; /* Centra el texto dentro del contenedor */
 }
 #contenedor-bienvenida {
     
@@ -365,10 +373,5 @@ section img:hover {
   }
   .movil {
       display: none;
-  }
-
-  /* Ajustes adicionales para pantallas más grandes */
-  .galeria-imagenes img {
-      width: 150px;
   }
 }

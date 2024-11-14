@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
-    <link rel="stylesheet" href="../css/nominas.css">
+    <link rel="stylesheet" href="../assets/css/nominas.css">
 
     <title> NOMINAS</title>
     <?php
@@ -79,7 +79,7 @@
     
     <div class="contenido-include">
     <h3 class="titulo-vaca">Nóminas de <?= ($_SESSION['username'])?> </h3>
-             <form action="../controlador/controladorNominas.php" method="post">
+             <form action="../controlador/controlador_Nominas.php" method="post">
                 <label for="mes">Mes:</label>
                 <select name="mes" id="mes">
                     <?php

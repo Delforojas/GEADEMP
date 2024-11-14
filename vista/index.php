@@ -1,16 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
-    <link rel="stylesheet" href="../css/css7.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
+
+
+    
     <title>Menu desplegable</title>
     
 
     <title>principal</title>
         <?php
+         // Activar reporte de errores para depuración
+         ini_set('display_errors', '1');
+         ini_set('display_startup_errors', '1');
+         error_reporting(E_ALL);
          include('../controlador/validar_usuario.php');
         ?>
         

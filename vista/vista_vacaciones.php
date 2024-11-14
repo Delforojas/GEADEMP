@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
     <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
+    <link rel="stylesheet" href="../assets/css/vistavacaciones.css">
     <title>Vacaciones del Usuario</title>
     <?php
          include('../controlador/validar_usuario.php');
@@ -19,7 +20,6 @@
             <button><a href="../vista/index.php">Volver</a></button>
         </div>
     </header>
-    
 
     <div class="contenedor-flex">  
     <div class="contenedor-principal">
@@ -81,15 +81,14 @@
             </ul>           
         </nav>
         
-    </div>
+   
     
-    <div style="position: absolute; top: 100; left: 20%; transform: translateX(-%);">
+    <div class="contenido-include1" >
                 
-                <h1>Total de Días de Vacaciones eooo  </h1>
-                <?php include('../controlador/controlador_Total_dias.php'); ?>
+        <h3 class="titulo-vaca">Total de Días de Vacaciones </h1>
+        <?php include('../controlador/controlador_Total_dias.php'); ?>
     </div>
-        
-</div>         
+
     <script src="../vista/javascript.js"></script>
 
           

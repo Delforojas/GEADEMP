@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
-    <link rel="stylesheet" href="../css/css5.css">
-    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
+    <link rel="stylesheet" href="../css/formularios.css">
     <title>Registro de Usuario</title>
 
     <?php

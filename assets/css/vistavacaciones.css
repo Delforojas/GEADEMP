@@ -1,0 +1,94 @@
+.contenido-include1,
+.contenido-include2 {
+    position: relative; /* Ajusta al flujo del documento */
+    width: 79%; /* Ocupa el espacio restante */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    padding: 7px;
+    min-height: 100vh; /* Asegura que ocupe al menos la altura de la pantalla */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenido */
+}
+.contenido-include {
+    display: block;
+    padding: 7px; /* Espaciado interno */
+    width: 100%; /* Ancho del contenido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenido */
+    margin: 0 auto; /* Centrar el contenido en la página */
+    text-align: center; /* Centrar el texto dentro del contenedor */
+}
+
+h1 {
+    color:#0B192C;
+    font-size: 30px;
+    text-align: center; 
+
+}
+label {
+    color:#0B192C; /* Cambia el color del texto del label */
+    font-weight: bold; /* Opcional: Haz el texto más grueso */
+    font-size: 30px; /* Ajusta el tamaño de la fuente */
+}
+button {
+    display: block; /* Asegura que el botón sea un bloque para centrarlo */
+    width: 20%; /* Ancho del botón (puedes ajustar según lo desees) */
+    padding: 10px; /* Espaciado interno */
+    background-color: #0B192C; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de la fuente del botón */
+    cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+    margin: 20px auto; /* Margen superior e inferior y centrar el botón */
+}
+
+button:hover {
+    background-color: #FF6500; /* Color del fondo al pasar el ratón */
+}
+
+input[type="date"] {
+    width: 100%; /* Haz que el input ocupe todo el ancho disponible */
+    max-width: 300px; /* Ancho máximo para mantener proporción */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border: 1px solid #ccc; /* Color del borde */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transición para efectos al enfocar */
+    margin-top: 15px;
+}
+
+input[type="date"]:focus {
+    border-color: orange; /* Cambia el color del borde al enfocar */
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5); /* Efecto de enfoque */
+    outline: none; /* Quita el contorno predeterminado */
+}
+
+
+button[name="aprobar"] {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    background: #1E3E62;
+    font-size: 16px; /* Asegúrate de definir el tamaño de fuente */
+    color: white; /* Color del texto del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    width:90%;
+  }
+  
+  button:hover[name="aprobar"] {
+    background: #FF6500; /* Cambia el color de fondo al pasar el ratón */
+  }
+  button[name="rechazar"] {
+    display: block;
+    border: none;
+    border-radius: 5px;
+    background: #1E3E62;
+    font-size: 16px; /* Asegúrate de definir el tamaño de fuente */
+    color: white; /* Color del texto del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    width:90%;
+  }
+  
+  button:hover[name="rechazar"] {
+    background: #FF6500; /* Cambia el color de fondo al pasar el ratón */
+  }

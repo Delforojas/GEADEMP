@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/css2.css">
-    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
+    <link rel="stylesheet" href="../assets/css/estilosmenudesplegable.css">
     <title>IRPF</title>
     <?php
          include('../controlador/validar_usuario.php');
     ?>
 </head>
-<body>
+
 <body>
      <h1 class="titulo-vacaciones"id="h1p">Certificados de Retenciones</h1>
         <header>
@@ -18,11 +18,10 @@
                 <button><a href="../vista/index.php">Volver a principal</a></button>
             </div>
         </header>
-                        
-                    
+                                    
         <div class="contenedor-flex">         
         <div class="contenedor-principal">
-        <body>
+       
             <nav class="nav">
                 <ul class="list">
                     <li class="list__item">
@@ -78,7 +77,8 @@
                 </li>
             </ul>
         </nav>
-    </div>                          
+        </div>
+        
     <div class="contenido-include">
         <?php include('../controlador/controlador_retenciones.php'); ?>
     </div>
