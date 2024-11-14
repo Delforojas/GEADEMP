@@ -75,7 +75,7 @@
                 </li>
             </ul>           
         </nav>
-    </div> 
+</div>
         <div class="contenido-include">
             <?php include('../controlador/controlador_comunicados.php'); ?>
         </div>  
