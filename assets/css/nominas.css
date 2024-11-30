@@ -1,10 +1,12 @@
-.contenido-include {
-    position: relative; /* Establece una posición absoluta */
-    width: 79%; /* Ancho del contenido */
+.contenido-include
+{   display: block;
+    padding: 7px; /* Espaciado interno */
+    width: 100%; /* Ancho del contenido */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del contenido */
+    margin: 0 auto; /* Centrar el contenido en la página */
     text-align: center; /* Centrar el texto dentro del contenedor */
-    padding:7px;
+ 
 }
-
 .titulo-vaca {
     background-color: #257180; /* Color de fondo */
     color: #FF6500 !important; /* Asegura que el color del texto se aplique */

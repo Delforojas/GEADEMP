@@ -1,75 +1,66 @@
+/*
 body {
-    font-family: Arial, sans-serif; /* Fuente del cuerpo */
-    background-color: #0B192C; /* Fondo oscuro */
+    font-family: Arial, sans-serif;
+    background-color: #0B192C;
     display: flex;
-    justify-content: center; /* Centrar el formulario horizontalmente */
-    align-items: center; /* Centrar el formulario verticalmente */
-    height: 100vh; /* Altura completa de la ventana */
-    margin: 0; /* Sin margen */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 150px; 
+    margin-bottom: 20px;
 }
 
 .signup {
-    background-color: #FF6500;; /* Fondo blanco para el formulario */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra del formulario */
-    width: 300px; /* Ancho del formulario */
-    display: flex; /* Flex para centrar elementos dentro */
-    flex-direction: column; /* Coloca elementos en columna */
-    align-items: center; /* Centra los elementos hijos horizontalmente */
-    width: 60vh;
+    background-color: #FF6500;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-h1 {
-    text-align: center; /* Centrar el texto del título */
-    margin-bottom: 20px; /* Espacio debajo del título */
+.signup h1 {
+    text-align: center;
+    margin-bottom: 20px;
     color: black;
 }
 
 input[type="text"],
 input[type="password"] {
-    width: 100%; /* Que los inputs ocupen todo el ancho */
-    padding: 10px; /* Espaciado interno */
-    margin: 10px 0; /* Margen vertical entre inputs */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 5px; /* Bordes redondeados */
-    box-sizing: border-box; /* Incluir padding y border en el ancho total */
-    font-size: 14px; /* Tamaño de la fuente */
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #FF6500; /* Color del borde al enfocar */
-    outline: none; /* Sin contorno */
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 button {
-    display: block; /* Asegura que el botón sea un bloque para centrarlo */
-    width: 100%; /* El botón ocupa todo el ancho */
-    padding: 10px; /* Espaciado interno */
-    background-color: #1E3E62; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de la fuente del botón */
-    cursor: pointer; /* Cursor de puntero al pasar sobre el botón */
-    transition: background-color 0.3s; /* Transición suave para el cambio de color */
-    margin-top: 10px; /* Margen superior para separación */
+    width: 100%;
+    padding: 10px;
+    background-color: #1E3E62;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #FF6500; /* Color del fondo al pasar el ratón */
-}
-
-/* Estilo para el título de advertencia */
-.tituloadmin {
-    background-color: #257180; /* Color de fondo */
-    color: #FF6500; /* Color del texto */
-    text-align: center; /* Centrar el texto */
-    margin: 20px 0; /* Margen arriba y abajo */
-    padding: 10px; /* Espaciado interno */
-    font-size: 20px; /* Tamaño de fuente */
-    border-radius: 5px; /* Bordes redondeados */
-    display: block; /* Asegura que ocupa una línea completa */
-    width: 62vh; /* Ancho completo para ocupar todo el espacio */
+    background-color: #FF6500;
 }

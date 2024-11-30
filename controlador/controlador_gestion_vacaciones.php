@@ -1,10 +1,9 @@
 <?php
 require_once("../modelo/modelo.php");
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
+include '../config.php';
 $enlace = obtenerConexion();
 $vacaciones = new Vacaciones();
 
@@ -26,7 +25,7 @@ if (isset($_POST['aprobar']) || isset($_POST['rechazar'])) {
     }
 
     // Redirige de vuelta a la vista
-    header("Location: ../vista/vista_vacaciones_admin.php");
+    header("Location: ".$base_url."/SolicitudesEmpleados");
     exit();
 }
 

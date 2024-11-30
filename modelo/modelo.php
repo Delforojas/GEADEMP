@@ -110,11 +110,13 @@ class linea_produccion {
         echo "</form>";
         echo '</div>';
     }
-    function generarTablaConCheckboxes($resultado, $action = "../controlador/procesar.php") {
+    function generarTablaConCheckboxes($resultado, $action = "") {
+        global $base_url;
+    
         echo '<div class="table-title">';
-        echo "<h3  class='titulo-vaca'>Produccion</h3>";
+        echo "<h3 class='titulo-vaca'>Producción</h3>";
         echo '<form action="' . htmlspecialchars($action) . '" method="post">';
-        echo "<table class ='table-fill'><tr>";
+        echo "<table class='table-fill'><tr>";
     
         // Imprimir encabezados de la tabla
         while ($field = mysqli_fetch_field($resultado)) {
@@ -134,13 +136,14 @@ class linea_produccion {
             echo "<td class='text-left'><input type='checkbox' name='seleccionados[]' value='" . htmlspecialchars($row['id']) . "'></td>";
             echo "</tr>";
         }
-        
+    
         echo "</table>";
         // Botón de envío para procesar el formulario
-        echo "<input type='submit' value='Enviar' class ='btn-salir'>";
+        echo "<input type='submit' value='Enviar' class='btn-salir'>";
         echo "</form>";
-    
+        echo "</div>";
     }
+    
 
     public  function eliminardatos($enlace, $id){
         // Eliminar el registro de la tabla bolsa
@@ -346,17 +349,17 @@ class Usuario {
 
     public function verificarUsuario($apellidos, $clave) {
         // Preparar la consulta SQL para verificar el usuario y la contraseña
-        $q = $enlace->prepare("SELECT u.idUsuario, u.nombre, u.apellidos, u.clave, c.descripcion AS rol 
+        $verificarUsuario = $enlace->prepare("SELECT u.idUsuario, u.nombre, u.apellidos, u.clave, c.descripcion AS rol 
                                 FROM USUARIOS u 
                                 LEFT JOIN CARGO c ON u.idCargo = c.idCargo 
                                 WHERE u.apellidos = ? AND u.clave = ?");
     
         // Enlazar los parámetros (matricula y contraseña)
-        $q->bind_param("ss", $apellidos, $clave);
+        $verificarUsuario->bind_param("ss", $apellidos, $clave);
         // Ejecutar la consulta
-        $q->execute();
+        $verificarUsuario->execute();
         // Obtener el resultado de la consulta
-        $resultado = $q->get_result();
+        $resultado = $verificarUsuario->get_result();
         // Verificar si se obtuvo algún resultado (usuario válido)
         if ($resultado->num_rows > 0) {
             // Obtener los datos del usuario
@@ -371,9 +374,9 @@ class Usuario {
     
             // Redirigir al usuario según su rol (en este caso, a la vista de administrador o usuario)
             if ($row['rol'] == 'Administrador') {
-                header("Location: vista_bolsa_admin.php");
+                header("Location:/GEADEMP1/Administradores");
             } else {
-                header("Location: vista_usuario.php"); // Asegúrate de tener esta vista
+                header("Location:vista/vista_usuario.php"); // Asegúrate de tener esta vista
             }
             exit(); // Asegurarse de que el script se detiene después de la redirección
         } else {
@@ -381,7 +384,7 @@ class Usuario {
             echo '<div class="alert alert-danger">Usuario o contraseña incorrectos</div>';
         }
         // Cerrar el statement
-        $q->close();
+        $verificarUsuario->close();
     }
     
     public function verificarCredenciales($apellidos, $clave) {
@@ -389,19 +392,19 @@ class Usuario {
         // Consulta para verificar el usuario y la contraseña
         $consulta = "SELECT u.idCargo, u.nombre, u.clave FROM USUARIOS u WHERE u.apellidos = ?";        
         // Preparar la consulta para evitar inyecciones SQL
-        $q = $enlace->prepare($consulta);
-        if ($q === false) {
+        $verificarCredenciales = $enlace->prepare($consulta);
+        if ($verificarCredenciales === false) {
             die('Error al preparar la consulta: ' . $enlace->error);
         }
         
         // Vincular los parámetros a la consulta
-        $q->bind_param('ss', $apellidos, $clave);
+        $verificarCredenciales->bind_param('ss', $apellidos, $clave);
         
         // Ejecutar la consulta
-        $q->execute();
+        $verificarCredenciales->execute();
         
         // Obtener el resultado
-        $resultado = $q->get_result();
+        $resultado = $verificarCredenciales->get_result();
         
         if ($resultado && $resultado->num_rows > 0) {
             // Extraer los datos del usuario
@@ -414,11 +417,11 @@ class Usuario {
             // Redirigir según el rol del usuario
             if ($filas['idCargo'] == 2) {
                 // Redirección para el administrador
-                header("Location: vista_bolsa_admin.php");
+                header("Location: /GEADEMP1/Administradores");
                 exit();
             } elseif ($filas['idCargo'] == 1) {
                 // Redirección para el usuario normal
-                header("Location: index.php");
+                header("Location: /GEADEMP1/Inicio");
                 exit();
             }
         } else {
@@ -427,7 +430,7 @@ class Usuario {
         }
         
         // Cerrar el statement
-        $q->close();
+        $verificarCredenciales->close();
     }
     
         
@@ -460,15 +463,15 @@ class Nomina {
                              JOIN Nomina n ON un.idNomina = n.idNomina 
                              WHERE un.idUsuario = ? AND n.mes = ? AND n.anio = ?";
             
-            $stmt = $enlace->prepare($queryNominas);
-            if ($stmt === false) {
+            $obtenerNominasPorUsuario = $enlace->prepare($queryNominas);
+            if ($obtenerNominasPorUsuario === false) {
                 die("Error en la preparación de la consulta: " . $enlace->error);
             }
             
             // Vincular los parámetros y ejecutar la consulta
-            $stmt->bind_param("iss", $idUsuario, $mes, $anio);
-            $stmt->execute();
-            $resultadoNominas = $stmt->get_result();
+            $obtenerNominasPorUsuario->bind_param("iss", $idUsuario, $mes, $anio);
+            $obtenerNominasPorUsuario->execute();
+            $resultadoNominas = $obtenerNominasPorUsuario->get_result();
     
             // Almacenar las nóminas obtenidas en el array $nominas
             while ($fila = $resultadoNominas->fetch_assoc()) {
@@ -476,7 +479,7 @@ class Nomina {
             }
     
             // Cerrar el statement
-            $stmt->close();
+            $obtenerNominasPorUsuario->close();
         }
         
         // Devolver el array de nóminas
@@ -499,10 +502,10 @@ class Vacaciones{
             WHERE uv.idUsuario = ? AND v.idSolicitud = 2
         ";
         
-        $stmt = $conexion->prepare($query); // Corrige el uso de la variable
-        $stmt->bind_param("i", $idUsuario); // Usa correctamente $stmt
-        $stmt->execute();
-        return $stmt->get_result(); // Devuelve directamente el resultado de la consulta
+        $totalDiasSolicitados = $conexion->prepare($query); // Corrige el uso de la variable
+        $totalDiasSolicitados->bind_param("i", $idUsuario); // Usa correctamente $stmt
+        $totalDiasSolicitados->execute();
+        return $totalDiasSolicitados->get_result(); // Devuelve directamente el resultado de la consulta
     }
     function calcularDiasRestantes($resultado) {
         if ($resultado) {
@@ -531,29 +534,29 @@ class Vacaciones{
                   JOIN usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones
                   WHERE uv.idUsuario = ? AND v.idSolicitud = 2";
     
-        $stmt = $enlace->prepare($query);
-        if (!$stmt) {
+        $totalDiasSolicitados1= $enlace->prepare($query);
+        if (!$totalDiasSolicitados1) {
             die("Error al preparar la consulta: " . $this->enlace->error);
         }
     
-        $stmt->bind_param("i", $idUsuario);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        $totalDiasSolicitados1->bind_param("i", $idUsuario);
+        $totalDiasSolicitados1->execute();
+        $resultado = $totalDiasSolicitados1->get_result();
         $fila = $resultado->fetch_assoc();
     
-        $stmt->close();
+        $totalDiasSolicitados1->close();
     
         // Devuelve el total de días solicitados o 0 si es null
         return $fila['totalDiasSolicitados'] ?? 0;
     }
     function mostrarDiasVacaciones($diasTotales, $totalDiasSolicitados, $diasRestantes) {
         // Generar el HTML con los datos proporcionados
-        $html = "<h1>Días Totales de Vacaciones: " . htmlspecialchars($diasTotales) . "</h1>";
-        $html .= "<h1>Días Disfrutados: " . htmlspecialchars($totalDiasSolicitados) . "</h1>";
-        $html .= "<h1>Días Restantes: " . htmlspecialchars(max(0, $diasRestantes)) . "</h1>";
+        $mostrarDiasVacaciones = "<h1>Días Totales de Vacaciones: " . htmlspecialchars($diasTotales) . "</h1>";
+        $mostrarDiasVacaciones .= "<h1>Días Disfrutados: " . htmlspecialchars($totalDiasSolicitados) . "</h1>";
+        $mostrarDiasVacaciones .= "<h1>Días Restantes: " . htmlspecialchars(max(0, $diasRestantes)) . "</h1>";
         
         // Retornar el HTML
-        return $html;
+        return $mostrarDiasVacaciones;
     }
     public function obtenerDiasSolicitados( $enlace,$idUsuario) {
         $query = "SELECT SUM(v.diasSolicitados) AS totalDiasSolicitados 
@@ -561,42 +564,42 @@ class Vacaciones{
                   JOIN usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones
                   WHERE uv.idUsuario = ? AND v.idSolicitud = 2";
         
-        $stmt = $enlace->prepare($query);
-        $stmt->bind_param("i", $idUsuario);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        $obtenerDiasSolicitados = $enlace->prepare($query);
+        $obtenerDiasSolicitados->bind_param("i", $idUsuario);
+        $obtenerDiasSolicitados->execute();
+        $resultado = $obtenerDiasSolicitados->get_result();
         $fila = $resultado->fetch_assoc();
         
-        $stmt->close();
+        $obtenerDiasSolicitados->close();
         return $fila['totalDiasSolicitados'] ?? 0;
     }
 
     public function insertarVacaciones($enlace,$fecha_inicio, $fecha_fin, $diasSolicitados) {
         $query = "INSERT INTO Vacaciones (idSolicitud, fecha_inicio, fecha_fin, diasSolicitados) VALUES (1, ?, ?, ?)";
-        $stmt = $enlace->prepare($query);
-        $stmt->bind_param("ssi", $fecha_inicio, $fecha_fin, $diasSolicitados);
-        $resultado = $stmt->execute();
+        $insertarVacaciones = $enlace->prepare($query);
+        $insertarVacaciones->bind_param("ssi", $fecha_inicio, $fecha_fin, $diasSolicitados);
+        $resultado = $insertarVacaciones->execute();
         
         if ($resultado) {
-            $idVacaciones = $stmt->insert_id;
-            $stmt->close();
+            $idVacaciones = $insertarVacaciones->insert_id;
+            $insertarVacaciones->close();
             return $idVacaciones;
         } else {
-            $stmt->close();
+            $insertarVacaciones->close();
             return false;
         }
     }
 
     public function vacacionesUsuario($enlace,$idUsuario, $idVacaciones) {
         $query = "INSERT INTO UsuarioVacaciones (idUsuario, idVacaciones) VALUES (?, ?)";
-        $stmt = $enlace->prepare($query);
-        if (!$stmt) {
+        $vacacionesUsuario= $enlace->prepare($query);
+        if (!$vacacionesUsuario) {
             die("Error al preparar la consulta: " . $this->enlace->error);
         }
-        $stmt->bind_param("ii", $idUsuario, $idVacaciones);
-        $resultado = $stmt->execute();
+        $vacacionesUsuario->bind_param("ii", $idUsuario, $idVacaciones);
+        $resultado = $vacacionesUsuario->execute();
         
-        $stmt->close();
+        $vacacionesUsuario->close();
         return $resultado;
     }
 
@@ -607,19 +610,19 @@ class Vacaciones{
 
         public function actualizarSolicitud($enlace, $idVacaciones, $nuevoEstado) {
             $query = "UPDATE solicitud SET estado = ? WHERE idSolicitud = (SELECT idSolicitud FROM vacaciones WHERE idVacaciones = ?)";
-            $stmt = $enlace->prepare($query);
-            $stmt->bind_param("si", $nuevoEstado, $idVacaciones);
+            $actualizarSolicitud= $enlace->prepare($query);
+            $actualizarSolicitud->bind_param("si", $nuevoEstado, $idVacaciones);
             $resultado = $stmt->execute();
-            $stmt->close();
+            $actualizarSolicitud->close();
             return $resultado;
         }
     
         public function eliminarVacaciones($enlace, $idVacaciones) {
             $query = "DELETE FROM vacaciones WHERE idVacaciones = ?";
-            $stmt = $enlace->prepare($query);
-            $stmt->bind_param("i", $idVacaciones);
-            $resultado = $stmt->execute();
-            $stmt->close();
+            $eliminarVacaciones = $enlace->prepare($query);
+            $eliminarVacaciones->bind_param("i", $idVacaciones);
+            $resultado = $eliminarVacaciones->execute();
+            $eliminarVacaciones->close();
             return $resultado;
         }
     
@@ -641,6 +644,7 @@ class Vacaciones{
         }
         
         function tablaSolicitudes($solicitudes) {
+            global $base_url;
             if (!empty($solicitudes)) {
                 ob_start(); // Inicia la captura de salida
                 ?>
@@ -667,7 +671,7 @@ class Vacaciones{
                                 <td><?= htmlspecialchars($solicitud['fecha_fin']) ?></td>
                                 <td><?= htmlspecialchars($solicitud['diasSolicitados']) ?></td>
                                 <td>
-                                    <form action="../controlador/controlador_aprobar_rechazar_vacaciones.php" method="post">
+                                    <form action="<?php echo $base_url?>/controlador/controlador_aprobar_rechazar_vacaciones.php" method="post">
                                         <input type="hidden" name="idVacaciones" value="<?= htmlspecialchars($solicitud['idVacaciones']) ?>">
                                         <button type="submit" name="aprobar">Aprobar</button>
                                         <button type="submit" name="rechazar">Rechazar</button>
@@ -687,23 +691,23 @@ class Vacaciones{
         
         public function obtenerDiasSolicitados1($enlace, $idVacaciones) {
                 $sql = "SELECT diasSolicitados FROM Vacaciones WHERE idVacaciones = ?";
-                $stmt = $enlace->prepare($sql);
-                $stmt->bind_param("i", $idVacaciones);
-                $stmt->execute();
-                $stmt->bind_result($diasSolicitados);
-                $stmt->fetch();
-                $stmt->close();
+                $obtenerDiasSolicitados1 = $enlace->prepare($sql);
+                $obtenerDiasSolicitados1->bind_param("i", $idVacaciones);
+                $obtenerDiasSolicitados1->execute();
+                $obtenerDiasSolicitados1->bind_result($diasSolicitados);
+                $obtenerDiasSolicitados1->fetch();
+                $obtenerDiasSolicitados1->close();
                 return $diasSolicitados;
             }    
         
             public function obtenerIdUsuarioPorVacaciones($enlace, $idVacaciones) {
                 $sql = "SELECT idUsuario FROM Usuariovacaciones WHERE idVacaciones = ?";
-                $stmt = $enlace->prepare($sql);
-                $stmt->bind_param("i", $idVacaciones);
-                $stmt->execute();
-                $stmt->bind_result($idUsuario);
-                $stmt->fetch();
-                $stmt->close();
+                $obtenerIdUsuarioPorVacaciones = $enlace->prepare($sql);
+                $obtenerIdUsuarioPorVacaciones->bind_param("i", $idVacaciones);
+                $obtenerIdUsuarioPorVacaciones->execute();
+                $obtenerIdUsuarioPorVacaciones->bind_result($idUsuario);
+                $obtenerIdUsuarioPorVacaciones->fetch();
+                $obtenerIdUsuarioPorVacaciones->close();
                 return $idUsuario;
             }
         
@@ -712,12 +716,12 @@ class Vacaciones{
                         FROM vacaciones v 
                         JOIN Usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones 
                         WHERE uv.idUsuario = ?";
-                $stmt = $enlace->prepare($sql);
-                $stmt->bind_param("i", $idUsuario);
-                $stmt->execute();
-                $stmt->bind_result($diasTotales);
-                $stmt->fetch();
-                $stmt->close();
+                $obtenerDiasTotalesUsuario= $enlace->prepare($sql);
+                $obtenerDiasTotalesUsuario->bind_param("i", $idUsuario);
+                $obtenerDiasTotalesUsuario->execute();
+                $obtenerDiasTotalesUsuario->bind_result($diasTotales);
+                $obtenerDiasTotalesUsuario->fetch();
+                $obtenerDiasTotalesUsuario->close();
                 return $diasTotales;
             }
         
@@ -726,18 +730,18 @@ class Vacaciones{
                         JOIN Usuariovacaciones uv ON v.idVacaciones = uv.idVacaciones
                         SET v.diasTotales = ?
                         WHERE uv.idUsuario = ?";
-                $stmt = $enlace->prepare($sql);
-                $stmt->bind_param("ii", $nuevosDiasTotales, $idUsuario);
-                $stmt->execute();
-                $stmt->close();
+                $actualizarDiasTotales = $enlace->prepare($sql);
+                $actualizarDiasTotales->bind_param("ii", $nuevosDiasTotales, $idUsuario);
+                $actualizarDiasTotales->execute();
+                $actualizarDiasTotales->close();
             }
         
             public function actualizarEstadoSolicitud($enlace, $idVacaciones, $nuevoEstado) {
                 $sql = "UPDATE Vacaciones SET idSolicitud = ? WHERE idVacaciones = ?";
-                $stmt = $enlace->prepare($sql);
-                $stmt->bind_param("ii", $nuevoEstado, $idVacaciones);
-                $stmt->execute();
-                $stmt->close();
+                $actualizarEstadoSolicitud = $enlace->prepare($sql);
+                $actualizarEstadoSolicitud->bind_param("ii", $nuevoEstado, $idVacaciones);
+                $actualizarEstadoSolicitud->execute();
+                $actualizarEstadoSolicitud->close();
             }
             
     

@@ -1,6 +1,7 @@
 <?php
 require_once("../modelo/modelo.php");
 require_once("../modelo/datos_conexion.php");
+include '../config.php'; 
 
 $enlace = obtenerConexion();
 
@@ -30,7 +31,7 @@ if (isset($_POST['seleccionados'])) {
         }
     }
     echo "Los registros seleccionados han sido insertados en las tablas correspondientes y eliminados de bolsa.";
-    header("location: ../vista/vista_bolsa_admin.php");
+    header("Location: " . $base_url . "/Administradores");
 } else {
     echo "No se seleccionaron registros.";
 }

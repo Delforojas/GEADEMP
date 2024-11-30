@@ -1,0 +1,31 @@
+Options All -Indexes
+ErrorDocument 404 /GEADEMP1/404.html
+ErrorDocument 403 /GEADEMP1/403.html
+
+RewriteEngine On
+RewriteBase /GEADEMP1/
+
+# Permitir acceso a archivos estáticos (CSS, JS, imágenes)
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot|pdf)$">
+    Require all granted
+</FilesMatch>
+
+# Redirecciones limpias para rutas específicas
+RewriteRule ^Geademp$ login.php [L,NC]
+RewriteRule ^Inicio$ vista/index.php [L,NC]
+RewriteRule ^VistaLP1$ vista/vista_lp1.php [L,NC]
+RewriteRule ^VistaLP2$ vista/vista_lp2.php [L,NC]
+RewriteRule ^ResultadoLP1$ vista/vista_resultado_lp1.php [L,NC]
+RewriteRule ^ResultadoLP2$ vista/vista_resultado_lp2.php [L,NC]
+RewriteRule ^Administradores$ vista/vista_bolsa_admin.php [L,NC]
+RewriteRule ^LoginAdmin$ vista/loginadmin.php [L,NC]
+RewriteRule ^Comunicados$ vista/comunicados.php [L,NC]
+RewriteRule ^Nominas$ vista/nominas.php [L,NC]
+RewriteRule ^Vacaciones$ vista/vista_vacaciones.php [L,NC]
+RewriteRule ^IRPF$ vista/retenciones.php [L,NC]
+RewriteRule ^Menucomedor$ vista/menu.php [L,NC]
+RewriteRule ^Formulario$ vista/formulario.php [L,NC]
+RewriteRule ^RegistroUsuario$ vista/registro_usuario.php [L,NC]
+RewriteRule ^SolicitudesEmpleados$ vista/vista_vacaciones_admin.php [L,NC]
+RewriteRule ^NominaSolicitada$ vista/vista_nomina_usuario.php [L,NC]
+RewriteRule ^SolicitarVacaciones$ vista/vista_solicitar_vacaciones.php [L,NC]

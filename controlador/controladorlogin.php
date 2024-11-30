@@ -1,8 +1,24 @@
+
+
 <?php
-// Incluir el archivo que contiene la función de conexión
-include("../modelo/datos_conexion.php");
-include("../modelo/modelo.php");
+// Depuración inicial: Verificar si los archivos existen antes de incluirlos
 session_start();
+
+
+// Verificar si el archivo de conexión existe
+if (file_exists("../modelo/datos_conexion.php")) {
+    // Si existe, incluirlo
+    require_once("../modelo/datos_conexion.php");
+} else {
+    // Si no existe, mostrar un mensaje de error
+    echo "El archivo datos_conexion.php no se encuentra en la ruta especificada.";
+}
+require_once("../modelo/modelo.php");
+
+// Configuración para mostrar errores
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 // Llamar a la función que devuelve el enlace a la base de datos
 $enlace = obtenerConexion();
@@ -32,11 +48,13 @@ if (!empty($_POST["btningresar"])) {
 
                 if ($filas['idCargo'] == 1) {
                     // Redirección para el administrador
-                    header("Location: ../vista/vista_bolsa_admin.php");
+                    echo "Redirigiendo a la vista del administrador...<br>";
+                    header("Location:/GEADEMP1/Administradores");
                     exit();
                 } elseif ($filas['idCargo'] == 2) {
                     // Redirección para el usuario normal
-                    header("Location: ../vista/index.php");
+                    echo "Redirigiendo a la vista del usuario normal...<br>";
+                    header("Location:/GEADEMP1/Inicio");
                     exit();
                 }
             } else {

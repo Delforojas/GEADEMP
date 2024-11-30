@@ -1,6 +1,7 @@
 <?php
 
 require_once("../modelo/modelo.php");
+include '../config.php';
 
 $enlace = obtenerConexion();
 
@@ -19,7 +20,7 @@ if (isset($_POST['registro'])) {
         
         if ($resultado) {
             echo "<script>alert('Bobina introducida en el programa.');</script>";
-            header("Location: ../vista/vista_bolsa_admin.php");
+            header("Location: " . $base_url . "/Administradores");
         } else {
             echo "Error al insertar los datos."; 
         }
@@ -31,4 +32,3 @@ if (isset($_POST['registro'])) {
 // Cerrar la conexión
 mysqli_close($enlace);
 ?>
-

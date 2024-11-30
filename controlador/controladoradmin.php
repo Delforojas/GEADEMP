@@ -1,6 +1,7 @@
 <?php
 
 include("../modelo/datos_conexion.php");
+include("../config.php");
 session_start();
 
 // Obtener la conexión a la base de datos
@@ -29,7 +30,7 @@ if (!empty($_POST["btningresar"])) {
             echo '<div class="alert alert-success">Login exitoso</div>';
 
             // Redirigir según el rol
-            header("Location: vista_bolsa_admin.php");
+            header("Location: " . $base_url . "/Administradores.php");
             exit(); // Asegurarse de detener el script después de la redirección
         } else {
             // Si el usuario o contraseña son incorrectos
