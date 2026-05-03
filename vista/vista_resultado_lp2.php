@@ -1,34 +1,38 @@
+</head>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/estilo1.css">
-    <title>Bolsa SL7</title>
+    <link rel="stylesheet" href="../css/css2.css">
+    <link rel="stylesheet" href="../css/estilosmenudesplegable.css">
+    <title>Linea Produccion 1</title>
     <?php
          include('../controlador/validar_usuario.php');
-        ?>
+    ?>
         
 </head>
 <body>
-    <div class="form-volver">
-        <form action="index.php" method="post">
-            <button type="submit" class="btn-volver">Volver Inicio</button>
-        </form>
-        <form id="ordenForm" action="../vista/vista_resultado_sl7.php" method="POST">
-        <button type="submit" class="btn-volver">Ordenar</button>
-            <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
-                <optgroup label="Espesor">
-                    <option value="ASC">ASC (Espesor)</option>
-                    <option value="DESC">DESC (Espesor)</option>
-                </optgroup>
-                <optgroup label="Ancho">
-                    <option value="AASC">ASC (Ancho)</option>
-                    <option value="ADESC">DESC (Ancho)</option>
-                </optgroup>
-            </select>
-        </form>
-    </div>
+<h1 class="titulo-vacaciones"id="h1p">Linea de Produccion 2 </h1>
+    <header>
+        <div id="daohang">
+            <button><a href="index.php">Volver a Principal</a></button>
+            <form id="ordenForm" action="../vista/vista_resultado_lp2.php" method="POST">   
+            <button type="submit" class=>Ordenar</button>
+                    <select name="orden" id="ordenSelect" onchange="cambiarControlador()">
+                    <optgroup label="Criterio 1">
+                        <option value="AASC">ASC (Criterio 1)</option>
+                        <option value="ADESC">DESC (Criterio 1)</option>
+                    </optgroup>
+                    <optgroup label="Criterio 2">
+                        <option value="ASC">ASC (Criterio 2)</option>
+                        <option value="DESC">DESC (Criterio 2)</option>
+                    </optgroup>
+                    </select>
+            </form>
+        </div>
+    </header>
+<div class="contenedor-flex">  
     <div class="contenedor-principal">
         <nav class="nav">
             <ul class="list">
@@ -41,15 +45,12 @@
                 <li class="list__item list__item--click">
                     <div class="list__button list__button--click">
                         <img src="asset/doc.svg" class="list__img">
-                            <a href="#" class="nav__link">Programa</a>
+                            <a href="#" class="nav__link">Produccion</a>
                             <img src="asset/arrow.svg" class="list__arrow">
                     </div> 
                     <ul class="list__show">
                         <li class="list__inside">
-                            <a href="vista_sl4.php" class="nav__link nav__link--inside">SL4</a>
-                         </li>
-                        <li class="list__inside">
-                            <a href="vista_sl7.php" class="nav__link nav__link--inside">SL7</a>
+                            <a href="vista_lp1.php" class="nav__link nav__link--inside">Linea Produccion 1</a>
                         </li>
                     </ul>
                         
@@ -74,6 +75,9 @@
                                 <a href="nominas.php" class="nav__link nav__link--inside">Nominas</a>
                             </li>
                             <li class="list__inside">
+                                <a href="vista_vacaciones.php" class="nav__link nav__link--inside">Vacaciones</a>
+                            </li>
+                            <li class="list__inside">
                                 <a href="retenciones.php" class="nav__link nav__link--inside">IRPF</a>
                             </li>
                             <li class="list__inside">
@@ -82,17 +86,13 @@
                         </ul>
                     </li>
                 </li>
-
-
-            </ul>
-                    
+            </ul>           
         </nav>
-        <div class="contenido-include">
-            <?php include('../controlador/bolsa_sl7.php'); ?>
-        </div>
     </div>
-                    
-    <script src="app.js"></script>
-    
+        <div class="contenido-include">
+            <?php include('../controlador/ordenar_lp2.php'); ?>
+    </div>  
+</div>         
+    <script src="../vista/javascript.js"></script>
 </body>
 </html>

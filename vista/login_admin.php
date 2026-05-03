@@ -31,18 +31,13 @@
 
                 <div class="mb-3">
                     <h5>Contraseña</h5>
-                    <input id="password" type="password" class="form-control" name="password">
+                    <input id="clave" type="password" class="form-control" name="clave">
                 </div>
 
                 <div class="text-center">
                     <input name="btningresar" type="submit" class="btn btn-primary" value="INICIAR SESIÓN">
 
-                <!--<form action="../controlador/controladorlogin.php" method="POST">
-                <input type ="text" class="form-control" name= "usuario" placeholder="digite usuario"> 
-                <br><br>
-                <input type ="password" class="form-control"name= "clave" placeholder="digite usuario"> 
-                <br><br>
-                <button type ="submit" name="btningresar">ENTRAR</button>-->
+                
                 </div>
             </form>        
         </div>
