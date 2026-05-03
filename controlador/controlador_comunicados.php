@@ -15,16 +15,20 @@ $archivos = array_diff($archivos, array('.', '..'));
 // Verificar si hay archivos
 if (!empty($archivos)) {
     // Iniciar la tabla HTML
-    echo "<table border='1' cellpadding='10' cellspacing='0'>";
+    echo "<div class='table-title'>";  // Añadimos un contenedor con la clase 'table-title'
+    echo "<h3  class='titulo-vaca'>COMUNICADOS</h3>";  // Título de la tabla
+
+    // Creamos la tabla con la clase 'table-fill' y los estilos adicionales
+    echo "<table class='table-fill'>";
     echo "<thead>
             <tr>
-                <th></th>
-                <th></th>
+                <th class='text-left'>Nombre del Archivo</th>
+                <th class='text-left'>Ver / Descargar</th>
             </tr>
-          </thead>";
+        </thead>";
     echo "<tbody>";
 
-    // Recorrer y listar los archivos
+    // Recorremos y listamos los archivos
     foreach ($archivos as $archivo) {
         // Obtener la extensión del archivo
         $extension = pathinfo($archivo, PATHINFO_EXTENSION);
@@ -33,16 +37,17 @@ if (!empty($archivos)) {
         if (in_array(strtolower($extension), ['pdf', 'doc', 'docx', 'txt'])) {
             // Mostrar cada archivo como una fila en la tabla
             echo "<tr>";
-            echo "<td>$archivo</td>"; // Nombre del archivo
-            echo "<td><a href='$directorio/$archivo' target='_blank'>Ver / Descargar</a></td>"; // Enlace para ver o descargar
+            echo "<td class='text-left'>$archivo</td>";  // Nombre del archivo, alineado a la izquierda
+            echo "<td class='text-left'><a href='$directorio/$archivo' target='_blank'>Ver / Descargar</a></td>";  // Enlace para ver o descargar
             echo "</tr>";
         }
     }
-    
+
     echo "</tbody>";
-    echo "</table>";
-} else {
-    // Mostrar mensaje si no hay archivos
-    echo "<p>No se encontraron documentos en el directorio.</p>";
-}
-?>
+    echo "</table>";  // Cerramos la tabla
+    echo "</div>";  // Cerramos el div 'table-title'
+    } else {
+        // Mostrar mensaje si no hay archivos
+        echo "<p>No se encontraron documentos en el directorio.</p>";
+    }
+    ?>

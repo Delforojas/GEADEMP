@@ -1,0 +1,20 @@
+.galeria-imagenes{
+    display: flex;
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    height: 80vh; /* Ajusta la altura según sea necesario */
+    overflow: hidden; /* Evita que las imágenes se desborden */
+}
+.galeria-imagenes img {
+    width:100px;
+    height: auto; 
+    flex-grow: 1; /* Las imágenes ocuparán el mismo espacio */
+    object-fit: cover; /* Mantiene la relación de aspecto */
+    opacity: 0.8; /* Opacidad inicial */
+    transition: 0.5s ease; /* Transición suave */
+}
+.galeria-imagenes img:hover {
+    cursor: crosshair; /* Cambia el cursor al pasar el mouse */
+    width: 300px; /* Cambia el ancho al hacer hover */
+    opacity: 1; /* Aumenta la opacidad al hacer hover */
+    filter: contrast(120%); /* Aumenta el contraste */
+}

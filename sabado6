@@ -1,0 +1,60 @@
+[33mcommit 4bba561a13c05aa385d80f649b476970d93adec0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32msabado6[m[33m, [m[1;31morigin/sabado6[m[33m, [m[1;32mfrontmadrugada[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Sun Oct 6 06:11:19 2024 +0200
+
+    sabado 6
+
+[33mcommit 7664601ca3f6f7f7fe0f2de4777d82c3b58eba66[m[33m ([m[1;31morigin/frontmadrugada[m[33m, [m[1;32m04/10/24[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Sat Oct 5 03:50:44 2024 +0200
+
+    Front madrugada
+
+[33mcommit a7b96d37a50c865d53b98f6f33087292a23cde61[m[33m ([m[1;31morigin/viernes29[m[33m, [m[1;31morigin/04/10/24[m[33m, [m[1;32mviernes29[m[33m, [m[1;32mviernes27o[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Sun Sep 29 06:16:42 2024 +0200
+
+    domingo29
+
+[33mcommit c6c8e7fa8825554bbbd87b406270e106b8ea5a91[m[33m ([m[1;31morigin/viernes27o[m[33m, [m[1;32mjueves26[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Sat Sep 28 00:57:00 2024 +0200
+
+    Viernes27o
+
+[33mcommit de09285d4efe61e1088cca5204f1ba7e79590921[m[33m ([m[1;31morigin/jueves26[m[33m, [m[1;32mmain[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Thu Sep 26 23:18:37 2024 +0200
+
+    POO y validar objetos
+
+[33mcommit ad01f7cd6e5993ba0262502a4ec4ba8946d1bd04[m[33m ([m[1;31morigin/main[m[33m)[m
+Merge: d5ea92a d48044e
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Thu Sep 26 04:08:29 2024 +0200
+
+    Merge branch 'main' of https://github.com/Delforojas/delfonox
+
+[33mcommit d5ea92a6d31f32e2af9a30439658f77da24767fe[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Thu Sep 26 03:22:37 2024 +0200
+
+    version1
+
+[33mcommit b272137b06f9b21c9e67d5fdf98ee6c01f116190[m[33m ([m[1;31morigin/versionvacaciones[m[33m, [m[1;31mdelfonox/versionvacaciones[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Wed Sep 25 23:04:32 2024 +0200
+
+    vacaciones1.1
+
+[33mcommit d48044e1c68e8373bb25b3a228670d49b59d7814[m[33m ([m[1;31mdelfonox/main[m[33m)[m
+Author: Delfo <141573441+Delforojas@users.noreply.github.com>
+Date:   Wed Sep 25 17:15:48 2024 +0200
+
+    Initial commit
+
+[33mcommit 8fcffa9109439d233dbe14d1f1ffd3286d3de46e[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Delforojas <tuemail@ejemplo.com>
+Date:   Wed Sep 25 17:10:37 2024 +0200
+
+    version1

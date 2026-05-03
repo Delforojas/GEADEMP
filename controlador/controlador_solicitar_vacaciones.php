@@ -3,10 +3,20 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Depuración: imprimir el contenido de la sesión
+print_r($_SESSION);
+
 // Verificar si se ha enviado el formulario de solicitud de vacaciones
 if (isset($_POST['solicitar_vacaciones'])) {
-    // Obtener el ID del usuario desde la sesión
-    $usuario_id = $_SESSION['usuario_id'];  // ID del usuario en sesión
+    // Verificar si el ID del usuario está en la sesión
+    if (isset($_SESSION['id'])) {
+        $usuario_id = $_SESSION['id'];  // Asegúrate de usar el ID del usuario, no el nombre
+        echo "ID de usuario en sesión: $usuario_id";
+    } else {
+        echo "Error: No se ha encontrado el ID del usuario en la sesión.";
+        exit();
+    }
+
     $fecha_inicio = $_POST['fecha_inicio'];
     $fecha_fin = $_POST['fecha_fin'];
 
@@ -16,24 +26,12 @@ if (isset($_POST['solicitar_vacaciones'])) {
 
     $enlace = obtenerConexion();
 
-    // Calcular la cantidad de días entre las fechas
-    $inicio = new DateTime($fecha_inicio);
-    $fin = new DateTime($fecha_fin);
-    $diferencia = $inicio->diff($fin);
-    $dias_solicitados = $diferencia->days + 1;  // Sumar 1 para incluir el día de inicio
+    $vacaciones = new Vacaciones();
 
-    // Insertar la solicitud de vacaciones en la base de datos con el usuario específico
-    $consulta_insertar = "INSERT INTO vacaciones (usuario_id, fecha_inicio, fecha_fin, estado, dias_solicitados) 
-                          VALUES ('$usuario_id', '$fecha_inicio', '$fecha_fin', 'pendiente', '$dias_solicitados')";
+    $dias_solicitados = $vacaciones->calcularDiasSolicitados($fecha_inicio, $fecha_fin);
 
-    if (mysqli_query($enlace, $consulta_insertar)) {
-        // Redirigir a la vista de vacaciones
-        header("location: ../vista/vista_vacaciones.php");
-    } else {
-        echo "Error al solicitar las vacaciones: " . mysqli_error($enlace);
-    }
+    $vacaciones->insertarSolicitudVacaciones($enlace, $usuario_id, $fecha_inicio, $fecha_fin, $dias_solicitados);
 
-    // Cerrar la conexión a la base de datos
-    mysqli_close($enlace);
+    $vacaciones->actualizarDiasVacaciones($enlace, $usuario_id, $dias_solicitados);
 }
 ?>
